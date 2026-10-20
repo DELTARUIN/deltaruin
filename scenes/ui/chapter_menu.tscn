@@ -1,0 +1,811 @@
+[gd_scene format=3 uid="uid://dyyroll14jssr"]
+
+[ext_resource type="Script" uid="uid://cw1hsbpa8ntj6" path="res://scripts/ui/chapter_select.gd" id="1_script"]
+[ext_resource type="Theme" uid="uid://hsp738u2o52k" path="res://resources/ui/chapter_select_theme.tres" id="2_theme"]
+[ext_resource type="Texture2D" uid="uid://kfv66t7owls7" path="res://assets/graphics/ui/menu_bg.png" id="3_bg"]
+[ext_resource type="Texture2D" uid="uid://by01uoiqcmk4k" path="res://assets/graphics/ui/chapter.png" id="4_sheet"]
+[ext_resource type="FontFile" uid="uid://bm11rrjpyrp16" path="res://assets/fonts/8bit.ttf" id="5_8bit"]
+[ext_resource type="Texture2D" uid="uid://due0tqe7yac3v" path="res://assets/graphics/ui/heart.png" id="6_heart"]
+[ext_resource type="AudioStream" uid="uid://dmm0fswoftc5t" path="res://assets/audio/effects/common/snd_menumove.wav" id="7_sndmove"]
+[ext_resource type="AudioStream" uid="uid://xpo0gxfoum1p" path="res://assets/audio/effects/common/snd_select.wav" id="8_sndok"]
+[ext_resource type="AudioStream" uid="uid://bo0q5mk32382y" path="res://assets/audio/effects/common/snd_b.wav" id="9_sndcancel"]
+
+[sub_resource type="AtlasTexture" id="Atlas_star"]
+atlas = ExtResource("4_sheet")
+region = Rect2(1, 53, 10, 8)
+
+[sub_resource type="AtlasTexture" id="Atlas_ch1"]
+atlas = ExtResource("4_sheet")
+region = Rect2(27, 14, 28, 25)
+
+[sub_resource type="AtlasTexture" id="Atlas_ch2"]
+atlas = ExtResource("4_sheet")
+region = Rect2(54, 14, 28, 25)
+
+[sub_resource type="AtlasTexture" id="Atlas_ch3"]
+atlas = ExtResource("4_sheet")
+region = Rect2(216, 14, 28, 25)
+
+[sub_resource type="AtlasTexture" id="Atlas_ch4"]
+atlas = ExtResource("4_sheet")
+region = Rect2(108, 14, 28, 25)
+
+[sub_resource type="AtlasTexture" id="Atlas_ch5"]
+atlas = ExtResource("4_sheet")
+region = Rect2(135, 14, 28, 25)
+
+[sub_resource type="AtlasTexture" id="Atlas_ch_empty"]
+atlas = ExtResource("4_sheet")
+region = Rect2(0, 14, 28, 25)
+
+[node name="ChapterMenu" type="Control" unique_id=673489019]
+auto_translate_mode = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_script")
+
+[node name="Bg" type="TextureRect" parent="." unique_id=1974960271]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 480.0
+mouse_filter = 2
+texture = ExtResource("3_bg")
+
+[node name="Rows" type="VBoxContainer" parent="." unique_id=639437318]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 422.0
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Row1" type="Control" parent="Rows" unique_id=867767565]
+custom_minimum_size = Vector2(0, 62)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="NameLabel" type="Label" parent="Rows/Row1" unique_id=169579715]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "CHAPTER_1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Margin" type="MarginContainer" parent="Rows/Row1" unique_id=1928917655]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 52
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 5
+
+[node name="Line" type="HBoxContainer" parent="Rows/Row1/Margin" unique_id=245737382]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="ChapterLabel" type="Label" parent="Rows/Row1/Margin/Line" unique_id=730802651]
+custom_minimum_size = Vector2(133, 0)
+layout_mode = 2
+text = "CHAPTER_TITLE_1"
+vertical_alignment = 1
+
+[node name="Stars" type="VBoxContainer" parent="Rows/Row1/Margin/Line" unique_id=1091363533]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Star1" type="TextureRect" parent="Rows/Row1/Margin/Line/Stars" unique_id=1956021760]
+custom_minimum_size = Vector2(10, 8)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Atlas_star")
+
+[node name="Star2" type="TextureRect" parent="Rows/Row1/Margin/Line/Stars" unique_id=1767869468]
+custom_minimum_size = Vector2(10, 8)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Atlas_star")
+
+[node name="Star3" type="TextureRect" parent="Rows/Row1/Margin/Line/Stars" unique_id=70370403]
+custom_minimum_size = Vector2(10, 8)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Atlas_star")
+
+[node name="Spacer" type="Control" parent="Rows/Row1/Margin/Line" unique_id=614928268]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="Rows/Row1/Margin/Line" unique_id=64079052]
+custom_minimum_size = Vector2(56, 50)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = SubResource("Atlas_ch1")
+
+[node name="RowPlay" type="Label" parent="Rows/Row1" unique_id=321574494]
+visible = false
+layout_mode = 0
+offset_left = 252.0
+offset_top = 21.0
+offset_right = 348.0
+offset_bottom = 41.0
+text = "MENU_PLAY"
+
+[node name="RowBack" type="Label" parent="Rows/Row1" unique_id=1831405713]
+visible = false
+layout_mode = 0
+offset_left = 415.0
+offset_top = 21.0
+offset_right = 511.0
+offset_bottom = 41.0
+text = "MENU_BACK"
+
+[node name="Row2" type="Control" parent="Rows" unique_id=1146206564]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="NameLabel" type="Label" parent="Rows/Row2" unique_id=424078903]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "CHAPTER_2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Margin" type="MarginContainer" parent="Rows/Row2" unique_id=1624028314]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 52
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 5
+
+[node name="Line" type="HBoxContainer" parent="Rows/Row2/Margin" unique_id=500682755]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="ChapterLabel" type="Label" parent="Rows/Row2/Margin/Line" unique_id=373680524]
+custom_minimum_size = Vector2(133, 0)
+layout_mode = 2
+text = "CHAPTER_TITLE_2"
+vertical_alignment = 1
+
+[node name="Stars" type="VBoxContainer" parent="Rows/Row2/Margin/Line" unique_id=1523308167]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Star1" type="TextureRect" parent="Rows/Row2/Margin/Line/Stars" unique_id=304507929]
+custom_minimum_size = Vector2(10, 8)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Atlas_star")
+
+[node name="Star2" type="TextureRect" parent="Rows/Row2/Margin/Line/Stars" unique_id=205349008]
+custom_minimum_size = Vector2(10, 8)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Atlas_star")
+
+[node name="Star3" type="TextureRect" parent="Rows/Row2/Margin/Line/Stars" unique_id=32814847]
+custom_minimum_size = Vector2(10, 8)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Atlas_star")
+
+[node name="Spacer" type="Control" parent="Rows/Row2/Margin/Line" unique_id=1710210091]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="Rows/Row2/Margin/Line" unique_id=248422558]
+custom_minimum_size = Vector2(56, 50)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = SubResource("Atlas_ch2")
+
+[node name="RowPlay" type="Label" parent="Rows/Row2" unique_id=1441410170]
+visible = false
+layout_mode = 0
+offset_left = 252.0
+offset_top = 20.0
+offset_right = 348.0
+offset_bottom = 40.0
+text = "MENU_PLAY"
+
+[node name="RowBack" type="Label" parent="Rows/Row2" unique_id=193333181]
+visible = false
+layout_mode = 0
+offset_left = 415.0
+offset_top = 20.0
+offset_right = 511.0
+offset_bottom = 40.0
+text = "MENU_BACK"
+
+[node name="Row3" type="Control" parent="Rows" unique_id=72172117]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="NameLabel" type="Label" parent="Rows/Row3" unique_id=1272045497]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "CHAPTER_3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Margin" type="MarginContainer" parent="Rows/Row3" unique_id=222580387]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 52
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 5
+
+[node name="Line" type="HBoxContainer" parent="Rows/Row3/Margin" unique_id=1967522981]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="ChapterLabel" type="Label" parent="Rows/Row3/Margin/Line" unique_id=1996056764]
+custom_minimum_size = Vector2(133, 0)
+layout_mode = 2
+text = "CHAPTER_TITLE_3"
+vertical_alignment = 1
+
+[node name="Stars" type="VBoxContainer" parent="Rows/Row3/Margin/Line" unique_id=880152321]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Star1" type="TextureRect" parent="Rows/Row3/Margin/Line/Stars" unique_id=1088753912]
+custom_minimum_size = Vector2(10, 8)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Atlas_star")
+
+[node name="Star2" type="TextureRect" parent="Rows/Row3/Margin/Line/Stars" unique_id=2019708567]
+custom_minimum_size = Vector2(10, 8)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Atlas_star")
+
+[node name="Star3" type="TextureRect" parent="Rows/Row3/Margin/Line/Stars" unique_id=1738499596]
+custom_minimum_size = Vector2(10, 8)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Atlas_star")
+
+[node name="Spacer" type="Control" parent="Rows/Row3/Margin/Line" unique_id=1403705361]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="Rows/Row3/Margin/Line" unique_id=365256357]
+custom_minimum_size = Vector2(56, 50)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = SubResource("Atlas_ch3")
+
+[node name="RowPlay" type="Label" parent="Rows/Row3" unique_id=1003790162]
+visible = false
+layout_mode = 0
+offset_left = 252.0
+offset_top = 20.0
+offset_right = 348.0
+offset_bottom = 40.0
+text = "MENU_PLAY"
+
+[node name="RowBack" type="Label" parent="Rows/Row3" unique_id=2062159257]
+visible = false
+layout_mode = 0
+offset_left = 415.0
+offset_top = 20.0
+offset_right = 511.0
+offset_bottom = 40.0
+text = "MENU_BACK"
+
+[node name="Row4" type="Control" parent="Rows" unique_id=202227507]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="NameLabel" type="Label" parent="Rows/Row4" unique_id=339483728]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "CHAPTER_4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Margin" type="MarginContainer" parent="Rows/Row4" unique_id=1126913305]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 52
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 5
+
+[node name="Line" type="HBoxContainer" parent="Rows/Row4/Margin" unique_id=1545699383]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="ChapterLabel" type="Label" parent="Rows/Row4/Margin/Line" unique_id=1189788590]
+custom_minimum_size = Vector2(133, 0)
+layout_mode = 2
+text = "CHAPTER_TITLE_4"
+vertical_alignment = 1
+
+[node name="Stars" type="VBoxContainer" parent="Rows/Row4/Margin/Line" unique_id=2014641900]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Star1" type="TextureRect" parent="Rows/Row4/Margin/Line/Stars" unique_id=908109208]
+custom_minimum_size = Vector2(10, 8)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Atlas_star")
+
+[node name="Star2" type="TextureRect" parent="Rows/Row4/Margin/Line/Stars" unique_id=595718944]
+custom_minimum_size = Vector2(10, 8)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Atlas_star")
+
+[node name="Star3" type="TextureRect" parent="Rows/Row4/Margin/Line/Stars" unique_id=1581486859]
+custom_minimum_size = Vector2(10, 8)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Atlas_star")
+
+[node name="Spacer" type="Control" parent="Rows/Row4/Margin/Line" unique_id=1139818853]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="Rows/Row4/Margin/Line" unique_id=1135440910]
+custom_minimum_size = Vector2(56, 50)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = SubResource("Atlas_ch4")
+
+[node name="RowPlay" type="Label" parent="Rows/Row4" unique_id=119178514]
+visible = false
+layout_mode = 0
+offset_left = 252.0
+offset_top = 20.0
+offset_right = 348.0
+offset_bottom = 40.0
+text = "MENU_PLAY"
+
+[node name="RowBack" type="Label" parent="Rows/Row4" unique_id=2092185476]
+visible = false
+layout_mode = 0
+offset_left = 415.0
+offset_top = 20.0
+offset_right = 511.0
+offset_bottom = 40.0
+text = "MENU_BACK"
+
+[node name="Row5" type="Control" parent="Rows" unique_id=888231934]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="NameLabel" type="Label" parent="Rows/Row5" unique_id=1843168338]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "CHAPTER_5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Margin" type="MarginContainer" parent="Rows/Row5" unique_id=904079989]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 52
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 5
+
+[node name="Line" type="HBoxContainer" parent="Rows/Row5/Margin" unique_id=1986090766]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="ChapterLabel" type="Label" parent="Rows/Row5/Margin/Line" unique_id=2101013828]
+custom_minimum_size = Vector2(133, 0)
+layout_mode = 2
+text = "CHAPTER_TITLE_5"
+vertical_alignment = 1
+
+[node name="Stars" type="VBoxContainer" parent="Rows/Row5/Margin/Line" unique_id=1077041045]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Star1" type="TextureRect" parent="Rows/Row5/Margin/Line/Stars" unique_id=1203224003]
+custom_minimum_size = Vector2(10, 8)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Atlas_star")
+
+[node name="Star2" type="TextureRect" parent="Rows/Row5/Margin/Line/Stars" unique_id=1162053558]
+custom_minimum_size = Vector2(10, 8)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Atlas_star")
+
+[node name="Star3" type="TextureRect" parent="Rows/Row5/Margin/Line/Stars" unique_id=1995599197]
+visible = false
+custom_minimum_size = Vector2(10, 8)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Atlas_star")
+
+[node name="Spacer" type="Control" parent="Rows/Row5/Margin/Line" unique_id=497022795]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="Rows/Row5/Margin/Line" unique_id=1107789030]
+custom_minimum_size = Vector2(56, 50)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = SubResource("Atlas_ch5")
+
+[node name="RowPlay" type="Label" parent="Rows/Row5" unique_id=368482037]
+visible = false
+layout_mode = 0
+offset_left = 252.0
+offset_top = 20.0
+offset_right = 348.0
+offset_bottom = 40.0
+text = "MENU_PLAY"
+
+[node name="RowBack" type="Label" parent="Rows/Row5" unique_id=400359836]
+visible = false
+layout_mode = 0
+offset_left = 415.0
+offset_top = 20.0
+offset_right = 511.0
+offset_bottom = 40.0
+text = "MENU_BACK"
+
+[node name="Row6" type="Control" parent="Rows" unique_id=1963876199]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="NameLabel" type="Label" parent="Rows/Row6" unique_id=203350786]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Margin" type="MarginContainer" parent="Rows/Row6" unique_id=1544739057]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 52
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 5
+
+[node name="Line" type="HBoxContainer" parent="Rows/Row6/Margin" unique_id=295437724]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="ChapterLabel" type="Label" parent="Rows/Row6/Margin/Line" unique_id=1164946323]
+custom_minimum_size = Vector2(133, 0)
+layout_mode = 2
+text = "CHAPTER_TITLE_6"
+vertical_alignment = 1
+
+[node name="Stars" type="VBoxContainer" parent="Rows/Row6/Margin/Line" unique_id=687247133]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Star1" type="TextureRect" parent="Rows/Row6/Margin/Line/Stars" unique_id=241723070]
+visible = false
+custom_minimum_size = Vector2(10, 8)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Atlas_star")
+
+[node name="Star2" type="TextureRect" parent="Rows/Row6/Margin/Line/Stars" unique_id=1789098780]
+visible = false
+custom_minimum_size = Vector2(10, 8)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Atlas_star")
+
+[node name="Star3" type="TextureRect" parent="Rows/Row6/Margin/Line/Stars" unique_id=846486882]
+visible = false
+custom_minimum_size = Vector2(10, 8)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Atlas_star")
+
+[node name="Spacer" type="Control" parent="Rows/Row6/Margin/Line" unique_id=704760238]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="Rows/Row6/Margin/Line" unique_id=685278334]
+custom_minimum_size = Vector2(56, 50)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = SubResource("Atlas_ch_empty")
+
+[node name="RowPlay" type="Label" parent="Rows/Row6" unique_id=268595490]
+visible = false
+layout_mode = 0
+offset_left = 252.0
+offset_top = 20.0
+offset_right = 348.0
+offset_bottom = 40.0
+text = "MENU_PLAY"
+
+[node name="RowBack" type="Label" parent="Rows/Row6" unique_id=670137283]
+visible = false
+layout_mode = 0
+offset_left = 415.0
+offset_top = 20.0
+offset_right = 511.0
+offset_bottom = 40.0
+text = "MENU_BACK"
+
+[node name="Row7" type="Control" parent="Rows" unique_id=1226313343]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="NameLabel" type="Label" parent="Rows/Row7" unique_id=959670656]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Margin" type="MarginContainer" parent="Rows/Row7" unique_id=1050511780]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 52
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 5
+
+[node name="Line" type="HBoxContainer" parent="Rows/Row7/Margin" unique_id=1767762158]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="ChapterLabel" type="Label" parent="Rows/Row7/Margin/Line" unique_id=705556749]
+custom_minimum_size = Vector2(133, 0)
+layout_mode = 2
+text = "CHAPTER_TITLE_7"
+vertical_alignment = 1
+
+[node name="Stars" type="VBoxContainer" parent="Rows/Row7/Margin/Line" unique_id=1159020188]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Star1" type="TextureRect" parent="Rows/Row7/Margin/Line/Stars" unique_id=1291168801]
+visible = false
+custom_minimum_size = Vector2(10, 8)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Atlas_star")
+
+[node name="Star2" type="TextureRect" parent="Rows/Row7/Margin/Line/Stars" unique_id=744618808]
+visible = false
+custom_minimum_size = Vector2(10, 8)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Atlas_star")
+
+[node name="Star3" type="TextureRect" parent="Rows/Row7/Margin/Line/Stars" unique_id=1010209774]
+visible = false
+custom_minimum_size = Vector2(10, 8)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Atlas_star")
+
+[node name="Spacer" type="Control" parent="Rows/Row7/Margin/Line" unique_id=1348495071]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="Rows/Row7/Margin/Line" unique_id=439823703]
+custom_minimum_size = Vector2(56, 50)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = SubResource("Atlas_ch_empty")
+
+[node name="RowPlay" type="Label" parent="Rows/Row7" unique_id=320309814]
+visible = false
+layout_mode = 0
+offset_left = 252.0
+offset_top = 20.0
+offset_right = 348.0
+offset_bottom = 40.0
+text = "MENU_PLAY"
+
+[node name="RowBack" type="Label" parent="Rows/Row7" unique_id=1739020242]
+visible = false
+layout_mode = 0
+offset_left = 415.0
+offset_top = 20.0
+offset_right = 511.0
+offset_bottom = 40.0
+text = "MENU_BACK"
+
+[node name="CopyrightLabel" type="Label" parent="." unique_id=1082124430]
+visible = false
+layout_mode = 0
+offset_left = 8.0
+offset_top = 442.0
+offset_right = 208.0
+offset_bottom = 454.0
+theme_override_fonts/font = ExtResource("5_8bit")
+theme_override_font_sizes/font_size = 8
+text = "(C) Toby Fox 2018-2026"
+
+[node name="VersionLabel" type="Label" parent="." unique_id=1612485160]
+visible = false
+layout_mode = 0
+offset_left = 8.0
+offset_top = 456.0
+offset_right = 208.0
+offset_bottom = 468.0
+theme_override_fonts/font = ExtResource("5_8bit")
+theme_override_font_sizes/font_size = 8
+text = "DELTARUNE v23"
+
+[node name="ExitLabel" type="Label" parent="." unique_id=590539124]
+layout_mode = 0
+offset_left = 218.0
+offset_top = 440.0
+offset_right = 314.0
+offset_bottom = 460.0
+text = "MENU_EXIT"
+
+[node name="LangLabel" type="Label" parent="." unique_id=560037236]
+layout_mode = 0
+offset_left = 352.0
+offset_top = 440.0
+offset_right = 448.0
+offset_bottom = 460.0
+text = "MENU_LANG"
+
+[node name="Deco" type="Control" parent="." unique_id=1556814250]
+visible = false
+anchors_preset = 0
+offset_left = 560.0
+offset_top = 444.0
+offset_right = 632.0
+offset_bottom = 478.0
+mouse_filter = 2
+
+[node name="Heart" type="TextureRect" parent="." unique_id=169233994]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 21.0
+offset_right = 49.0
+offset_bottom = 37.0
+mouse_filter = 2
+texture = ExtResource("6_heart")
+
+[node name="Fade" type="ColorRect" parent="." unique_id=1148343377]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 480.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="LoadingLabel" type="Label" parent="." unique_id=1789999224]
+visible = false
+layout_mode = 0
+offset_top = 230.0
+offset_right = 640.0
+offset_bottom = 250.0
+text = "LOADING_CHAPTER_1"
+horizontal_alignment = 1
+
+[node name="SndMove" type="AudioStreamPlayer" parent="." unique_id=82596467]
+stream = ExtResource("7_sndmove")
+
+[node name="SndOk" type="AudioStreamPlayer" parent="." unique_id=860791409]
+stream = ExtResource("8_sndok")
+
+[node name="SndCancel" type="AudioStreamPlayer" parent="." unique_id=2146065305]
+stream = ExtResource("9_sndcancel")
