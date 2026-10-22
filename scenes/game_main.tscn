@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://brt0mcaopisn7"]
+
+[ext_resource type="Script" uid="uid://dh0043752lo5k" path="res://scripts/game_main.gd" id="1_ycjmf"]
+[ext_resource type="PackedScene" uid="uid://dyyroll14jssr" path="res://scenes/ui/chapter_menu.tscn" id="2_xewuv"]
+
+[node name="GameMain" type="Node" unique_id=477336484]
+script = ExtResource("1_ycjmf")
+
+[node name="Systems" type="Node" parent="." unique_id=212924905]
+process_mode = 3
+
+[node name="WorldRoot" type="Node2D" parent="." unique_id=933521493]
+process_mode = 1
+
+[node name="MapRoot" type="Node2D" parent="WorldRoot" unique_id=1658301463]
+
+[node name="HudLayer" type="CanvasLayer" parent="." unique_id=899098070]
+process_mode = 1
+
+[node name="ChapterMenu" parent="HudLayer" unique_id=673489019 instance=ExtResource("2_xewuv")]
+auto_translate_mode = 0
+
+[node name="PauseLayer" type="CanvasLayer" parent="." unique_id=676586351]
+process_mode = 2
+
+[node name="TransitionLayer" type="CanvasLayer" parent="." unique_id=359388568]
+process_mode = 3
+
+[node name="DebugLayer" type="CanvasLayer" parent="." unique_id=535902263]
+process_mode = 3
