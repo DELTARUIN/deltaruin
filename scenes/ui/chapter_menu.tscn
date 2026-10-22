@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://kfv66t7owls7" path="res://assets/graphics/ui/menu_bg.png" id="3_bg"]
 [ext_resource type="Texture2D" uid="uid://by01uoiqcmk4k" path="res://assets/graphics/ui/chapter.png" id="4_sheet"]
 [ext_resource type="FontFile" uid="uid://bm11rrjpyrp16" path="res://assets/fonts/8bit.ttf" id="5_8bit"]
-[ext_resource type="Texture2D" uid="uid://due0tqe7yac3v" path="res://assets/graphics/ui/heart.png" id="6_heart"]
+[ext_resource type="Texture2D" uid="uid://drtkdkhtqsk5t" path="res://assets/graphics/characters/soul/the_soul.png" id="6_bbscx"]
 [ext_resource type="AudioStream" uid="uid://dmm0fswoftc5t" path="res://assets/audio/effects/common/snd_menumove.wav" id="7_sndmove"]
 [ext_resource type="AudioStream" uid="uid://xpo0gxfoum1p" path="res://assets/audio/effects/common/snd_select.wav" id="8_sndok"]
 [ext_resource type="AudioStream" uid="uid://bo0q5mk32382y" path="res://assets/audio/effects/common/snd_b.wav" id="9_sndcancel"]
@@ -37,6 +37,11 @@ region = Rect2(135, 14, 28, 25)
 [sub_resource type="AtlasTexture" id="Atlas_ch_empty"]
 atlas = ExtResource("4_sheet")
 region = Rect2(0, 14, 28, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgiqg"]
+atlas = ExtResource("6_bbscx")
+region = Rect2(1, 36, 9, 9)
+filter_clip = true
 
 [node name="ChapterMenu" type="Control" unique_id=673489019]
 auto_translate_mode = 1
@@ -778,11 +783,11 @@ mouse_filter = 2
 [node name="Heart" type="TextureRect" parent="." unique_id=169233994]
 layout_mode = 0
 offset_left = 33.0
-offset_top = 21.0
-offset_right = 49.0
-offset_bottom = 37.0
+offset_top = 27.0
+offset_right = 42.0
+offset_bottom = 36.0
 mouse_filter = 2
-texture = ExtResource("6_heart")
+texture = SubResource("AtlasTexture_pgiqg")
 
 [node name="Fade" type="ColorRect" parent="." unique_id=1148343377]
 modulate = Color(1, 1, 1, 0)

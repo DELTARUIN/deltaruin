@@ -16,7 +16,7 @@ const LOCALES: Array[String] = ["zh", "ja"]
 #region 配置：配色与动态布局
 
 const COLOR_WHITE := Color.WHITE      ## 未选中文字/图标
-const COLOR_YELLOW := Color("ffd700") ## 选中态（Deltarune 黄）
+const COLOR_YELLOW := Color("ffff00") ## 选中态（Deltarune 黄）
 const COLOR_GRAY := Color("555555")   ## 锁定行
 
 const INPUT_COOLDOWN := 0.15          ## 输入去抖（秒）
@@ -25,7 +25,7 @@ const INPUT_COOLDOWN := 0.15          ## 输入去抖（秒）
 const ROW_CENTERS: Array[float] = [31.0, 92.0, 152.0, 212.0, 272.0, 332.0, 392.0]
 const X_HEART_ROW := 33.0             ## 行选中态红心 x（该行没有锚定 Label，固定值）
 const HEART_GAP_X := 26.0             ## 红心右缘与所锚定文字左缘的间距
-const HEART_FOOTER_DY := 2.0          ## 页脚态红心相对文字 y 偏移
+const HEART_FOOTER_DY := 10.0          ## 页脚态红心相对文字 y 偏移
 
 #endregion
 
