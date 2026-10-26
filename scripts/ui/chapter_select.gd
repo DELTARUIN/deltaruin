@@ -17,7 +17,7 @@ const LOCALES: Array[String] = ["zh", "ja"]
 
 const COLOR_WHITE := Color.WHITE      ## 未选中文字/图标
 const COLOR_YELLOW := Color("ffff00") ## 选中态（Deltarune 黄）
-const COLOR_GRAY := Color("555555")   ## 锁定行
+const COLOR_GRAY := Color("7F7F7F")   ## 锁定行
 
 const INPUT_COOLDOWN := 0.15          ## 输入去抖（秒）
 

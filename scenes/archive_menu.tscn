@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://b27eh3tirsf3g"]
+
+[ext_resource type="Texture2D" uid="uid://brcd1dm1bgucf" path="res://assets/graphics/ui/menu_heros.png" id="1_tio4f"]
+[ext_resource type="Texture2D" uid="uid://sxfh504cklr2" path="res://assets/graphics/ui/files_column.png" id="2_1v8yg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_anppa"]
+atlas = ExtResource("1_tio4f")
+region = Rect2(2, 2, 320, 260)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_072hb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_anppa")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lguj1"]
+atlas = ExtResource("1_tio4f")
+region = Rect2(2, 572, 320, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vs6u"]
+atlas = ExtResource("1_tio4f")
+region = Rect2(2, 268, 320, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_072hb"]
+atlas = ExtResource("1_tio4f")
+region = Rect2(2, 344, 320, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k6gdi"]
+atlas = ExtResource("1_tio4f")
+region = Rect2(2, 420, 320, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fnelr"]
+atlas = ExtResource("1_tio4f")
+region = Rect2(2, 496, 320, 70)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_duk5l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lguj1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vs6u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_072hb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k6gdi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fnelr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[node name="ArchiveMenu" type="Control" unique_id=65752808]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Backkground" type="AnimatedSprite2D" parent="." unique_id=788809417]
+position = Vector2(0, -20)
+sprite_frames = SubResource("SpriteFrames_072hb")
+centered = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2111320831]
+position = Vector2(0, 170)
+sprite_frames = SubResource("SpriteFrames_duk5l")
+autoplay = "default"
+frame = 2
+frame_progress = 0.31207374
+centered = false
+
+[node name="Bar1" type="TextureRect" parent="." unique_id=1087481828]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 53.0
+offset_right = 267.0
+offset_bottom = 96.0
+texture = ExtResource("2_1v8yg")
+
+[node name="Bar2" type="TextureRect" parent="." unique_id=149425962]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 98.0
+offset_right = 267.0
+offset_bottom = 141.0
+texture = ExtResource("2_1v8yg")
+
+[node name="Bar3" type="TextureRect" parent="." unique_id=1149069467]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 143.0
+offset_right = 267.0
+offset_bottom = 186.0
+texture = ExtResource("2_1v8yg")

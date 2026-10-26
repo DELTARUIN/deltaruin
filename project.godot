@@ -17,15 +17,15 @@ config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=960
+window/size/viewport_width=640
+window/size/viewport_height=480
 window/stretch/mode="viewport"
 window/stretch/scale=2.0
 window/stretch/scale_mode="integer"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/gut/plugin.cfg", "res://addons/script-ide/plugin.cfg")
+enabled=PackedStringArray()
 
 [input]
 

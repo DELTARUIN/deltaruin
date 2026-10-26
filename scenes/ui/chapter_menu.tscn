@@ -4,11 +4,12 @@
 [ext_resource type="Theme" uid="uid://hsp738u2o52k" path="res://resources/ui/chapter_select_theme.tres" id="2_theme"]
 [ext_resource type="Texture2D" uid="uid://kfv66t7owls7" path="res://assets/graphics/ui/menu_bg.png" id="3_bg"]
 [ext_resource type="Texture2D" uid="uid://by01uoiqcmk4k" path="res://assets/graphics/ui/chapter.png" id="4_sheet"]
-[ext_resource type="FontFile" uid="uid://bm11rrjpyrp16" path="res://assets/fonts/8bit.ttf" id="5_8bit"]
+[ext_resource type="FontFile" uid="uid://ciue4mvg8gog6" path="res://assets/fonts/dingmao.ttf" id="5_bbscx"]
 [ext_resource type="Texture2D" uid="uid://drtkdkhtqsk5t" path="res://assets/graphics/characters/soul/the_soul.png" id="6_bbscx"]
 [ext_resource type="AudioStream" uid="uid://dmm0fswoftc5t" path="res://assets/audio/effects/common/snd_menumove.wav" id="7_sndmove"]
 [ext_resource type="AudioStream" uid="uid://xpo0gxfoum1p" path="res://assets/audio/effects/common/snd_select.wav" id="8_sndok"]
-[ext_resource type="AudioStream" uid="uid://bo0q5mk32382y" path="res://assets/audio/effects/common/snd_b.wav" id="9_sndcancel"]
+[ext_resource type="AudioStream" uid="uid://cyb6kl8342ys5" path="res://assets/audio/effects/common/snd_swing.wav" id="9_bbscx"]
+[ext_resource type="AudioStream" uid="uid://pexdydjfqe8x" path="res://assets/audio/effects/ruin/snd_title.ogg" id="10_pgiqg"]
 
 [sub_resource type="AtlasTexture" id="Atlas_star"]
 atlas = ExtResource("4_sheet")
@@ -32,15 +33,18 @@ region = Rect2(108, 14, 28, 25)
 
 [sub_resource type="AtlasTexture" id="Atlas_ch5"]
 atlas = ExtResource("4_sheet")
-region = Rect2(135, 14, 28, 25)
+region = Rect2(243, 14, 28, 25)
 
 [sub_resource type="AtlasTexture" id="Atlas_ch_empty"]
 atlas = ExtResource("4_sheet")
 region = Rect2(0, 14, 28, 25)
 
+[sub_resource type="FontVariation" id="FontVariation_bbscx"]
+base_font = ExtResource("5_bbscx")
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_pgiqg"]
 atlas = ExtResource("6_bbscx")
-region = Rect2(1, 36, 9, 9)
+region = Rect2(1, 15, 20, 20)
 filter_clip = true
 
 [node name="ChapterMenu" type="Control" unique_id=673489019]
@@ -78,6 +82,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 80.0
+offset_right = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "CHAPTER_1"
@@ -100,7 +106,6 @@ theme_override_constants/margin_bottom = 5
 [node name="Line" type="HBoxContainer" parent="Rows/Row1/Margin" unique_id=245737382]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/separation = 0
 
 [node name="ChapterLabel" type="Label" parent="Rows/Row1/Margin/Line" unique_id=730802651]
 custom_minimum_size = Vector2(133, 0)
@@ -109,6 +114,7 @@ text = "CHAPTER_TITLE_1"
 vertical_alignment = 1
 
 [node name="Stars" type="VBoxContainer" parent="Rows/Row1/Margin/Line" unique_id=1091363533]
+visible = false
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
@@ -148,18 +154,18 @@ texture = SubResource("Atlas_ch1")
 visible = false
 layout_mode = 0
 offset_left = 252.0
-offset_top = 21.0
-offset_right = 348.0
-offset_bottom = 41.0
+offset_top = 16.0
+offset_right = 420.0
+offset_bottom = 48.0
 text = "MENU_PLAY"
 
 [node name="RowBack" type="Label" parent="Rows/Row1" unique_id=1831405713]
 visible = false
 layout_mode = 0
-offset_left = 415.0
-offset_top = 21.0
-offset_right = 511.0
-offset_bottom = 41.0
+offset_left = 431.0
+offset_top = 16.0
+offset_right = 599.0
+offset_bottom = 48.0
 text = "MENU_BACK"
 
 [node name="Row2" type="Control" parent="Rows" unique_id=1146206564]
@@ -172,8 +178,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 80.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_theme")
 text = "CHAPTER_2"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -203,6 +211,7 @@ text = "CHAPTER_TITLE_2"
 vertical_alignment = 1
 
 [node name="Stars" type="VBoxContainer" parent="Rows/Row2/Margin/Line" unique_id=1523308167]
+visible = false
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
@@ -242,18 +251,18 @@ texture = SubResource("Atlas_ch2")
 visible = false
 layout_mode = 0
 offset_left = 252.0
-offset_top = 20.0
-offset_right = 348.0
-offset_bottom = 40.0
+offset_top = 14.0
+offset_right = 420.0
+offset_bottom = 46.0
 text = "MENU_PLAY"
 
 [node name="RowBack" type="Label" parent="Rows/Row2" unique_id=193333181]
 visible = false
 layout_mode = 0
-offset_left = 415.0
-offset_top = 20.0
-offset_right = 511.0
-offset_bottom = 40.0
+offset_left = 431.0
+offset_top = 14.0
+offset_right = 599.0
+offset_bottom = 46.0
 text = "MENU_BACK"
 
 [node name="Row3" type="Control" parent="Rows" unique_id=72172117]
@@ -266,6 +275,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 80.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "CHAPTER_3"
@@ -297,6 +307,7 @@ text = "CHAPTER_TITLE_3"
 vertical_alignment = 1
 
 [node name="Stars" type="VBoxContainer" parent="Rows/Row3/Margin/Line" unique_id=880152321]
+visible = false
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
@@ -336,18 +347,18 @@ texture = SubResource("Atlas_ch3")
 visible = false
 layout_mode = 0
 offset_left = 252.0
-offset_top = 20.0
-offset_right = 348.0
-offset_bottom = 40.0
+offset_top = 14.0
+offset_right = 420.0
+offset_bottom = 46.0
 text = "MENU_PLAY"
 
 [node name="RowBack" type="Label" parent="Rows/Row3" unique_id=2062159257]
 visible = false
 layout_mode = 0
-offset_left = 415.0
-offset_top = 20.0
-offset_right = 511.0
-offset_bottom = 40.0
+offset_left = 431.0
+offset_top = 14.0
+offset_right = 599.0
+offset_bottom = 46.0
 text = "MENU_BACK"
 
 [node name="Row4" type="Control" parent="Rows" unique_id=202227507]
@@ -360,6 +371,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 80.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "CHAPTER_4"
@@ -391,6 +403,7 @@ text = "CHAPTER_TITLE_4"
 vertical_alignment = 1
 
 [node name="Stars" type="VBoxContainer" parent="Rows/Row4/Margin/Line" unique_id=2014641900]
+visible = false
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
@@ -430,18 +443,18 @@ texture = SubResource("Atlas_ch4")
 visible = false
 layout_mode = 0
 offset_left = 252.0
-offset_top = 20.0
-offset_right = 348.0
-offset_bottom = 40.0
+offset_top = 14.0
+offset_right = 420.0
+offset_bottom = 46.0
 text = "MENU_PLAY"
 
 [node name="RowBack" type="Label" parent="Rows/Row4" unique_id=2092185476]
 visible = false
 layout_mode = 0
-offset_left = 415.0
-offset_top = 20.0
-offset_right = 511.0
-offset_bottom = 40.0
+offset_left = 431.0
+offset_top = 14.0
+offset_right = 599.0
+offset_bottom = 46.0
 text = "MENU_BACK"
 
 [node name="Row5" type="Control" parent="Rows" unique_id=888231934]
@@ -454,9 +467,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 80.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "CHAPTER_5"
+text = "CHAPTER_?"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -481,10 +495,11 @@ theme_override_constants/separation = 0
 [node name="ChapterLabel" type="Label" parent="Rows/Row5/Margin/Line" unique_id=2101013828]
 custom_minimum_size = Vector2(133, 0)
 layout_mode = 2
-text = "CHAPTER_TITLE_5"
+text = "CHAPTER_TITLE_?"
 vertical_alignment = 1
 
 [node name="Stars" type="VBoxContainer" parent="Rows/Row5/Margin/Line" unique_id=1077041045]
+visible = false
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
@@ -503,7 +518,6 @@ mouse_filter = 2
 texture = SubResource("Atlas_star")
 
 [node name="Star3" type="TextureRect" parent="Rows/Row5/Margin/Line/Stars" unique_id=1995599197]
-visible = false
 custom_minimum_size = Vector2(10, 8)
 layout_mode = 2
 mouse_filter = 2
@@ -525,18 +539,18 @@ texture = SubResource("Atlas_ch5")
 visible = false
 layout_mode = 0
 offset_left = 252.0
-offset_top = 20.0
-offset_right = 348.0
-offset_bottom = 40.0
+offset_top = 14.0
+offset_right = 420.0
+offset_bottom = 46.0
 text = "MENU_PLAY"
 
 [node name="RowBack" type="Label" parent="Rows/Row5" unique_id=400359836]
 visible = false
 layout_mode = 0
-offset_left = 415.0
-offset_top = 20.0
-offset_right = 511.0
-offset_bottom = 40.0
+offset_left = 431.0
+offset_top = 14.0
+offset_right = 599.0
+offset_bottom = 46.0
 text = "MENU_BACK"
 
 [node name="Row6" type="Control" parent="Rows" unique_id=1963876199]
@@ -549,9 +563,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 80.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "--"
+text = "CHAPTER_5"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -576,31 +591,29 @@ theme_override_constants/separation = 0
 [node name="ChapterLabel" type="Label" parent="Rows/Row6/Margin/Line" unique_id=1164946323]
 custom_minimum_size = Vector2(133, 0)
 layout_mode = 2
-text = "CHAPTER_TITLE_6"
+text = "CHAPTER_TITLE_5"
 vertical_alignment = 1
 
 [node name="Stars" type="VBoxContainer" parent="Rows/Row6/Margin/Line" unique_id=687247133]
+visible = false
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 theme_override_constants/separation = 8
 
 [node name="Star1" type="TextureRect" parent="Rows/Row6/Margin/Line/Stars" unique_id=241723070]
-visible = false
 custom_minimum_size = Vector2(10, 8)
 layout_mode = 2
 mouse_filter = 2
 texture = SubResource("Atlas_star")
 
 [node name="Star2" type="TextureRect" parent="Rows/Row6/Margin/Line/Stars" unique_id=1789098780]
-visible = false
 custom_minimum_size = Vector2(10, 8)
 layout_mode = 2
 mouse_filter = 2
 texture = SubResource("Atlas_star")
 
 [node name="Star3" type="TextureRect" parent="Rows/Row6/Margin/Line/Stars" unique_id=846486882]
-visible = false
 custom_minimum_size = Vector2(10, 8)
 layout_mode = 2
 mouse_filter = 2
@@ -622,18 +635,18 @@ texture = SubResource("Atlas_ch_empty")
 visible = false
 layout_mode = 0
 offset_left = 252.0
-offset_top = 20.0
-offset_right = 348.0
-offset_bottom = 40.0
+offset_top = 14.0
+offset_right = 420.0
+offset_bottom = 46.0
 text = "MENU_PLAY"
 
 [node name="RowBack" type="Label" parent="Rows/Row6" unique_id=670137283]
 visible = false
 layout_mode = 0
-offset_left = 415.0
-offset_top = 20.0
-offset_right = 511.0
-offset_bottom = 40.0
+offset_left = 431.0
+offset_top = 14.0
+offset_right = 599.0
+offset_bottom = 46.0
 text = "MENU_BACK"
 
 [node name="Row7" type="Control" parent="Rows" unique_id=1226313343]
@@ -646,6 +659,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 80.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "--"
@@ -673,31 +687,29 @@ theme_override_constants/separation = 0
 [node name="ChapterLabel" type="Label" parent="Rows/Row7/Margin/Line" unique_id=705556749]
 custom_minimum_size = Vector2(133, 0)
 layout_mode = 2
-text = "CHAPTER_TITLE_7"
+text = "CHAPTER_TITLE_6"
 vertical_alignment = 1
 
 [node name="Stars" type="VBoxContainer" parent="Rows/Row7/Margin/Line" unique_id=1159020188]
+visible = false
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 theme_override_constants/separation = 8
 
 [node name="Star1" type="TextureRect" parent="Rows/Row7/Margin/Line/Stars" unique_id=1291168801]
-visible = false
 custom_minimum_size = Vector2(10, 8)
 layout_mode = 2
 mouse_filter = 2
 texture = SubResource("Atlas_star")
 
 [node name="Star2" type="TextureRect" parent="Rows/Row7/Margin/Line/Stars" unique_id=744618808]
-visible = false
 custom_minimum_size = Vector2(10, 8)
 layout_mode = 2
 mouse_filter = 2
 texture = SubResource("Atlas_star")
 
 [node name="Star3" type="TextureRect" parent="Rows/Row7/Margin/Line/Stars" unique_id=1010209774]
-visible = false
 custom_minimum_size = Vector2(10, 8)
 layout_mode = 2
 mouse_filter = 2
@@ -719,51 +731,42 @@ texture = SubResource("Atlas_ch_empty")
 visible = false
 layout_mode = 0
 offset_left = 252.0
-offset_top = 20.0
-offset_right = 348.0
-offset_bottom = 40.0
+offset_top = 14.0
+offset_right = 420.0
+offset_bottom = 46.0
 text = "MENU_PLAY"
 
 [node name="RowBack" type="Label" parent="Rows/Row7" unique_id=1739020242]
 visible = false
 layout_mode = 0
-offset_left = 415.0
-offset_top = 20.0
-offset_right = 511.0
-offset_bottom = 40.0
+offset_left = 431.0
+offset_top = 14.0
+offset_right = 599.0
+offset_bottom = 46.0
 text = "MENU_BACK"
 
 [node name="CopyrightLabel" type="Label" parent="." unique_id=1082124430]
-visible = false
 layout_mode = 0
-offset_left = 8.0
-offset_top = 442.0
-offset_right = 208.0
-offset_bottom = 454.0
-theme_override_fonts/font = ExtResource("5_8bit")
-theme_override_font_sizes/font_size = 8
-text = "(C) Toby Fox 2018-2026"
-
-[node name="VersionLabel" type="Label" parent="." unique_id=1612485160]
-visible = false
-layout_mode = 0
-offset_left = 8.0
-offset_top = 456.0
-offset_right = 208.0
-offset_bottom = 468.0
-theme_override_fonts/font = ExtResource("5_8bit")
-theme_override_font_sizes/font_size = 8
-text = "DELTARUNE v23"
+offset_left = 16.0
+offset_top = 428.0
+offset_right = 144.0
+offset_bottom = 475.0
+theme_override_colors/font_color = Color(0.49803922, 0.49803922, 0.49803922, 1)
+theme_override_fonts/font = SubResource("FontVariation_bbscx")
+theme_override_font_sizes/font_size = 16
+text = "三角大崩坏
+新星派&一块懒AA"
 
 [node name="ExitLabel" type="Label" parent="." unique_id=590539124]
 layout_mode = 0
-offset_left = 218.0
-offset_top = 440.0
-offset_right = 314.0
-offset_bottom = 460.0
+offset_left = 212.0
+offset_top = 434.0
+offset_right = 388.0
+offset_bottom = 466.0
 text = "MENU_EXIT"
 
 [node name="LangLabel" type="Label" parent="." unique_id=560037236]
+visible = false
 layout_mode = 0
 offset_left = 352.0
 offset_top = 440.0
@@ -772,7 +775,6 @@ offset_bottom = 460.0
 text = "MENU_LANG"
 
 [node name="Deco" type="Control" parent="." unique_id=1556814250]
-visible = false
 anchors_preset = 0
 offset_left = 560.0
 offset_top = 444.0
@@ -782,10 +784,10 @@ mouse_filter = 2
 
 [node name="Heart" type="TextureRect" parent="." unique_id=169233994]
 layout_mode = 0
-offset_left = 33.0
-offset_top = 27.0
-offset_right = 42.0
-offset_bottom = 36.0
+offset_left = 23.0
+offset_top = 21.0
+offset_right = 43.0
+offset_bottom = 41.0
 mouse_filter = 2
 texture = SubResource("AtlasTexture_pgiqg")
 
@@ -813,4 +815,7 @@ stream = ExtResource("7_sndmove")
 stream = ExtResource("8_sndok")
 
 [node name="SndCancel" type="AudioStreamPlayer" parent="." unique_id=2146065305]
-stream = ExtResource("9_sndcancel")
+stream = ExtResource("9_bbscx")
+
+[node name="SndBegin" type="AudioStreamPlayer" parent="." unique_id=568460998]
+stream = ExtResource("10_pgiqg")

@@ -1,7 +1,11 @@
 [gd_resource type="Theme" format=3 uid="uid://hsp738u2o52k"]
 
-[ext_resource type="FontFile" uid="uid://mb6rowafflj" path="res://assets/fonts/normal.ttf" id="1_font"]
+[ext_resource type="FontFile" uid="uid://dmtt8i0qf1pay" path="res://assets/fonts/normal.ttf" id="1_k8xxe"]
+
+[sub_resource type="FontVariation" id="FontVariation_k8xxe"]
+base_font = ExtResource("1_k8xxe")
+spacing_glyph = 4
 
 [resource]
-default_font = ExtResource("1_font")
-default_font_size = 24
+default_font = SubResource("FontVariation_k8xxe")
+default_font_size = 32
