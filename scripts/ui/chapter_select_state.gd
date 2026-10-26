@@ -22,11 +22,10 @@ enum Pending {
 
 #region 常量
 
-## 焦点位线性编号：0~6 为章节行，7/8 为页脚项
+## 焦点位线性编号：0~7 为章节行，8 为页脚项
 const ROW_COUNT := 7
 const FOOTER_EXIT := 7
-const FOOTER_LANG := 8
-const ITEM_COUNT := 9
+const ITEM_COUNT := 8
 
 #endregion
 
@@ -37,7 +36,6 @@ var cursor := 0                     ## 当前焦点位（线性编号）
 var sub_item: SubItem = SubItem.PLAY ## 子菜单当前项
 var pending: Pending = Pending.NONE  ## FADE_OUT 结束后要执行的动作
 var loading_row := 0                 ## FADE_OUT(PLAY) 对应的章节行
-var language := 0                    ## 0=中文 1=日文
 var locked: Array[bool] = []         ## 各章节行是否锁定（长度 ROW_COUNT）
 
 #endregion
@@ -71,8 +69,8 @@ func debug_text() -> String:
 	var sub := ""
 	if state == State.SUBMENU_OPEN:
 		sub = " sub=%s" % SubItem.keys()[sub_item]
-	return "state=%s cursor=%d%s lang=%d pending=%s" % [
-		State.keys()[state], cursor, sub, language, Pending.keys()[pending],
+	return "state=%s cursor=%d%s pending=%s" % [
+		State.keys()[state], cursor, sub, Pending.keys()[pending],
 	]
 
 #endregion
@@ -106,8 +104,6 @@ func press_ok() -> void:
 		State.ROW_SELECTED:
 			if cursor == FOOTER_EXIT:
 				_start_fade(Pending.EXIT)
-			elif cursor == FOOTER_LANG:
-				language = (language + 1) % 2
 			else:
 				state = State.SUBMENU_OPEN
 				sub_item = SubItem.PLAY

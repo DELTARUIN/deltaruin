@@ -11,9 +11,9 @@
 [ext_resource type="AudioStream" uid="uid://cyb6kl8342ys5" path="res://assets/audio/effects/common/snd_swing.wav" id="9_bbscx"]
 [ext_resource type="AudioStream" uid="uid://pexdydjfqe8x" path="res://assets/audio/effects/ruin/snd_title.ogg" id="10_pgiqg"]
 
-[sub_resource type="AtlasTexture" id="Atlas_star"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_f22bx"]
 atlas = ExtResource("4_sheet")
-region = Rect2(1, 53, 10, 8)
+region = Rect2(1, 94, 17, 17)
 
 [sub_resource type="AtlasTexture" id="Atlas_ch1"]
 atlas = ExtResource("4_sheet")
@@ -34,6 +34,10 @@ region = Rect2(108, 14, 28, 25)
 [sub_resource type="AtlasTexture" id="Atlas_ch5"]
 atlas = ExtResource("4_sheet")
 region = Rect2(243, 14, 28, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kjnqs"]
+atlas = ExtResource("4_sheet")
+region = Rect2(135, 14, 28, 25)
 
 [sub_resource type="AtlasTexture" id="Atlas_ch_empty"]
 atlas = ExtResource("4_sheet")
@@ -83,10 +87,10 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 80.0
-offset_right = -1.0
+offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "CHAPTER_1"
+text = "开端"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -103,42 +107,25 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 5
 
-[node name="Line" type="HBoxContainer" parent="Rows/Row1/Margin" unique_id=245737382]
+[node name="Line" type="HBoxContainer" parent="Rows/Row1/Margin" unique_id=1414628763]
 layout_mode = 2
 mouse_filter = 2
+theme_override_constants/separation = 4
 
-[node name="ChapterLabel" type="Label" parent="Rows/Row1/Margin/Line" unique_id=730802651]
+[node name="ChapterLabel" type="Label" parent="Rows/Row1/Margin/Line" unique_id=1201312299]
 custom_minimum_size = Vector2(133, 0)
 layout_mode = 2
-text = "CHAPTER_TITLE_1"
+text = "第1章"
 vertical_alignment = 1
 
-[node name="Stars" type="VBoxContainer" parent="Rows/Row1/Margin/Line" unique_id=1091363533]
-visible = false
+[node name="Stars" type="TextureRect" parent="Rows/Row1/Margin/Line" unique_id=1532012074]
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
-theme_override_constants/separation = 8
+texture = SubResource("AtlasTexture_f22bx")
 
-[node name="Star1" type="TextureRect" parent="Rows/Row1/Margin/Line/Stars" unique_id=1956021760]
-custom_minimum_size = Vector2(10, 8)
-layout_mode = 2
-mouse_filter = 2
-texture = SubResource("Atlas_star")
-
-[node name="Star2" type="TextureRect" parent="Rows/Row1/Margin/Line/Stars" unique_id=1767869468]
-custom_minimum_size = Vector2(10, 8)
-layout_mode = 2
-mouse_filter = 2
-texture = SubResource("Atlas_star")
-
-[node name="Star3" type="TextureRect" parent="Rows/Row1/Margin/Line/Stars" unique_id=70370403]
-custom_minimum_size = Vector2(10, 8)
-layout_mode = 2
-mouse_filter = 2
-texture = SubResource("Atlas_star")
-
-[node name="Spacer" type="Control" parent="Rows/Row1/Margin/Line" unique_id=614928268]
+[node name="Spacer" type="Control" parent="Rows/Row1/Margin/Line" unique_id=1530155783]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
@@ -157,7 +144,7 @@ offset_left = 252.0
 offset_top = 16.0
 offset_right = 420.0
 offset_bottom = 48.0
-text = "MENU_PLAY"
+text = "游玩"
 
 [node name="RowBack" type="Label" parent="Rows/Row1" unique_id=1831405713]
 visible = false
@@ -166,7 +153,7 @@ offset_left = 431.0
 offset_top = 16.0
 offset_right = 599.0
 offset_bottom = 48.0
-text = "MENU_BACK"
+text = "返回"
 
 [node name="Row2" type="Control" parent="Rows" unique_id=1146206564]
 custom_minimum_size = Vector2(0, 60)
@@ -182,7 +169,7 @@ offset_left = 80.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_theme")
-text = "CHAPTER_2"
+text = "赛博世界"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -207,33 +194,15 @@ theme_override_constants/separation = 0
 [node name="ChapterLabel" type="Label" parent="Rows/Row2/Margin/Line" unique_id=373680524]
 custom_minimum_size = Vector2(133, 0)
 layout_mode = 2
-text = "CHAPTER_TITLE_2"
+text = "第2章"
 vertical_alignment = 1
 
-[node name="Stars" type="VBoxContainer" parent="Rows/Row2/Margin/Line" unique_id=1523308167]
-visible = false
+[node name="Stars" type="TextureRect" parent="Rows/Row2/Margin/Line" unique_id=85984658]
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
-theme_override_constants/separation = 8
-
-[node name="Star1" type="TextureRect" parent="Rows/Row2/Margin/Line/Stars" unique_id=304507929]
-custom_minimum_size = Vector2(10, 8)
-layout_mode = 2
-mouse_filter = 2
-texture = SubResource("Atlas_star")
-
-[node name="Star2" type="TextureRect" parent="Rows/Row2/Margin/Line/Stars" unique_id=205349008]
-custom_minimum_size = Vector2(10, 8)
-layout_mode = 2
-mouse_filter = 2
-texture = SubResource("Atlas_star")
-
-[node name="Star3" type="TextureRect" parent="Rows/Row2/Margin/Line/Stars" unique_id=32814847]
-custom_minimum_size = Vector2(10, 8)
-layout_mode = 2
-mouse_filter = 2
-texture = SubResource("Atlas_star")
+texture = SubResource("AtlasTexture_f22bx")
 
 [node name="Spacer" type="Control" parent="Rows/Row2/Margin/Line" unique_id=1710210091]
 layout_mode = 2
@@ -254,7 +223,7 @@ offset_left = 252.0
 offset_top = 14.0
 offset_right = 420.0
 offset_bottom = 46.0
-text = "MENU_PLAY"
+text = "游玩"
 
 [node name="RowBack" type="Label" parent="Rows/Row2" unique_id=193333181]
 visible = false
@@ -263,7 +232,7 @@ offset_left = 431.0
 offset_top = 14.0
 offset_right = 599.0
 offset_bottom = 46.0
-text = "MENU_BACK"
+text = "返回"
 
 [node name="Row3" type="Control" parent="Rows" unique_id=72172117]
 custom_minimum_size = Vector2(0, 60)
@@ -278,7 +247,7 @@ anchor_bottom = 1.0
 offset_left = 80.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "CHAPTER_3"
+text = "深夜"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -303,33 +272,15 @@ theme_override_constants/separation = 0
 [node name="ChapterLabel" type="Label" parent="Rows/Row3/Margin/Line" unique_id=1996056764]
 custom_minimum_size = Vector2(133, 0)
 layout_mode = 2
-text = "CHAPTER_TITLE_3"
+text = "第3章"
 vertical_alignment = 1
 
-[node name="Stars" type="VBoxContainer" parent="Rows/Row3/Margin/Line" unique_id=880152321]
-visible = false
+[node name="Stars" type="TextureRect" parent="Rows/Row3/Margin/Line" unique_id=338253647]
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
-theme_override_constants/separation = 8
-
-[node name="Star1" type="TextureRect" parent="Rows/Row3/Margin/Line/Stars" unique_id=1088753912]
-custom_minimum_size = Vector2(10, 8)
-layout_mode = 2
-mouse_filter = 2
-texture = SubResource("Atlas_star")
-
-[node name="Star2" type="TextureRect" parent="Rows/Row3/Margin/Line/Stars" unique_id=2019708567]
-custom_minimum_size = Vector2(10, 8)
-layout_mode = 2
-mouse_filter = 2
-texture = SubResource("Atlas_star")
-
-[node name="Star3" type="TextureRect" parent="Rows/Row3/Margin/Line/Stars" unique_id=1738499596]
-custom_minimum_size = Vector2(10, 8)
-layout_mode = 2
-mouse_filter = 2
-texture = SubResource("Atlas_star")
+texture = SubResource("AtlasTexture_f22bx")
 
 [node name="Spacer" type="Control" parent="Rows/Row3/Margin/Line" unique_id=1403705361]
 layout_mode = 2
@@ -350,7 +301,7 @@ offset_left = 252.0
 offset_top = 14.0
 offset_right = 420.0
 offset_bottom = 46.0
-text = "MENU_PLAY"
+text = "游玩"
 
 [node name="RowBack" type="Label" parent="Rows/Row3" unique_id=2062159257]
 visible = false
@@ -359,7 +310,7 @@ offset_left = 431.0
 offset_top = 14.0
 offset_right = 599.0
 offset_bottom = 46.0
-text = "MENU_BACK"
+text = "返回"
 
 [node name="Row4" type="Control" parent="Rows" unique_id=202227507]
 custom_minimum_size = Vector2(0, 60)
@@ -374,7 +325,7 @@ anchor_bottom = 1.0
 offset_left = 80.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "CHAPTER_4"
+text = "预言"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -399,33 +350,15 @@ theme_override_constants/separation = 0
 [node name="ChapterLabel" type="Label" parent="Rows/Row4/Margin/Line" unique_id=1189788590]
 custom_minimum_size = Vector2(133, 0)
 layout_mode = 2
-text = "CHAPTER_TITLE_4"
+text = "第4章"
 vertical_alignment = 1
 
-[node name="Stars" type="VBoxContainer" parent="Rows/Row4/Margin/Line" unique_id=2014641900]
-visible = false
+[node name="Stars" type="TextureRect" parent="Rows/Row4/Margin/Line" unique_id=950793740]
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
-theme_override_constants/separation = 8
-
-[node name="Star1" type="TextureRect" parent="Rows/Row4/Margin/Line/Stars" unique_id=908109208]
-custom_minimum_size = Vector2(10, 8)
-layout_mode = 2
-mouse_filter = 2
-texture = SubResource("Atlas_star")
-
-[node name="Star2" type="TextureRect" parent="Rows/Row4/Margin/Line/Stars" unique_id=595718944]
-custom_minimum_size = Vector2(10, 8)
-layout_mode = 2
-mouse_filter = 2
-texture = SubResource("Atlas_star")
-
-[node name="Star3" type="TextureRect" parent="Rows/Row4/Margin/Line/Stars" unique_id=1581486859]
-custom_minimum_size = Vector2(10, 8)
-layout_mode = 2
-mouse_filter = 2
-texture = SubResource("Atlas_star")
+texture = SubResource("AtlasTexture_f22bx")
 
 [node name="Spacer" type="Control" parent="Rows/Row4/Margin/Line" unique_id=1139818853]
 layout_mode = 2
@@ -446,7 +379,7 @@ offset_left = 252.0
 offset_top = 14.0
 offset_right = 420.0
 offset_bottom = 46.0
-text = "MENU_PLAY"
+text = "游玩"
 
 [node name="RowBack" type="Label" parent="Rows/Row4" unique_id=2092185476]
 visible = false
@@ -455,7 +388,7 @@ offset_left = 431.0
 offset_top = 14.0
 offset_right = 599.0
 offset_bottom = 46.0
-text = "MENU_BACK"
+text = "返回"
 
 [node name="Row5" type="Control" parent="Rows" unique_id=888231934]
 custom_minimum_size = Vector2(0, 60)
@@ -470,7 +403,7 @@ anchor_bottom = 1.0
 offset_left = 80.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "CHAPTER_?"
+text = "？？？"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -495,33 +428,15 @@ theme_override_constants/separation = 0
 [node name="ChapterLabel" type="Label" parent="Rows/Row5/Margin/Line" unique_id=2101013828]
 custom_minimum_size = Vector2(133, 0)
 layout_mode = 2
-text = "CHAPTER_TITLE_?"
+text = "第？章"
 vertical_alignment = 1
 
-[node name="Stars" type="VBoxContainer" parent="Rows/Row5/Margin/Line" unique_id=1077041045]
-visible = false
+[node name="Stars" type="TextureRect" parent="Rows/Row5/Margin/Line" unique_id=1722955832]
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
-theme_override_constants/separation = 8
-
-[node name="Star1" type="TextureRect" parent="Rows/Row5/Margin/Line/Stars" unique_id=1203224003]
-custom_minimum_size = Vector2(10, 8)
-layout_mode = 2
-mouse_filter = 2
-texture = SubResource("Atlas_star")
-
-[node name="Star2" type="TextureRect" parent="Rows/Row5/Margin/Line/Stars" unique_id=1162053558]
-custom_minimum_size = Vector2(10, 8)
-layout_mode = 2
-mouse_filter = 2
-texture = SubResource("Atlas_star")
-
-[node name="Star3" type="TextureRect" parent="Rows/Row5/Margin/Line/Stars" unique_id=1995599197]
-custom_minimum_size = Vector2(10, 8)
-layout_mode = 2
-mouse_filter = 2
-texture = SubResource("Atlas_star")
+texture = SubResource("AtlasTexture_f22bx")
 
 [node name="Spacer" type="Control" parent="Rows/Row5/Margin/Line" unique_id=497022795]
 layout_mode = 2
@@ -542,7 +457,7 @@ offset_left = 252.0
 offset_top = 14.0
 offset_right = 420.0
 offset_bottom = 46.0
-text = "MENU_PLAY"
+text = "游玩"
 
 [node name="RowBack" type="Label" parent="Rows/Row5" unique_id=400359836]
 visible = false
@@ -551,7 +466,7 @@ offset_left = 431.0
 offset_top = 14.0
 offset_right = 599.0
 offset_bottom = 46.0
-text = "MENU_BACK"
+text = "返回"
 
 [node name="Row6" type="Control" parent="Rows" unique_id=1963876199]
 custom_minimum_size = Vector2(0, 60)
@@ -566,7 +481,7 @@ anchor_bottom = 1.0
 offset_left = 80.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "CHAPTER_5"
+text = "庆典日"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -591,33 +506,15 @@ theme_override_constants/separation = 0
 [node name="ChapterLabel" type="Label" parent="Rows/Row6/Margin/Line" unique_id=1164946323]
 custom_minimum_size = Vector2(133, 0)
 layout_mode = 2
-text = "CHAPTER_TITLE_5"
+text = "第5章"
 vertical_alignment = 1
 
-[node name="Stars" type="VBoxContainer" parent="Rows/Row6/Margin/Line" unique_id=687247133]
-visible = false
+[node name="Stars" type="TextureRect" parent="Rows/Row6/Margin/Line" unique_id=1922752520]
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
-theme_override_constants/separation = 8
-
-[node name="Star1" type="TextureRect" parent="Rows/Row6/Margin/Line/Stars" unique_id=241723070]
-custom_minimum_size = Vector2(10, 8)
-layout_mode = 2
-mouse_filter = 2
-texture = SubResource("Atlas_star")
-
-[node name="Star2" type="TextureRect" parent="Rows/Row6/Margin/Line/Stars" unique_id=1789098780]
-custom_minimum_size = Vector2(10, 8)
-layout_mode = 2
-mouse_filter = 2
-texture = SubResource("Atlas_star")
-
-[node name="Star3" type="TextureRect" parent="Rows/Row6/Margin/Line/Stars" unique_id=846486882]
-custom_minimum_size = Vector2(10, 8)
-layout_mode = 2
-mouse_filter = 2
-texture = SubResource("Atlas_star")
+texture = SubResource("AtlasTexture_f22bx")
 
 [node name="Spacer" type="Control" parent="Rows/Row6/Margin/Line" unique_id=704760238]
 layout_mode = 2
@@ -629,7 +526,7 @@ custom_minimum_size = Vector2(56, 50)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
-texture = SubResource("Atlas_ch_empty")
+texture = SubResource("AtlasTexture_kjnqs")
 
 [node name="RowPlay" type="Label" parent="Rows/Row6" unique_id=268595490]
 visible = false
@@ -638,7 +535,7 @@ offset_left = 252.0
 offset_top = 14.0
 offset_right = 420.0
 offset_bottom = 46.0
-text = "MENU_PLAY"
+text = "游玩"
 
 [node name="RowBack" type="Label" parent="Rows/Row6" unique_id=670137283]
 visible = false
@@ -647,7 +544,7 @@ offset_left = 431.0
 offset_top = 14.0
 offset_right = 599.0
 offset_bottom = 46.0
-text = "MENU_BACK"
+text = "返回"
 
 [node name="Row7" type="Control" parent="Rows" unique_id=1226313343]
 custom_minimum_size = Vector2(0, 60)
@@ -687,33 +584,15 @@ theme_override_constants/separation = 0
 [node name="ChapterLabel" type="Label" parent="Rows/Row7/Margin/Line" unique_id=705556749]
 custom_minimum_size = Vector2(133, 0)
 layout_mode = 2
-text = "CHAPTER_TITLE_6"
+text = "第6章"
 vertical_alignment = 1
 
-[node name="Stars" type="VBoxContainer" parent="Rows/Row7/Margin/Line" unique_id=1159020188]
-visible = false
+[node name="Stars" type="TextureRect" parent="Rows/Row7/Margin/Line" unique_id=67498390]
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
-theme_override_constants/separation = 8
-
-[node name="Star1" type="TextureRect" parent="Rows/Row7/Margin/Line/Stars" unique_id=1291168801]
-custom_minimum_size = Vector2(10, 8)
-layout_mode = 2
-mouse_filter = 2
-texture = SubResource("Atlas_star")
-
-[node name="Star2" type="TextureRect" parent="Rows/Row7/Margin/Line/Stars" unique_id=744618808]
-custom_minimum_size = Vector2(10, 8)
-layout_mode = 2
-mouse_filter = 2
-texture = SubResource("Atlas_star")
-
-[node name="Star3" type="TextureRect" parent="Rows/Row7/Margin/Line/Stars" unique_id=1010209774]
-custom_minimum_size = Vector2(10, 8)
-layout_mode = 2
-mouse_filter = 2
-texture = SubResource("Atlas_star")
+texture = SubResource("AtlasTexture_f22bx")
 
 [node name="Spacer" type="Control" parent="Rows/Row7/Margin/Line" unique_id=1348495071]
 layout_mode = 2
@@ -734,7 +613,7 @@ offset_left = 252.0
 offset_top = 14.0
 offset_right = 420.0
 offset_bottom = 46.0
-text = "MENU_PLAY"
+text = "游玩"
 
 [node name="RowBack" type="Label" parent="Rows/Row7" unique_id=1739020242]
 visible = false
@@ -743,7 +622,7 @@ offset_left = 431.0
 offset_top = 14.0
 offset_right = 599.0
 offset_bottom = 46.0
-text = "MENU_BACK"
+text = "返回"
 
 [node name="CopyrightLabel" type="Label" parent="." unique_id=1082124430]
 layout_mode = 0
@@ -758,21 +637,21 @@ text = "三角大崩坏
 新星派&一块懒AA"
 
 [node name="ExitLabel" type="Label" parent="." unique_id=590539124]
-layout_mode = 0
-offset_left = 212.0
-offset_top = 434.0
-offset_right = 388.0
-offset_bottom = 466.0
-text = "MENU_EXIT"
-
-[node name="LangLabel" type="Label" parent="." unique_id=560037236]
-visible = false
-layout_mode = 0
-offset_left = 352.0
-offset_top = 440.0
-offset_right = 448.0
-offset_bottom = 460.0
-text = "MENU_LANG"
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -88.0
+offset_top = -42.0
+offset_right = 88.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "退出"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Deco" type="Control" parent="." unique_id=1556814250]
 anchors_preset = 0
@@ -792,6 +671,7 @@ mouse_filter = 2
 texture = SubResource("AtlasTexture_pgiqg")
 
 [node name="Fade" type="ColorRect" parent="." unique_id=1148343377]
+visible = false
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_right = 640.0

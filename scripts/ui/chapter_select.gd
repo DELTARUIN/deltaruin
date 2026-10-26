@@ -6,7 +6,7 @@ extends Control
 #region 配置：章节数据与语言
 
 ## 各章节行锁定状态（与场景 Rows/RowN 一一对应；文案走 assets/locales/translations.csv）
-const LOCKED_ROWS: Array[bool] = [false, false, false, false, false, true, true]
+const LOCKED_ROWS: Array[bool] = [false, false, false, false, false, false, true]
 
 ## 状态机 language 索引 → locale 代码
 const LOCALES: Array[String] = ["zh", "ja"]
@@ -23,9 +23,9 @@ const INPUT_COOLDOWN := 0.15          ## 输入去抖（秒）
 
 ## 各行中心 y（对应场景行边界 0/62/122/.../422）
 const ROW_CENTERS: Array[float] = [31.0, 92.0, 152.0, 212.0, 272.0, 332.0, 392.0]
-const X_HEART_ROW := 33.0             ## 行选中态红心 x（该行没有锚定 Label，固定值）
+const X_HEART_ROW := 30.0             ## 行选中态红心 x（该行没有锚定 Label，固定值）
 const HEART_GAP_X := 26.0             ## 红心右缘与所锚定文字左缘的间距
-const HEART_FOOTER_DY := 10.0          ## 页脚态红心相对文字 y 偏移
+const HEART_FOOTER_DY := 6.0          ## 页脚态红心相对文字 y 偏移
 
 #endregion
 
@@ -33,7 +33,6 @@ const HEART_FOOTER_DY := 10.0          ## 页脚态红心相对文字 y 偏移
 
 @onready var _rows: Array[Node] = $Rows.get_children()  ## Row1..Row7，顺序即章节顺序
 @onready var _exit_label: Label = $ExitLabel
-@onready var _lang_label: Label = $LangLabel
 @onready var _heart: TextureRect = $Heart
 @onready var _fade_rect: ColorRect = $Fade
 @onready var _loading_label: Label = $LoadingLabel
@@ -65,7 +64,7 @@ func _ready() -> void:
 		_back_labels.append(row.get_node("RowBack"))
 		_icons.append(row.get_node("Margin/Line/Icon"))
 		_star_lists.append(row.get_node("Margin/Line/Stars").get_children())
-	_apply_language()
+	#_apply_language()
 	_apply_focus()
 
 
@@ -118,13 +117,8 @@ func _apply_move(action: Callable) -> void:
 ## 应用确认键：语言切换单独处理（需重翻文案）；进入 FADE_OUT 时启动渐隐 Tween
 func _apply_ok() -> void:
 	var old_state := state.state
-	var old_lang := state.language
 	state.press_ok()
-	if state.language != old_lang:
-		_snd_ok.play()
-		_apply_language()
-		_after_state_change()
-	elif state.state != old_state:
+	if state.state != old_state:
 		_snd_ok.play()
 		_after_state_change()
 		if state.state == ChapterSelectState.State.FADE_OUT:
@@ -179,16 +173,13 @@ func _apply_focus() -> void:
 			else _back_labels[state.cursor].global_position.x) - HEART_GAP_X
 		_heart.position.y = ROW_CENTERS[state.cursor] - _heart.size.y / 2.0
 	elif on_footer:
-		_heart.position.x = (_exit_label.position.x if state.cursor == ChapterSelectState.FOOTER_EXIT
-			else _lang_label.position.x) - HEART_GAP_X
+		_heart.position.x = (_exit_label.position.x) - HEART_GAP_X
 		_heart.position.y = _exit_label.position.y + HEART_FOOTER_DY
 		_setup_label_selected(_exit_label, state.cursor == ChapterSelectState.FOOTER_EXIT)
-		_setup_label_selected(_lang_label, state.cursor == ChapterSelectState.FOOTER_LANG)
 	else:
 		_heart.position.x = X_HEART_ROW
 		_heart.position.y = ROW_CENTERS[state.cursor] - _heart.size.y / 2.0
 		_setup_label_selected(_exit_label, false)
-		_setup_label_selected(_lang_label, false)
 
 func _setup_label_selected(node: Control, selected: bool) -> void:
 	node.add_theme_color_override("font_color", COLOR_YELLOW if selected else COLOR_WHITE)
@@ -200,12 +191,6 @@ func _apply_row_colors(i: int, color: Color) -> void:
 	for star: TextureRect in _star_lists[i]:
 		star.modulate = color
 	_icons[i].modulate = color
-
-
-## 切换 locale：场景里 text 填翻译 key 的 Label 由引擎自动翻译并随 locale 切换
-## 自动重翻，脚本无需逐个 tr()。加载字样含章节数字，在渐隐完成时按行设 key。
-func _apply_language() -> void:
-	TranslationServer.set_locale(LOCALES[state.language])
 
 #endregion
 

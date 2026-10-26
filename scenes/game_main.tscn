@@ -19,7 +19,6 @@ process_mode = 1
 
 [node name="ChapterMenu" parent="HudLayer" unique_id=673489019 instance=ExtResource("2_xewuv")]
 auto_translate_mode = 0
-scale = Vector2(0.5, 0.5)
 
 [node name="PauseLayer" type="CanvasLayer" parent="." unique_id=676586351]
 process_mode = 2
