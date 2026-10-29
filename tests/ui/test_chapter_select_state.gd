@@ -1,5 +1,5 @@
 extends GutTest
-## ChapterSelectState 状态机测试：锁定行跳过 / 子菜单切换 / 取消与渐隐路径
+## ChapterSelectState 状态机测试：锁定行跳过 / 子菜单切换 / 取消与确认动作路径
 
 var state: ChapterSelectState
 
@@ -82,21 +82,18 @@ func test_cancel_closes_submenu_keeps_focus() -> void:
 	assert_eq(state.cursor, 3, "焦点不变")
 
 
-func test_ok_on_play_fades_out() -> void:
+func test_ok_on_play_returns_play_action() -> void:
 	state.press_ok()
-	state.press_ok()
-	assert_eq(state.state, ChapterSelectState.State.FADE_OUT)
-	assert_eq(state.pending, ChapterSelectState.Pending.PLAY)
-	assert_eq(state.loading_row, 0)
+	assert_eq(state.press_ok(), ChapterSelectState.Action.PLAY)
+	assert_eq(state.play_row, 0)
+	assert_eq(state.state, ChapterSelectState.State.SUBMENU_OPEN, "菜单不冻结，停在子菜单")
 
 
-func test_play_path_returns_to_menu() -> void:
+func test_ok_on_play_row_two_reports_row_two() -> void:
 	state.cursor = 2
 	state.press_ok()
-	state.press_ok()
-	state.finish_fade()
-	assert_eq(state.state, ChapterSelectState.State.ROW_SELECTED)
-	assert_eq(state.pending, ChapterSelectState.Pending.NONE)
+	assert_eq(state.press_ok(), ChapterSelectState.Action.PLAY)
+	assert_eq(state.play_row, 2)
 
 
 func test_ok_on_back_equals_cancel() -> void:
@@ -106,21 +103,9 @@ func test_ok_on_back_equals_cancel() -> void:
 	assert_eq(state.state, ChapterSelectState.State.ROW_SELECTED)
 
 
-func test_ok_on_exit_fades_out_with_exit_pending() -> void:
+func test_ok_on_exit_returns_exit_action() -> void:
 	state.cursor = ChapterSelectState.FOOTER_EXIT
-	state.press_ok()
-	assert_eq(state.state, ChapterSelectState.State.FADE_OUT)
-	assert_eq(state.pending, ChapterSelectState.Pending.EXIT)
-
-
-func test_fade_out_ignores_all_input() -> void:
-	state.press_ok()
-	state.press_ok()
-	state.move_down()
-	state.move_left()
-	state.press_cancel()
-	assert_eq(state.state, ChapterSelectState.State.FADE_OUT)
-	assert_eq(state.sub_item, ChapterSelectState.SubItem.PLAY)
+	assert_eq(state.press_ok(), ChapterSelectState.Action.EXIT)
 
 
 func test_all_rows_locked_cursor_goes_to_footer() -> void:

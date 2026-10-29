@@ -1,30 +1,15 @@
 [gd_scene format=3 uid="uid://brt0mcaopisn7"]
 
-[ext_resource type="Script" uid="uid://dh0043752lo5k" path="res://scripts/game_main.gd" id="1_ycjmf"]
-[ext_resource type="PackedScene" uid="uid://dyyroll14jssr" path="res://scenes/ui/chapter_menu.tscn" id="2_xewuv"]
+[ext_resource type="Script" uid="uid://kvovkurrk8o8" path="res://scripts/core/game_manager.gd" id="1_2uxk6"]
+[ext_resource type="PackedScene" uid="uid://dyyroll14jssr" path="res://scenes/ui/chapter_menu.tscn" id="1_754un"]
 
 [node name="GameMain" type="Node" unique_id=477336484]
-script = ExtResource("1_ycjmf")
+script = ExtResource("1_2uxk6")
 
-[node name="Systems" type="Node" parent="." unique_id=212924905]
-process_mode = 3
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1963245406]
 
-[node name="WorldRoot" type="Node2D" parent="." unique_id=933521493]
-process_mode = 1
-
-[node name="MapRoot" type="Node2D" parent="WorldRoot" unique_id=1658301463]
-
-[node name="HudLayer" type="CanvasLayer" parent="." unique_id=899098070]
-process_mode = 1
-
-[node name="ChapterMenu" parent="HudLayer" unique_id=673489019 instance=ExtResource("2_xewuv")]
+[node name="ChapterMenu" parent="CanvasLayer" unique_id=673489019 instance=ExtResource("1_754un")]
 auto_translate_mode = 0
 
-[node name="PauseLayer" type="CanvasLayer" parent="." unique_id=676586351]
-process_mode = 2
-
-[node name="TransitionLayer" type="CanvasLayer" parent="." unique_id=359388568]
-process_mode = 3
-
-[node name="DebugLayer" type="CanvasLayer" parent="." unique_id=535902263]
-process_mode = 3
+[connection signal="exit_requested" from="CanvasLayer/ChapterMenu" to="." method="_on_chapter_menu_exit_requested"]
+[connection signal="play_requested" from="CanvasLayer/ChapterMenu" to="." method="_on_chapter_menu_play_requested"]

@@ -3,13 +3,17 @@ extends Control
 ## 节点结构在 chapter_menu.tscn 中编排；本脚本只负责输入处理与状态到视图的同步。
 ## 状态逻辑在 ChapterSelectState（纯逻辑类，可单测）。
 
-#region 配置：章节数据与语言
+#region 信号
 
-## 各章节行锁定状态（与场景 Rows/RowN 一一对应；文案走 assets/locales/translations.csv）
-const LOCKED_ROWS: Array[bool] = [false, false, false, false, false, false, true]
+signal play_requested(row: int) ## 确认「游玩」：row 为章节行索引（0 起）
+signal exit_requested           ## 确认「退出」
 
-## 状态机 language 索引 → locale 代码
-const LOCALES: Array[String] = ["zh", "ja"]
+#endregion
+
+#region 配置：章节数据
+
+## 各章节行锁定状态（与场景 Rows/RowN 一一对应
+const LOCKED_ROWS: Array[bool] = [true, true, true, true, false, true, true]
 
 #endregion
 
@@ -34,8 +38,6 @@ const HEART_FOOTER_DY := 6.0          ## 页脚态红心相对文字 y 偏移
 @onready var _rows: Array[Node] = $Rows.get_children()  ## Row1..Row7，顺序即章节顺序
 @onready var _exit_label: Label = $ExitLabel
 @onready var _heart: TextureRect = $Heart
-@onready var _fade_rect: ColorRect = $Fade
-@onready var _loading_label: Label = $LoadingLabel
 @onready var _snd_move: AudioStreamPlayer = $SndMove
 @onready var _snd_ok: AudioStreamPlayer = $SndOk
 @onready var _snd_cancel: AudioStreamPlayer = $SndCancel
@@ -49,7 +51,6 @@ var _star_lists: Array[Array] = []      ## 各行星列（TextureRect 数组）
 var _icons: Array[TextureRect] = []     ## 各行章节图标
 
 var _cooldown := 0.0                    ## 输入去抖剩余时间
-var _fading := false                    ## 渐隐 Tween 进行中（期间屏蔽输入）
 
 #endregion
 
@@ -66,6 +67,7 @@ func _ready() -> void:
 		_star_lists.append(row.get_node("Margin/Line/Stars").get_children())
 	#_apply_language()
 	_apply_focus()
+	_apply_move(func() -> void: state.move_down())
 
 
 #region 输入
@@ -74,16 +76,8 @@ func _process(delta: float) -> void:
 	_cooldown = maxf(0.0, _cooldown - delta)
 
 
-## 键盘输入入口：FADE_OUT 态只接受「任意键返回菜单」，其余状态走动作映射
+## 键盘输入入口：按动作映射分派
 func _unhandled_input(event: InputEvent) -> void:
-	## FADE_OUT(PLAY)：加载字样显示后任意键返回菜单
-	if state.state == ChapterSelectState.State.FADE_OUT:
-		if _fading or state.pending != ChapterSelectState.Pending.PLAY:
-			return
-		if event is InputEventKey and event.is_pressed():
-			_return_from_loading()
-		return
-
 	if not (event is InputEventKey) or not event.is_pressed() or event.is_echo():
 		return
 	if _cooldown > 0.0:
@@ -114,15 +108,20 @@ func _apply_move(action: Callable) -> void:
 		_after_state_change()
 
 
-## 应用确认键：语言切换单独处理（需重翻文案）；进入 FADE_OUT 时启动渐隐 Tween
+## 应用确认键：状态变化播 snd_ok；确认产生动作时播 snd_ok 并发对应信号
 func _apply_ok() -> void:
 	var old_state := state.state
-	state.press_ok()
+	var action := state.press_ok()
 	if state.state != old_state:
 		_snd_ok.play()
 		_after_state_change()
-		if state.state == ChapterSelectState.State.FADE_OUT:
-			_start_fade_tween()
+	match action:
+		ChapterSelectState.Action.PLAY:
+			_snd_ok.play()
+			play_requested.emit(state.play_row)
+		ChapterSelectState.Action.EXIT:
+			_snd_ok.play()
+			exit_requested.emit()
 
 
 ## 应用取消键：状态实际变化才播音效刷新
@@ -191,38 +190,5 @@ func _apply_row_colors(i: int, color: Color) -> void:
 	for star: TextureRect in _star_lists[i]:
 		star.modulate = color
 	_icons[i].modulate = color
-
-#endregion
-
-
-#region 渐隐过渡
-
-
-## 渐入纯黑（1.5s）：游玩加载与退出共用
-func _start_fade_tween() -> void:
-	_fading = true
-	var tween := create_tween()
-	tween.tween_property(_fade_rect, "modulate:a", 1.0, 1.5)
-	tween.finished.connect(_on_fade_in_done)
-
-
-## 渐隐完成：游玩→按行设加载字样 key（自动翻译）并等待任意键；退出→结束程序
-func _on_fade_in_done() -> void:
-	_fading = false
-	if state.pending == ChapterSelectState.Pending.PLAY:
-		_loading_label.text = "LOADING_CHAPTER_%d" % (state.loading_row + 1)
-		_loading_label.visible = true
-	else:
-		get_tree().quit()
-
-
-## 加载字样下按任意键：淡出黑幕回菜单（0.3s），状态机回到 ROW_SELECTED
-func _return_from_loading() -> void:
-	_loading_label.visible = false
-	state.finish_fade()
-	var tween := create_tween()
-	tween.tween_property(_fade_rect, "modulate:a", 0.0, 0.3)
-	tween.finished.connect(_after_state_change)
-	_cooldown = INPUT_COOLDOWN
 
 #endregion
