@@ -1,0 +1,9 @@
+[style name="dialogic_style"]
+susie (default): 欢迎来到测试对话
+susie (happy): 接下来测试选项功能
+- 确定
+	susie (default): 明智的抉择
+	[end_timeline]
+- 拒绝
+	susie (danger): 竟然敢拒绝，那就陷入无尽的循环吧
+	jump demo/

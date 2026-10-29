@@ -1,0 +1,94 @@
+[gd_resource type="Resource" script_class="DialogicStyle" format=3 uid="uid://cwars0itmtotn"]
+
+[ext_resource type="PackedScene" uid="uid://cqpb3ie51rwl5" path="res://addons/dialogic/Modules/DefaultLayoutParts/Base_Default/default_layout_base.tscn" id="1_ks2oh"]
+[ext_resource type="Script" uid="uid://bwg6yncmh2cml" path="res://addons/dialogic/Resources/dialogic_style_layer.gd" id="2_nbiop"]
+[ext_resource type="PackedScene" uid="uid://c1k5m0w3r40xf" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_FullBackground/full_background_layer.tscn" id="3_wgtgg"]
+[ext_resource type="PackedScene" uid="uid://cn674foxwedqu" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_Input/full_advance_input_layer.tscn" id="4_jl83g"]
+[ext_resource type="PackedScene" uid="uid://b7qqmd2gp0mw6" path="res://scenes/dialogic/TextboxWithPortrait/custom_textbox_with_portrait_.tscn" id="5_ks2oh"]
+[ext_resource type="PackedScene" uid="uid://dsbwnp5hegnu3" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_Glossary/glossary_popup_layer.tscn" id="6_n62rp"]
+[ext_resource type="PackedScene" uid="uid://bvfp4o1vhh2yc" path="res://scenes/dialogic/CenteredChoices/custom_centered_choices.tscn" id="7_ks2oh"]
+[ext_resource type="PackedScene" uid="uid://cvgf4c6gg0tsy" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_TextInput/text_input_layer.tscn" id="8_lbjmk"]
+[ext_resource type="PackedScene" uid="uid://lx24i8fl6uo" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_History/history_layer.tscn" id="9_xt7ic"]
+[ext_resource type="Script" uid="uid://dv08k6ljua6fm" path="res://addons/dialogic/Resources/dialogic_style.gd" id="10_hee2n"]
+
+[sub_resource type="Resource" id="Resource_hb34i"]
+script = ExtResource("2_nbiop")
+scene = ExtResource("1_ks2oh")
+overrides = {
+"global_font": "\"res://resources/font_variation.tres\"",
+"global_font_size": "32.0"
+}
+
+[sub_resource type="Resource" id="Resource_6c31b"]
+script = ExtResource("2_nbiop")
+scene = ExtResource("3_wgtgg")
+
+[sub_resource type="Resource" id="Resource_8oyxr"]
+script = ExtResource("2_nbiop")
+scene = ExtResource("4_jl83g")
+overrides = {
+"disabled": "true"
+}
+
+[sub_resource type="Resource" id="Resource_0uvjc"]
+script = ExtResource("2_nbiop")
+scene = ExtResource("5_ks2oh")
+overrides = {
+"box_modulate_custom_color": "Color(1, 1, 1, 1)",
+"box_modulate_global_color": "false",
+"box_panel": "\"res://resources/dialogic/dialogic_style_box.tres\"",
+"name_label_hide_when_no_character": "true"
+}
+
+[sub_resource type="Resource" id="Resource_0fc4o"]
+script = ExtResource("2_nbiop")
+scene = ExtResource("6_n62rp")
+overrides = {
+"disabled": "true"
+}
+
+[sub_resource type="Resource" id="Resource_pb4wb"]
+script = ExtResource("2_nbiop")
+scene = ExtResource("7_ks2oh")
+overrides = {
+"boxes_min_size": "Vector2(100, 0)",
+"boxes_stylebox_focused": "\"res://resources/dialogic/choice_button_style.tres\"",
+"boxes_stylebox_hovered": "\"res://resources/dialogic/choice_button_style.tres\"",
+"boxes_stylebox_normal": "\"res://resources/dialogic/choice_button_style.tres\"",
+"boxes_v_separation": "40.0",
+"choices_custom_button": "\"res://scenes/dialogic/choice_button.tscn\"",
+"maximum_choices": "2.0",
+"sounds_focus": "\"\"",
+"sounds_hover": "\"\"",
+"sounds_pressed": "\"\""
+}
+
+[sub_resource type="Resource" id="Resource_1twvw"]
+script = ExtResource("2_nbiop")
+scene = ExtResource("8_lbjmk")
+overrides = {
+"disabled": "true"
+}
+
+[sub_resource type="Resource" id="Resource_lyniq"]
+script = ExtResource("2_nbiop")
+scene = ExtResource("9_xt7ic")
+overrides = {
+"disabled": "true"
+}
+
+[resource]
+script = ExtResource("10_hee2n")
+name = "dialogic_style"
+layer_list = Array[String](["10", "11", "12", "13", "14", "15", "16"])
+layer_info = {
+"": SubResource("Resource_hb34i"),
+"10": SubResource("Resource_6c31b"),
+"11": SubResource("Resource_8oyxr"),
+"12": SubResource("Resource_0uvjc"),
+"13": SubResource("Resource_0fc4o"),
+"14": SubResource("Resource_pb4wb"),
+"15": SubResource("Resource_1twvw"),
+"16": SubResource("Resource_lyniq")
+}
+metadata/_latest_layer = "14"
