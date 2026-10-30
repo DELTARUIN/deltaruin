@@ -28,12 +28,6 @@ func _ready() -> void:
 	SceneManager.show_first_scene(fade_in_options, general_options)
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 func _on_chapter_menu_exit_requested() -> void:
 	SceneManager.change_scene("exit", fade_in_options, fade_in_options, general_options)
 	pass # Replace with function body.

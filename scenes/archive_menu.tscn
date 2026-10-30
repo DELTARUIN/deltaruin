@@ -1,10 +1,13 @@
 [gd_scene format=3 uid="uid://b27eh3tirsf3g"]
 
-[ext_resource type="Script" uid="uid://kvovkurrk8o8" path="res://scripts/core/game_manager.gd" id="1_1v8yg"]
 [ext_resource type="Texture2D" uid="uid://brcd1dm1bgucf" path="res://assets/graphics/ui/menu_heros.png" id="1_tio4f"]
 [ext_resource type="Texture2D" uid="uid://sxfh504cklr2" path="res://assets/graphics/ui/files_column.png" id="2_1v8yg"]
 [ext_resource type="Texture2D" uid="uid://drtkdkhtqsk5t" path="res://assets/graphics/characters/soul/the_soul.png" id="5_s8c2v"]
 [ext_resource type="FontFile" uid="uid://dmtt8i0qf1pay" path="res://assets/fonts/normal.ttf" id="5_yjyqx"]
+[ext_resource type="Script" path="res://scripts/ui/archive_select.gd" id="10_ascr"]
+[ext_resource type="AudioStream" uid="uid://dmm0fswoftc5t" path="res://assets/audio/effects/common/snd_menumove.wav" id="11_sndmv"]
+[ext_resource type="AudioStream" uid="uid://xpo0gxfoum1p" path="res://assets/audio/effects/common/snd_select.wav" id="12_sndok"]
+[ext_resource type="AudioStream" uid="uid://cyb6kl8342ys5" path="res://assets/audio/effects/common/snd_swing.wav" id="13_sndcxl"]
 
 [sub_resource type="Theme" id="Theme_yjyqx"]
 default_font = ExtResource("5_yjyqx")
@@ -60,7 +63,7 @@ atlas = ExtResource("5_s8c2v")
 region = Rect2(1, 15, 20, 20)
 
 [node name="ArchiveMenu" type="Node" unique_id=1586803957]
-script = ExtResource("1_1v8yg")
+script = ExtResource("10_ascr")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1850881411]
 
@@ -213,6 +216,42 @@ offset_bottom = 15.0
 grow_vertical = 2
 texture = SubResource("AtlasTexture_1t8fe")
 
+[node name="DisableDodulate" type="ColorRect" parent="CanvasLayer/ArchiveSelect/Archives/Control1" unique_id=537722123]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.38625094, 0.38625082, 0.38625085, 0.4862745)
+
+[node name="ConfirmStart" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control1"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 76.0
+offset_top = -22.0
+offset_right = 164.0
+offset_bottom = 27.0
+grow_vertical = 2
+text = "开始"
+
+[node name="ConfirmBack" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control1"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 180.0
+offset_top = -22.0
+offset_right = 268.0
+offset_bottom = 27.0
+grow_vertical = 2
+text = "返回"
+
 [node name="Control2" type="Control" parent="CanvasLayer/ArchiveSelect/Archives" unique_id=1850558903]
 layout_mode = 2
 size_flags_vertical = 3
@@ -288,6 +327,41 @@ offset_bottom = 15.0
 grow_vertical = 2
 texture = SubResource("AtlasTexture_1t8fe")
 
+[node name="DisableDodulate" type="ColorRect" parent="CanvasLayer/ArchiveSelect/Archives/Control2" unique_id=66329197]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.38625094, 0.38625082, 0.38625085, 0.4862745)
+
+[node name="ConfirmStart" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control2"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 76.0
+offset_top = -22.0
+offset_right = 164.0
+offset_bottom = 27.0
+grow_vertical = 2
+text = "开始"
+
+[node name="ConfirmBack" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control2"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 180.0
+offset_top = -22.0
+offset_right = 268.0
+offset_bottom = 27.0
+grow_vertical = 2
+text = "返回"
+
 [node name="Control3" type="Control" parent="CanvasLayer/ArchiveSelect/Archives" unique_id=1177324688]
 layout_mode = 2
 size_flags_vertical = 3
@@ -362,3 +436,47 @@ offset_right = 37.0
 offset_bottom = 15.0
 grow_vertical = 2
 texture = SubResource("AtlasTexture_1t8fe")
+
+[node name="DisableDodulate" type="ColorRect" parent="CanvasLayer/ArchiveSelect/Archives/Control3" unique_id=407165067]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.38625094, 0.38625082, 0.38625085, 0.4862745)
+
+[node name="ConfirmStart" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control3"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 76.0
+offset_top = -22.0
+offset_right = 164.0
+offset_bottom = 27.0
+grow_vertical = 2
+text = "开始"
+
+[node name="ConfirmBack" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control3"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 180.0
+offset_top = -22.0
+offset_right = 268.0
+offset_bottom = 27.0
+grow_vertical = 2
+text = "返回"
+
+[node name="SndMove" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_sndmv")
+
+[node name="SndOk" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_sndok")
+
+[node name="SndCancel" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_sndcxl")
