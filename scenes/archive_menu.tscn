@@ -80,7 +80,7 @@ libraries/ = SubResource("AnimationLibrary_ygnmt")
 autoplay = &"default"
 
 [node name="Background" type="TextureRect" parent="CanvasLayer/ArchiveSelect" unique_id=1540944304]
-texture_filter = 2
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -90,13 +90,13 @@ grow_vertical = 2
 texture = SubResource("AtlasTexture_1v8yg")
 
 [node name="Heros" type="TextureRect" parent="CanvasLayer/ArchiveSelect" unique_id=446059883]
-texture_filter = 2
+texture_filter = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -135.0
+offset_top = -136.0
 grow_horizontal = 2
 grow_vertical = 0
 texture = SubResource("AtlasTexture_tio4f")
