@@ -1,5 +1,5 @@
 extends GutTest
-## ChapterSelectState 状态机测试：锁定行跳过 / 子菜单切换 / 取消与渐隐路径
+## ChapterSelectState 状态机测试：锁定行跳过 / 子菜单切换 / 取消与确认动作路径
 
 var state: ChapterSelectState
 
@@ -27,19 +27,17 @@ func test_move_down_from_last_unlocked_goes_to_footer() -> void:
 	assert_eq(state.cursor, ChapterSelectState.FOOTER_EXIT, "第5章向下跳过锁定行进页脚")
 
 
-func test_move_down_reaches_footer_items() -> void:
+func test_move_down_from_footer_wraps_to_first_row() -> void:
 	state.cursor = 4
 	state.move_down()
-	assert_eq(state.cursor, ChapterSelectState.FOOTER_EXIT, "第5章之后是退出")
+	assert_eq(state.cursor, ChapterSelectState.FOOTER_EXIT, "第5章向下跳过锁定行进页脚")
 	state.move_down()
-	assert_eq(state.cursor, ChapterSelectState.FOOTER_LANG, "退出之后是日本語")
-	state.move_down()
-	assert_eq(state.cursor, 0, "日本語之后循环回第1章")
+	assert_eq(state.cursor, 0, "页脚之后循环回第1章")
 
 
 func test_move_up_from_first_wraps_to_footer() -> void:
 	state.move_up()
-	assert_eq(state.cursor, ChapterSelectState.FOOTER_LANG)
+	assert_eq(state.cursor, ChapterSelectState.FOOTER_EXIT)
 
 
 func test_ok_on_row_opens_submenu_at_play() -> void:
@@ -84,21 +82,18 @@ func test_cancel_closes_submenu_keeps_focus() -> void:
 	assert_eq(state.cursor, 3, "焦点不变")
 
 
-func test_ok_on_play_fades_out() -> void:
+func test_ok_on_play_returns_play_action() -> void:
 	state.press_ok()
-	state.press_ok()
-	assert_eq(state.state, ChapterSelectState.State.FADE_OUT)
-	assert_eq(state.pending, ChapterSelectState.Pending.PLAY)
-	assert_eq(state.loading_row, 0)
+	assert_eq(state.press_ok(), ChapterSelectState.Action.PLAY)
+	assert_eq(state.play_row, 0)
+	assert_eq(state.state, ChapterSelectState.State.SUBMENU_OPEN, "菜单不冻结，停在子菜单")
 
 
-func test_play_path_returns_to_menu() -> void:
+func test_ok_on_play_row_two_reports_row_two() -> void:
 	state.cursor = 2
 	state.press_ok()
-	state.press_ok()
-	state.finish_fade()
-	assert_eq(state.state, ChapterSelectState.State.ROW_SELECTED)
-	assert_eq(state.pending, ChapterSelectState.Pending.NONE)
+	assert_eq(state.press_ok(), ChapterSelectState.Action.PLAY)
+	assert_eq(state.play_row, 2)
 
 
 func test_ok_on_back_equals_cancel() -> void:
@@ -108,29 +103,9 @@ func test_ok_on_back_equals_cancel() -> void:
 	assert_eq(state.state, ChapterSelectState.State.ROW_SELECTED)
 
 
-func test_ok_on_exit_fades_out_with_exit_pending() -> void:
+func test_ok_on_exit_returns_exit_action() -> void:
 	state.cursor = ChapterSelectState.FOOTER_EXIT
-	state.press_ok()
-	assert_eq(state.state, ChapterSelectState.State.FADE_OUT)
-	assert_eq(state.pending, ChapterSelectState.Pending.EXIT)
-
-
-func test_ok_on_language_toggles() -> void:
-	state.cursor = ChapterSelectState.FOOTER_LANG
-	state.press_ok()
-	assert_eq(state.language, 1)
-	state.press_ok()
-	assert_eq(state.language, 0)
-
-
-func test_fade_out_ignores_all_input() -> void:
-	state.press_ok()
-	state.press_ok()
-	state.move_down()
-	state.move_left()
-	state.press_cancel()
-	assert_eq(state.state, ChapterSelectState.State.FADE_OUT)
-	assert_eq(state.sub_item, ChapterSelectState.SubItem.PLAY)
+	assert_eq(state.press_ok(), ChapterSelectState.Action.EXIT)
 
 
 func test_all_rows_locked_cursor_goes_to_footer() -> void:

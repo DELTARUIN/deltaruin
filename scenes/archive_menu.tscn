@@ -2,102 +2,481 @@
 
 [ext_resource type="Texture2D" uid="uid://brcd1dm1bgucf" path="res://assets/graphics/ui/menu_heros.png" id="1_tio4f"]
 [ext_resource type="Texture2D" uid="uid://sxfh504cklr2" path="res://assets/graphics/ui/files_column.png" id="2_1v8yg"]
+[ext_resource type="Texture2D" uid="uid://drtkdkhtqsk5t" path="res://assets/graphics/characters/soul/the_soul.png" id="5_s8c2v"]
+[ext_resource type="FontFile" uid="uid://dmtt8i0qf1pay" path="res://assets/fonts/normal.ttf" id="5_yjyqx"]
+[ext_resource type="Script" path="res://scripts/ui/archive_select.gd" id="10_ascr"]
+[ext_resource type="AudioStream" uid="uid://dmm0fswoftc5t" path="res://assets/audio/effects/common/snd_menumove.wav" id="11_sndmv"]
+[ext_resource type="AudioStream" uid="uid://xpo0gxfoum1p" path="res://assets/audio/effects/common/snd_select.wav" id="12_sndok"]
+[ext_resource type="AudioStream" uid="uid://cyb6kl8342ys5" path="res://assets/audio/effects/common/snd_swing.wav" id="13_sndcxl"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_anppa"]
+[sub_resource type="Theme" id="Theme_yjyqx"]
+default_font = ExtResource("5_yjyqx")
+default_font_size = 36
+
+[sub_resource type="Animation" id="Animation_tio4f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Heros:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 193, 324, 75)]
+}
+
+[sub_resource type="Animation" id="Animation_1v8yg"]
+resource_name = "default"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Heros:texture:region")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(2, 268, 320, 70), Rect2(2, 344, 320, 70), Rect2(2, 420, 320, 70), Rect2(2, 496, 320, 70), Rect2(2, 572, 320, 70)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ygnmt"]
+_data = {
+&"RESET": SubResource("Animation_tio4f"),
+&"default": SubResource("Animation_1v8yg")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1v8yg"]
 atlas = ExtResource("1_tio4f")
-region = Rect2(2, 2, 320, 260)
+region = Rect2(2, 14, 320, 248)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_072hb"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_anppa")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lguj1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_tio4f"]
 atlas = ExtResource("1_tio4f")
-region = Rect2(2, 572, 320, 70)
+region = Rect2(0, 193, 324, 75)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3vs6u"]
-atlas = ExtResource("1_tio4f")
-region = Rect2(2, 268, 320, 70)
+[sub_resource type="AtlasTexture" id="AtlasTexture_1t8fe"]
+atlas = ExtResource("5_s8c2v")
+region = Rect2(1, 15, 20, 20)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_072hb"]
-atlas = ExtResource("1_tio4f")
-region = Rect2(2, 344, 320, 70)
+[node name="ArchiveMenu" type="Node" unique_id=1586803957]
+script = ExtResource("10_ascr")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_k6gdi"]
-atlas = ExtResource("1_tio4f")
-region = Rect2(2, 420, 320, 70)
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1850881411]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fnelr"]
-atlas = ExtResource("1_tio4f")
-region = Rect2(2, 496, 320, 70)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_duk5l"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lguj1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3vs6u")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_072hb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_k6gdi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fnelr")
-}],
-"loop": true,
-"name": &"default",
-"speed": 3.0
-}]
-
-[node name="ArchiveMenu" type="Control" unique_id=65752808]
+[node name="ArchiveSelect" type="Control" parent="CanvasLayer" unique_id=1272150953]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource("Theme_yjyqx")
 
-[node name="Backkground" type="AnimatedSprite2D" parent="." unique_id=788809417]
-position = Vector2(0, -20)
-sprite_frames = SubResource("SpriteFrames_072hb")
-centered = false
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/ArchiveSelect" unique_id=1563920247]
+libraries/ = SubResource("AnimationLibrary_ygnmt")
+autoplay = &"default"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2111320831]
-position = Vector2(0, 170)
-sprite_frames = SubResource("SpriteFrames_duk5l")
-autoplay = "default"
-frame = 2
-frame_progress = 0.31207374
-centered = false
+[node name="Background" type="TextureRect" parent="CanvasLayer/ArchiveSelect" unique_id=1540944304]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_1v8yg")
 
-[node name="Bar1" type="TextureRect" parent="." unique_id=1087481828]
-layout_mode = 0
-offset_left = 53.0
-offset_top = 53.0
-offset_right = 267.0
-offset_bottom = 96.0
+[node name="Heros" type="TextureRect" parent="CanvasLayer/ArchiveSelect" unique_id=446059883]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -136.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("AtlasTexture_tio4f")
+
+[node name="ChapterName" type="Label" parent="CanvasLayer/ArchiveSelect" unique_id=776210329]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0328125
+anchor_top = 0.025
+anchor_right = 0.1390625
+anchor_bottom = 0.058333334
+offset_right = 40.0
+offset_bottom = 16.0
+text = "特殊章节"
+metadata/_edit_use_anchors_ = true
+
+[node name="SelectFile" type="Label" parent="CanvasLayer/ArchiveSelect" unique_id=291772616]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.132
+anchor_top = 0.17208335
+anchor_right = 0.132
+anchor_bottom = 0.17208335
+offset_top = -19.0
+offset_right = 224.00002
+offset_bottom = 26.0
+text = "请选择一个文件"
+
+[node name="Archives" type="VBoxContainer" parent="CanvasLayer/ArchiveSelect" unique_id=1450222345]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -209.0
+offset_top = -123.0
+offset_right = 209.0
+offset_bottom = 131.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control1" type="Control" parent="CanvasLayer/ArchiveSelect/Archives" unique_id=1981793096]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Box" type="TextureRect" parent="CanvasLayer/ArchiveSelect/Archives/Control1" unique_id=1087481828]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_1v8yg")
 
-[node name="Bar2" type="TextureRect" parent="." unique_id=149425962]
-layout_mode = 0
-offset_left = 53.0
-offset_top = 98.0
-offset_right = 267.0
-offset_bottom = 141.0
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/ArchiveSelect/Archives/Control1" unique_id=203430774]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_right = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ArchiveSelect/Archives/Control1/MarginContainer" unique_id=1714182179]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="CanvasLayer/ArchiveSelect/Archives/Control1/MarginContainer/VBoxContainer" unique_id=171321633]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control1/MarginContainer/VBoxContainer/Control" unique_id=625642091]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 128.0
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "PLAYER"
+vertical_alignment = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control1/MarginContainer/VBoxContainer/Control" unique_id=2068428288]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("5_yjyqx")
+text = "00:00:01"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Label3" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control1/MarginContainer/VBoxContainer" unique_id=115376290]
+layout_mode = 2
+size_flags_vertical = 3
+text = "MIKE ZONE"
+
+[node name="SelectCursor" type="TextureRect" parent="CanvasLayer/ArchiveSelect/Archives/Control1" unique_id=1760425040]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 7.0
+offset_top = -15.0
+offset_right = 37.0
+offset_bottom = 15.0
+grow_vertical = 2
+texture = SubResource("AtlasTexture_1t8fe")
+
+[node name="DisableDodulate" type="ColorRect" parent="CanvasLayer/ArchiveSelect/Archives/Control1" unique_id=537722123]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.38625094, 0.38625082, 0.38625085, 0.4862745)
+
+[node name="ConfirmStart" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control1"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 76.0
+offset_top = -22.0
+offset_right = 164.0
+offset_bottom = 27.0
+grow_vertical = 2
+text = "开始"
+
+[node name="ConfirmBack" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control1"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 180.0
+offset_top = -22.0
+offset_right = 268.0
+offset_bottom = 27.0
+grow_vertical = 2
+text = "返回"
+
+[node name="Control2" type="Control" parent="CanvasLayer/ArchiveSelect/Archives" unique_id=1850558903]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Box" type="TextureRect" parent="CanvasLayer/ArchiveSelect/Archives/Control2" unique_id=1677226617]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_1v8yg")
 
-[node name="Bar3" type="TextureRect" parent="." unique_id=1149069467]
-layout_mode = 0
-offset_left = 53.0
-offset_top = 143.0
-offset_right = 267.0
-offset_bottom = 186.0
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/ArchiveSelect/Archives/Control2" unique_id=1510108049]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_right = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ArchiveSelect/Archives/Control2/MarginContainer" unique_id=1865780908]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="CanvasLayer/ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer" unique_id=302747189]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer/Control" unique_id=1711412626]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 128.0
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "[EMPTY]"
+vertical_alignment = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer/Control" unique_id=754888030]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("5_yjyqx")
+text = "--:--"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Label3" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer" unique_id=1669115430]
+layout_mode = 2
+size_flags_vertical = 3
+text = "----------"
+
+[node name="SelectCursor" type="TextureRect" parent="CanvasLayer/ArchiveSelect/Archives/Control2" unique_id=42389320]
+visible = false
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 7.0
+offset_top = -15.0
+offset_right = 37.0
+offset_bottom = 15.0
+grow_vertical = 2
+texture = SubResource("AtlasTexture_1t8fe")
+
+[node name="DisableDodulate" type="ColorRect" parent="CanvasLayer/ArchiveSelect/Archives/Control2" unique_id=66329197]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.38625094, 0.38625082, 0.38625085, 0.4862745)
+
+[node name="ConfirmStart" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control2"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 76.0
+offset_top = -22.0
+offset_right = 164.0
+offset_bottom = 27.0
+grow_vertical = 2
+text = "开始"
+
+[node name="ConfirmBack" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control2"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 180.0
+offset_top = -22.0
+offset_right = 268.0
+offset_bottom = 27.0
+grow_vertical = 2
+text = "返回"
+
+[node name="Control3" type="Control" parent="CanvasLayer/ArchiveSelect/Archives" unique_id=1177324688]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Box" type="TextureRect" parent="CanvasLayer/ArchiveSelect/Archives/Control3" unique_id=310415735]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_1v8yg")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/ArchiveSelect/Archives/Control3" unique_id=1114746979]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_right = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ArchiveSelect/Archives/Control3/MarginContainer" unique_id=817885554]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="CanvasLayer/ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer" unique_id=701618041]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer/Control" unique_id=329501013]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 128.0
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "[EMPTY]"
+vertical_alignment = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer/Control" unique_id=689843297]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("5_yjyqx")
+text = "--:--"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Label3" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer" unique_id=1804419397]
+layout_mode = 2
+size_flags_vertical = 3
+text = "----------"
+
+[node name="SelectCursor" type="TextureRect" parent="CanvasLayer/ArchiveSelect/Archives/Control3" unique_id=1220787303]
+visible = false
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 7.0
+offset_top = -15.0
+offset_right = 37.0
+offset_bottom = 15.0
+grow_vertical = 2
+texture = SubResource("AtlasTexture_1t8fe")
+
+[node name="DisableDodulate" type="ColorRect" parent="CanvasLayer/ArchiveSelect/Archives/Control3" unique_id=407165067]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.38625094, 0.38625082, 0.38625085, 0.4862745)
+
+[node name="ConfirmStart" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control3"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 76.0
+offset_top = -22.0
+offset_right = 164.0
+offset_bottom = 27.0
+grow_vertical = 2
+text = "开始"
+
+[node name="ConfirmBack" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control3"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 180.0
+offset_top = -22.0
+offset_right = 268.0
+offset_bottom = 27.0
+grow_vertical = 2
+text = "返回"
+
+[node name="SndMove" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_sndmv")
+
+[node name="SndOk" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_sndok")
+
+[node name="SndCancel" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_sndcxl")

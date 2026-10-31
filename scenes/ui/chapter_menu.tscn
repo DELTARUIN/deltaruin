@@ -432,6 +432,7 @@ text = "第？章"
 vertical_alignment = 1
 
 [node name="Stars" type="TextureRect" parent="Rows/Row5/Margin/Line" unique_id=1722955832]
+visible = false
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_vertical = 4
@@ -669,24 +670,6 @@ offset_right = 43.0
 offset_bottom = 41.0
 mouse_filter = 2
 texture = SubResource("AtlasTexture_pgiqg")
-
-[node name="Fade" type="ColorRect" parent="." unique_id=1148343377]
-visible = false
-modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_right = 640.0
-offset_bottom = 480.0
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
-
-[node name="LoadingLabel" type="Label" parent="." unique_id=1789999224]
-visible = false
-layout_mode = 0
-offset_top = 230.0
-offset_right = 640.0
-offset_bottom = 250.0
-text = "LOADING_CHAPTER_1"
-horizontal_alignment = 1
 
 [node name="SndMove" type="AudioStreamPlayer" parent="." unique_id=82596467]
 stream = ExtResource("7_sndmove")
