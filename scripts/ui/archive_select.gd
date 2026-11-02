@@ -1,4 +1,4 @@
-extends Node
+extends Control
 ## 存档选择菜单（Undertale/Deltarune 风格红心光标选档）。
 ## 节点结构在 archive_menu.tscn 中编排；本脚本只负责输入处理与状态到视图的同步。
 ## 状态逻辑在 ArchiveSelectState（纯逻辑类，可单测）。
@@ -18,7 +18,7 @@ const INPUT_COOLDOWN := 0.15          ## 输入去抖（秒）
 
 #region 节点引用（场景节点，@onready 绑定）
 
-@onready var _slots: Array[Node] = $CanvasLayer/ArchiveSelect/Archives.get_children() ## Control1..3，顺序即槽号
+@onready var _slots: Array[Node] = $Archives.get_children() ## Control1..3，顺序即槽号
 @onready var _snd_move: AudioStreamPlayer = $SndMove
 @onready var _snd_ok: AudioStreamPlayer = $SndOk
 @onready var _snd_cancel: AudioStreamPlayer = $SndCancel

@@ -22,17 +22,17 @@ extends Node
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GameLogger.set_levels(logger_level, logger_level)
-	# 展示第一个场景：简单的纯淡入效果，1 秒延迟
-	var fade_in_options = SceneManager.create_options(1, "fade")
-	var general_options = SceneManager.create_general_options(Color(0, 0, 0), 1, false)
-	SceneManager.show_first_scene(fade_in_options, general_options)
 	pass # Replace with function body.
 
-func _on_chapter_menu_exit_requested() -> void:
+func exit_game() -> void:
 	SceneManager.change_scene("exit", fade_in_options, fade_in_options, general_options)
 	pass # Replace with function body.
 
 
-func _on_chapter_menu_play_requested(row: int) -> void:
+func show_chapter() -> void:
+	SceneManager.change_scene("chapter_menu", fade_in_options, fade_in_options, general_options)
+	pass # Replace with function body.
+
+func play_chapter(row: int) -> void:
 	SceneManager.change_scene("archive_menu", fade_in_options, fade_in_options, general_options)
 	pass # Replace with function body.

@@ -51,7 +51,9 @@ atlas = ExtResource("6_bbscx")
 region = Rect2(1, 15, 20, 20)
 filter_clip = true
 
-[node name="ChapterMenu" type="Control" unique_id=673489019]
+[node name="ChapterMenu" type="CanvasLayer" unique_id=1519472213]
+
+[node name="ChapterSelect" type="Control" parent="." unique_id=673489019]
 auto_translate_mode = 1
 layout_mode = 3
 anchors_preset = 15
@@ -62,26 +64,26 @@ grow_vertical = 2
 theme = ExtResource("2_theme")
 script = ExtResource("1_script")
 
-[node name="Bg" type="TextureRect" parent="." unique_id=1974960271]
+[node name="Bg" type="TextureRect" parent="ChapterSelect" unique_id=1974960271]
 layout_mode = 0
 offset_right = 640.0
 offset_bottom = 480.0
 mouse_filter = 2
 texture = ExtResource("3_bg")
 
-[node name="Rows" type="VBoxContainer" parent="." unique_id=639437318]
+[node name="Rows" type="VBoxContainer" parent="ChapterSelect" unique_id=639437318]
 layout_mode = 0
 offset_right = 640.0
 offset_bottom = 422.0
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="Row1" type="Control" parent="Rows" unique_id=867767565]
+[node name="Row1" type="Control" parent="ChapterSelect/Rows" unique_id=867767565]
 custom_minimum_size = Vector2(0, 62)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="NameLabel" type="Label" parent="Rows/Row1" unique_id=169579715]
+[node name="NameLabel" type="Label" parent="ChapterSelect/Rows/Row1" unique_id=169579715]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -94,7 +96,7 @@ text = "开端"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Margin" type="MarginContainer" parent="Rows/Row1" unique_id=1928917655]
+[node name="Margin" type="MarginContainer" parent="ChapterSelect/Rows/Row1" unique_id=1928917655]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -107,37 +109,37 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 5
 
-[node name="Line" type="HBoxContainer" parent="Rows/Row1/Margin" unique_id=1414628763]
+[node name="Line" type="HBoxContainer" parent="ChapterSelect/Rows/Row1/Margin" unique_id=1414628763]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="ChapterLabel" type="Label" parent="Rows/Row1/Margin/Line" unique_id=1201312299]
+[node name="ChapterLabel" type="Label" parent="ChapterSelect/Rows/Row1/Margin/Line" unique_id=1201312299]
 custom_minimum_size = Vector2(133, 0)
 layout_mode = 2
 text = "第1章"
 vertical_alignment = 1
 
-[node name="Stars" type="TextureRect" parent="Rows/Row1/Margin/Line" unique_id=1532012074]
+[node name="Stars" type="TextureRect" parent="ChapterSelect/Rows/Row1/Margin/Line" unique_id=1532012074]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 texture = SubResource("AtlasTexture_f22bx")
 
-[node name="Spacer" type="Control" parent="Rows/Row1/Margin/Line" unique_id=1530155783]
+[node name="Spacer" type="Control" parent="ChapterSelect/Rows/Row1/Margin/Line" unique_id=1530155783]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Icon" type="TextureRect" parent="Rows/Row1/Margin/Line" unique_id=64079052]
+[node name="Icon" type="TextureRect" parent="ChapterSelect/Rows/Row1/Margin/Line" unique_id=64079052]
 custom_minimum_size = Vector2(56, 50)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 texture = SubResource("Atlas_ch1")
 
-[node name="RowPlay" type="Label" parent="Rows/Row1" unique_id=321574494]
+[node name="RowPlay" type="Label" parent="ChapterSelect/Rows/Row1" unique_id=321574494]
 visible = false
 layout_mode = 0
 offset_left = 252.0
@@ -146,7 +148,7 @@ offset_right = 420.0
 offset_bottom = 48.0
 text = "游玩"
 
-[node name="RowBack" type="Label" parent="Rows/Row1" unique_id=1831405713]
+[node name="RowBack" type="Label" parent="ChapterSelect/Rows/Row1" unique_id=1831405713]
 visible = false
 layout_mode = 0
 offset_left = 431.0
@@ -155,12 +157,12 @@ offset_right = 599.0
 offset_bottom = 48.0
 text = "返回"
 
-[node name="Row2" type="Control" parent="Rows" unique_id=1146206564]
+[node name="Row2" type="Control" parent="ChapterSelect/Rows" unique_id=1146206564]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="NameLabel" type="Label" parent="Rows/Row2" unique_id=424078903]
+[node name="NameLabel" type="Label" parent="ChapterSelect/Rows/Row2" unique_id=424078903]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -173,7 +175,7 @@ text = "赛博世界"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Margin" type="MarginContainer" parent="Rows/Row2" unique_id=1624028314]
+[node name="Margin" type="MarginContainer" parent="ChapterSelect/Rows/Row2" unique_id=1624028314]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -186,37 +188,37 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 5
 
-[node name="Line" type="HBoxContainer" parent="Rows/Row2/Margin" unique_id=500682755]
+[node name="Line" type="HBoxContainer" parent="ChapterSelect/Rows/Row2/Margin" unique_id=500682755]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="ChapterLabel" type="Label" parent="Rows/Row2/Margin/Line" unique_id=373680524]
+[node name="ChapterLabel" type="Label" parent="ChapterSelect/Rows/Row2/Margin/Line" unique_id=373680524]
 custom_minimum_size = Vector2(133, 0)
 layout_mode = 2
 text = "第2章"
 vertical_alignment = 1
 
-[node name="Stars" type="TextureRect" parent="Rows/Row2/Margin/Line" unique_id=85984658]
+[node name="Stars" type="TextureRect" parent="ChapterSelect/Rows/Row2/Margin/Line" unique_id=85984658]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 texture = SubResource("AtlasTexture_f22bx")
 
-[node name="Spacer" type="Control" parent="Rows/Row2/Margin/Line" unique_id=1710210091]
+[node name="Spacer" type="Control" parent="ChapterSelect/Rows/Row2/Margin/Line" unique_id=1710210091]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Icon" type="TextureRect" parent="Rows/Row2/Margin/Line" unique_id=248422558]
+[node name="Icon" type="TextureRect" parent="ChapterSelect/Rows/Row2/Margin/Line" unique_id=248422558]
 custom_minimum_size = Vector2(56, 50)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 texture = SubResource("Atlas_ch2")
 
-[node name="RowPlay" type="Label" parent="Rows/Row2" unique_id=1441410170]
+[node name="RowPlay" type="Label" parent="ChapterSelect/Rows/Row2" unique_id=1441410170]
 visible = false
 layout_mode = 0
 offset_left = 252.0
@@ -225,7 +227,7 @@ offset_right = 420.0
 offset_bottom = 46.0
 text = "游玩"
 
-[node name="RowBack" type="Label" parent="Rows/Row2" unique_id=193333181]
+[node name="RowBack" type="Label" parent="ChapterSelect/Rows/Row2" unique_id=193333181]
 visible = false
 layout_mode = 0
 offset_left = 431.0
@@ -234,12 +236,12 @@ offset_right = 599.0
 offset_bottom = 46.0
 text = "返回"
 
-[node name="Row3" type="Control" parent="Rows" unique_id=72172117]
+[node name="Row3" type="Control" parent="ChapterSelect/Rows" unique_id=72172117]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="NameLabel" type="Label" parent="Rows/Row3" unique_id=1272045497]
+[node name="NameLabel" type="Label" parent="ChapterSelect/Rows/Row3" unique_id=1272045497]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -251,7 +253,7 @@ text = "深夜"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Margin" type="MarginContainer" parent="Rows/Row3" unique_id=222580387]
+[node name="Margin" type="MarginContainer" parent="ChapterSelect/Rows/Row3" unique_id=222580387]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -264,37 +266,37 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 5
 
-[node name="Line" type="HBoxContainer" parent="Rows/Row3/Margin" unique_id=1967522981]
+[node name="Line" type="HBoxContainer" parent="ChapterSelect/Rows/Row3/Margin" unique_id=1967522981]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="ChapterLabel" type="Label" parent="Rows/Row3/Margin/Line" unique_id=1996056764]
+[node name="ChapterLabel" type="Label" parent="ChapterSelect/Rows/Row3/Margin/Line" unique_id=1996056764]
 custom_minimum_size = Vector2(133, 0)
 layout_mode = 2
 text = "第3章"
 vertical_alignment = 1
 
-[node name="Stars" type="TextureRect" parent="Rows/Row3/Margin/Line" unique_id=338253647]
+[node name="Stars" type="TextureRect" parent="ChapterSelect/Rows/Row3/Margin/Line" unique_id=338253647]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 texture = SubResource("AtlasTexture_f22bx")
 
-[node name="Spacer" type="Control" parent="Rows/Row3/Margin/Line" unique_id=1403705361]
+[node name="Spacer" type="Control" parent="ChapterSelect/Rows/Row3/Margin/Line" unique_id=1403705361]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Icon" type="TextureRect" parent="Rows/Row3/Margin/Line" unique_id=365256357]
+[node name="Icon" type="TextureRect" parent="ChapterSelect/Rows/Row3/Margin/Line" unique_id=365256357]
 custom_minimum_size = Vector2(56, 50)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 texture = SubResource("Atlas_ch3")
 
-[node name="RowPlay" type="Label" parent="Rows/Row3" unique_id=1003790162]
+[node name="RowPlay" type="Label" parent="ChapterSelect/Rows/Row3" unique_id=1003790162]
 visible = false
 layout_mode = 0
 offset_left = 252.0
@@ -303,7 +305,7 @@ offset_right = 420.0
 offset_bottom = 46.0
 text = "游玩"
 
-[node name="RowBack" type="Label" parent="Rows/Row3" unique_id=2062159257]
+[node name="RowBack" type="Label" parent="ChapterSelect/Rows/Row3" unique_id=2062159257]
 visible = false
 layout_mode = 0
 offset_left = 431.0
@@ -312,12 +314,12 @@ offset_right = 599.0
 offset_bottom = 46.0
 text = "返回"
 
-[node name="Row4" type="Control" parent="Rows" unique_id=202227507]
+[node name="Row4" type="Control" parent="ChapterSelect/Rows" unique_id=202227507]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="NameLabel" type="Label" parent="Rows/Row4" unique_id=339483728]
+[node name="NameLabel" type="Label" parent="ChapterSelect/Rows/Row4" unique_id=339483728]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -329,7 +331,7 @@ text = "预言"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Margin" type="MarginContainer" parent="Rows/Row4" unique_id=1126913305]
+[node name="Margin" type="MarginContainer" parent="ChapterSelect/Rows/Row4" unique_id=1126913305]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -342,37 +344,37 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 5
 
-[node name="Line" type="HBoxContainer" parent="Rows/Row4/Margin" unique_id=1545699383]
+[node name="Line" type="HBoxContainer" parent="ChapterSelect/Rows/Row4/Margin" unique_id=1545699383]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="ChapterLabel" type="Label" parent="Rows/Row4/Margin/Line" unique_id=1189788590]
+[node name="ChapterLabel" type="Label" parent="ChapterSelect/Rows/Row4/Margin/Line" unique_id=1189788590]
 custom_minimum_size = Vector2(133, 0)
 layout_mode = 2
 text = "第4章"
 vertical_alignment = 1
 
-[node name="Stars" type="TextureRect" parent="Rows/Row4/Margin/Line" unique_id=950793740]
+[node name="Stars" type="TextureRect" parent="ChapterSelect/Rows/Row4/Margin/Line" unique_id=950793740]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 texture = SubResource("AtlasTexture_f22bx")
 
-[node name="Spacer" type="Control" parent="Rows/Row4/Margin/Line" unique_id=1139818853]
+[node name="Spacer" type="Control" parent="ChapterSelect/Rows/Row4/Margin/Line" unique_id=1139818853]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Icon" type="TextureRect" parent="Rows/Row4/Margin/Line" unique_id=1135440910]
+[node name="Icon" type="TextureRect" parent="ChapterSelect/Rows/Row4/Margin/Line" unique_id=1135440910]
 custom_minimum_size = Vector2(56, 50)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 texture = SubResource("Atlas_ch4")
 
-[node name="RowPlay" type="Label" parent="Rows/Row4" unique_id=119178514]
+[node name="RowPlay" type="Label" parent="ChapterSelect/Rows/Row4" unique_id=119178514]
 visible = false
 layout_mode = 0
 offset_left = 252.0
@@ -381,7 +383,7 @@ offset_right = 420.0
 offset_bottom = 46.0
 text = "游玩"
 
-[node name="RowBack" type="Label" parent="Rows/Row4" unique_id=2092185476]
+[node name="RowBack" type="Label" parent="ChapterSelect/Rows/Row4" unique_id=2092185476]
 visible = false
 layout_mode = 0
 offset_left = 431.0
@@ -390,12 +392,12 @@ offset_right = 599.0
 offset_bottom = 46.0
 text = "返回"
 
-[node name="Row5" type="Control" parent="Rows" unique_id=888231934]
+[node name="Row5" type="Control" parent="ChapterSelect/Rows" unique_id=888231934]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="NameLabel" type="Label" parent="Rows/Row5" unique_id=1843168338]
+[node name="NameLabel" type="Label" parent="ChapterSelect/Rows/Row5" unique_id=1843168338]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -407,7 +409,7 @@ text = "？？？"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Margin" type="MarginContainer" parent="Rows/Row5" unique_id=904079989]
+[node name="Margin" type="MarginContainer" parent="ChapterSelect/Rows/Row5" unique_id=904079989]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -420,18 +422,18 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 5
 
-[node name="Line" type="HBoxContainer" parent="Rows/Row5/Margin" unique_id=1986090766]
+[node name="Line" type="HBoxContainer" parent="ChapterSelect/Rows/Row5/Margin" unique_id=1986090766]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="ChapterLabel" type="Label" parent="Rows/Row5/Margin/Line" unique_id=2101013828]
+[node name="ChapterLabel" type="Label" parent="ChapterSelect/Rows/Row5/Margin/Line" unique_id=2101013828]
 custom_minimum_size = Vector2(133, 0)
 layout_mode = 2
 text = "第？章"
 vertical_alignment = 1
 
-[node name="Stars" type="TextureRect" parent="Rows/Row5/Margin/Line" unique_id=1722955832]
+[node name="Stars" type="TextureRect" parent="ChapterSelect/Rows/Row5/Margin/Line" unique_id=1722955832]
 visible = false
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
@@ -439,19 +441,19 @@ size_flags_vertical = 4
 mouse_filter = 2
 texture = SubResource("AtlasTexture_f22bx")
 
-[node name="Spacer" type="Control" parent="Rows/Row5/Margin/Line" unique_id=497022795]
+[node name="Spacer" type="Control" parent="ChapterSelect/Rows/Row5/Margin/Line" unique_id=497022795]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Icon" type="TextureRect" parent="Rows/Row5/Margin/Line" unique_id=1107789030]
+[node name="Icon" type="TextureRect" parent="ChapterSelect/Rows/Row5/Margin/Line" unique_id=1107789030]
 custom_minimum_size = Vector2(56, 50)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 texture = SubResource("Atlas_ch5")
 
-[node name="RowPlay" type="Label" parent="Rows/Row5" unique_id=368482037]
+[node name="RowPlay" type="Label" parent="ChapterSelect/Rows/Row5" unique_id=368482037]
 visible = false
 layout_mode = 0
 offset_left = 252.0
@@ -460,7 +462,7 @@ offset_right = 420.0
 offset_bottom = 46.0
 text = "游玩"
 
-[node name="RowBack" type="Label" parent="Rows/Row5" unique_id=400359836]
+[node name="RowBack" type="Label" parent="ChapterSelect/Rows/Row5" unique_id=400359836]
 visible = false
 layout_mode = 0
 offset_left = 431.0
@@ -469,12 +471,12 @@ offset_right = 599.0
 offset_bottom = 46.0
 text = "返回"
 
-[node name="Row6" type="Control" parent="Rows" unique_id=1963876199]
+[node name="Row6" type="Control" parent="ChapterSelect/Rows" unique_id=1963876199]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="NameLabel" type="Label" parent="Rows/Row6" unique_id=203350786]
+[node name="NameLabel" type="Label" parent="ChapterSelect/Rows/Row6" unique_id=203350786]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -486,7 +488,7 @@ text = "庆典日"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Margin" type="MarginContainer" parent="Rows/Row6" unique_id=1544739057]
+[node name="Margin" type="MarginContainer" parent="ChapterSelect/Rows/Row6" unique_id=1544739057]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -499,37 +501,37 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 5
 
-[node name="Line" type="HBoxContainer" parent="Rows/Row6/Margin" unique_id=295437724]
+[node name="Line" type="HBoxContainer" parent="ChapterSelect/Rows/Row6/Margin" unique_id=295437724]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="ChapterLabel" type="Label" parent="Rows/Row6/Margin/Line" unique_id=1164946323]
+[node name="ChapterLabel" type="Label" parent="ChapterSelect/Rows/Row6/Margin/Line" unique_id=1164946323]
 custom_minimum_size = Vector2(133, 0)
 layout_mode = 2
 text = "第5章"
 vertical_alignment = 1
 
-[node name="Stars" type="TextureRect" parent="Rows/Row6/Margin/Line" unique_id=1922752520]
+[node name="Stars" type="TextureRect" parent="ChapterSelect/Rows/Row6/Margin/Line" unique_id=1922752520]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 texture = SubResource("AtlasTexture_f22bx")
 
-[node name="Spacer" type="Control" parent="Rows/Row6/Margin/Line" unique_id=704760238]
+[node name="Spacer" type="Control" parent="ChapterSelect/Rows/Row6/Margin/Line" unique_id=704760238]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Icon" type="TextureRect" parent="Rows/Row6/Margin/Line" unique_id=685278334]
+[node name="Icon" type="TextureRect" parent="ChapterSelect/Rows/Row6/Margin/Line" unique_id=685278334]
 custom_minimum_size = Vector2(56, 50)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 texture = SubResource("AtlasTexture_kjnqs")
 
-[node name="RowPlay" type="Label" parent="Rows/Row6" unique_id=268595490]
+[node name="RowPlay" type="Label" parent="ChapterSelect/Rows/Row6" unique_id=268595490]
 visible = false
 layout_mode = 0
 offset_left = 252.0
@@ -538,7 +540,7 @@ offset_right = 420.0
 offset_bottom = 46.0
 text = "游玩"
 
-[node name="RowBack" type="Label" parent="Rows/Row6" unique_id=670137283]
+[node name="RowBack" type="Label" parent="ChapterSelect/Rows/Row6" unique_id=670137283]
 visible = false
 layout_mode = 0
 offset_left = 431.0
@@ -547,12 +549,12 @@ offset_right = 599.0
 offset_bottom = 46.0
 text = "返回"
 
-[node name="Row7" type="Control" parent="Rows" unique_id=1226313343]
+[node name="Row7" type="Control" parent="ChapterSelect/Rows" unique_id=1226313343]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="NameLabel" type="Label" parent="Rows/Row7" unique_id=959670656]
+[node name="NameLabel" type="Label" parent="ChapterSelect/Rows/Row7" unique_id=959670656]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -564,7 +566,7 @@ text = "--"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Margin" type="MarginContainer" parent="Rows/Row7" unique_id=1050511780]
+[node name="Margin" type="MarginContainer" parent="ChapterSelect/Rows/Row7" unique_id=1050511780]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -577,37 +579,37 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 5
 
-[node name="Line" type="HBoxContainer" parent="Rows/Row7/Margin" unique_id=1767762158]
+[node name="Line" type="HBoxContainer" parent="ChapterSelect/Rows/Row7/Margin" unique_id=1767762158]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="ChapterLabel" type="Label" parent="Rows/Row7/Margin/Line" unique_id=705556749]
+[node name="ChapterLabel" type="Label" parent="ChapterSelect/Rows/Row7/Margin/Line" unique_id=705556749]
 custom_minimum_size = Vector2(133, 0)
 layout_mode = 2
 text = "第6章"
 vertical_alignment = 1
 
-[node name="Stars" type="TextureRect" parent="Rows/Row7/Margin/Line" unique_id=67498390]
+[node name="Stars" type="TextureRect" parent="ChapterSelect/Rows/Row7/Margin/Line" unique_id=67498390]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 texture = SubResource("AtlasTexture_f22bx")
 
-[node name="Spacer" type="Control" parent="Rows/Row7/Margin/Line" unique_id=1348495071]
+[node name="Spacer" type="Control" parent="ChapterSelect/Rows/Row7/Margin/Line" unique_id=1348495071]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Icon" type="TextureRect" parent="Rows/Row7/Margin/Line" unique_id=439823703]
+[node name="Icon" type="TextureRect" parent="ChapterSelect/Rows/Row7/Margin/Line" unique_id=439823703]
 custom_minimum_size = Vector2(56, 50)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 texture = SubResource("Atlas_ch_empty")
 
-[node name="RowPlay" type="Label" parent="Rows/Row7" unique_id=320309814]
+[node name="RowPlay" type="Label" parent="ChapterSelect/Rows/Row7" unique_id=320309814]
 visible = false
 layout_mode = 0
 offset_left = 252.0
@@ -616,7 +618,7 @@ offset_right = 420.0
 offset_bottom = 46.0
 text = "游玩"
 
-[node name="RowBack" type="Label" parent="Rows/Row7" unique_id=1739020242]
+[node name="RowBack" type="Label" parent="ChapterSelect/Rows/Row7" unique_id=1739020242]
 visible = false
 layout_mode = 0
 offset_left = 431.0
@@ -625,7 +627,7 @@ offset_right = 599.0
 offset_bottom = 46.0
 text = "返回"
 
-[node name="CopyrightLabel" type="Label" parent="." unique_id=1082124430]
+[node name="CopyrightLabel" type="Label" parent="ChapterSelect" unique_id=1082124430]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 428.0
@@ -637,7 +639,7 @@ theme_override_font_sizes/font_size = 16
 text = "三角大崩坏
 新星派&一块懒AA"
 
-[node name="ExitLabel" type="Label" parent="." unique_id=590539124]
+[node name="ExitLabel" type="Label" parent="ChapterSelect" unique_id=590539124]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -654,7 +656,7 @@ text = "退出"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Deco" type="Control" parent="." unique_id=1556814250]
+[node name="Deco" type="Control" parent="ChapterSelect" unique_id=1556814250]
 anchors_preset = 0
 offset_left = 560.0
 offset_top = 444.0
@@ -662,7 +664,7 @@ offset_right = 632.0
 offset_bottom = 478.0
 mouse_filter = 2
 
-[node name="Heart" type="TextureRect" parent="." unique_id=169233994]
+[node name="Heart" type="TextureRect" parent="ChapterSelect" unique_id=169233994]
 layout_mode = 0
 offset_left = 23.0
 offset_top = 21.0
@@ -671,14 +673,14 @@ offset_bottom = 41.0
 mouse_filter = 2
 texture = SubResource("AtlasTexture_pgiqg")
 
-[node name="SndMove" type="AudioStreamPlayer" parent="." unique_id=82596467]
+[node name="SndMove" type="AudioStreamPlayer" parent="ChapterSelect" unique_id=82596467]
 stream = ExtResource("7_sndmove")
 
-[node name="SndOk" type="AudioStreamPlayer" parent="." unique_id=860791409]
+[node name="SndOk" type="AudioStreamPlayer" parent="ChapterSelect" unique_id=860791409]
 stream = ExtResource("8_sndok")
 
-[node name="SndCancel" type="AudioStreamPlayer" parent="." unique_id=2146065305]
+[node name="SndCancel" type="AudioStreamPlayer" parent="ChapterSelect" unique_id=2146065305]
 stream = ExtResource("9_bbscx")
 
-[node name="SndBegin" type="AudioStreamPlayer" parent="." unique_id=568460998]
+[node name="SndBegin" type="AudioStreamPlayer" parent="ChapterSelect" unique_id=568460998]
 stream = ExtResource("10_pgiqg")

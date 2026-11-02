@@ -3,13 +3,6 @@ extends Control
 ## 节点结构在 chapter_menu.tscn 中编排；本脚本只负责输入处理与状态到视图的同步。
 ## 状态逻辑在 ChapterSelectState（纯逻辑类，可单测）。
 
-#region 信号
-
-signal play_requested(row: int) ## 确认「游玩」：row 为章节行索引（0 起）
-signal exit_requested           ## 确认「退出」
-
-#endregion
-
 #region 配置：章节数据
 
 ## 各章节行锁定状态（与场景 Rows/RowN 一一对应
@@ -118,10 +111,10 @@ func _apply_ok() -> void:
 	match action:
 		ChapterSelectState.Action.PLAY:
 			_snd_ok.play()
-			play_requested.emit(state.play_row)
+			GameManager.play_chapter(state.play_row)
 		ChapterSelectState.Action.EXIT:
 			_snd_ok.play()
-			exit_requested.emit()
+			GameManager.exit_game()
 
 
 ## 应用取消键：状态实际变化才播音效刷新

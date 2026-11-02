@@ -1,15 +1,6 @@
 [gd_scene format=3 uid="uid://brt0mcaopisn7"]
 
-[ext_resource type="Script" uid="uid://kvovkurrk8o8" path="res://scripts/core/game_manager.gd" id="1_2uxk6"]
-[ext_resource type="PackedScene" uid="uid://dyyroll14jssr" path="res://scenes/ui/chapter_menu.tscn" id="1_754un"]
+[ext_resource type="Script" uid="uid://ctn6cwio36seg" path="res://scripts/game_main.gd" id="1_tjvxm"]
 
 [node name="GameMain" type="Node" unique_id=477336484]
-script = ExtResource("1_2uxk6")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1963245406]
-
-[node name="ChapterMenu" parent="CanvasLayer" unique_id=673489019 instance=ExtResource("1_754un")]
-auto_translate_mode = 0
-
-[connection signal="exit_requested" from="CanvasLayer/ChapterMenu" to="." method="_on_chapter_menu_exit_requested"]
-[connection signal="play_requested" from="CanvasLayer/ChapterMenu" to="." method="_on_chapter_menu_play_requested"]
+script = ExtResource("1_tjvxm")

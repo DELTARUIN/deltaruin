@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://b27eh3tirsf3g"]
 
-[ext_resource type="Texture2D" uid="uid://brcd1dm1bgucf" path="res://assets/graphics/ui/menu_heros.png" id="1_tio4f"]
-[ext_resource type="Texture2D" uid="uid://sxfh504cklr2" path="res://assets/graphics/ui/files_column.png" id="2_1v8yg"]
-[ext_resource type="Texture2D" uid="uid://drtkdkhtqsk5t" path="res://assets/graphics/characters/soul/the_soul.png" id="5_s8c2v"]
-[ext_resource type="FontFile" uid="uid://dmtt8i0qf1pay" path="res://assets/fonts/normal.ttf" id="5_yjyqx"]
-[ext_resource type="Script" path="res://scripts/ui/archive_select.gd" id="10_ascr"]
-[ext_resource type="AudioStream" uid="uid://dmm0fswoftc5t" path="res://assets/audio/effects/common/snd_menumove.wav" id="11_sndmv"]
-[ext_resource type="AudioStream" uid="uid://xpo0gxfoum1p" path="res://assets/audio/effects/common/snd_select.wav" id="12_sndok"]
-[ext_resource type="AudioStream" uid="uid://cyb6kl8342ys5" path="res://assets/audio/effects/common/snd_swing.wav" id="13_sndcxl"]
+[ext_resource type="Script" uid="uid://cmbs40vlkpkhb" path="res://scripts/ui/archive_select.gd" id="1_ywe50"]
+[ext_resource type="FontFile" uid="uid://dmtt8i0qf1pay" path="res://assets/fonts/normal.ttf" id="2_nvfcb"]
+[ext_resource type="Texture2D" uid="uid://brcd1dm1bgucf" path="res://assets/graphics/ui/menu_heros.png" id="3_433ub"]
+[ext_resource type="Texture2D" uid="uid://sxfh504cklr2" path="res://assets/graphics/ui/files_column.png" id="4_ru1li"]
+[ext_resource type="Texture2D" uid="uid://drtkdkhtqsk5t" path="res://assets/graphics/characters/soul/the_soul.png" id="5_nvhsi"]
+[ext_resource type="AudioStream" uid="uid://dmm0fswoftc5t" path="res://assets/audio/effects/common/snd_menumove.wav" id="6_tid2w"]
+[ext_resource type="AudioStream" uid="uid://xpo0gxfoum1p" path="res://assets/audio/effects/common/snd_select.wav" id="7_vggj4"]
+[ext_resource type="AudioStream" uid="uid://cyb6kl8342ys5" path="res://assets/audio/effects/common/snd_swing.wav" id="8_3uqf2"]
 
 [sub_resource type="Theme" id="Theme_yjyqx"]
-default_font = ExtResource("5_yjyqx")
+default_font = ExtResource("2_nvfcb")
 default_font_size = 36
 
 [sub_resource type="Animation" id="Animation_tio4f"]
@@ -51,23 +51,20 @@ _data = {
 }
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1v8yg"]
-atlas = ExtResource("1_tio4f")
+atlas = ExtResource("3_433ub")
 region = Rect2(2, 14, 320, 248)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tio4f"]
-atlas = ExtResource("1_tio4f")
+atlas = ExtResource("3_433ub")
 region = Rect2(0, 193, 324, 75)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1t8fe"]
-atlas = ExtResource("5_s8c2v")
+atlas = ExtResource("5_nvhsi")
 region = Rect2(1, 15, 20, 20)
 
-[node name="ArchiveMenu" type="Node" unique_id=1586803957]
-script = ExtResource("10_ascr")
+[node name="ArchiveMenu" type="CanvasLayer" unique_id=1018443976]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1850881411]
-
-[node name="ArchiveSelect" type="Control" parent="CanvasLayer" unique_id=1272150953]
+[node name="ArchiveSelect" type="Control" parent="." unique_id=1272150953]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -77,12 +74,13 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = SubResource("Theme_yjyqx")
+script = ExtResource("1_ywe50")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/ArchiveSelect" unique_id=1563920247]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ArchiveSelect" unique_id=1563920247]
 libraries/ = SubResource("AnimationLibrary_ygnmt")
 autoplay = &"default"
 
-[node name="Background" type="TextureRect" parent="CanvasLayer/ArchiveSelect" unique_id=1540944304]
+[node name="Background" type="TextureRect" parent="ArchiveSelect" unique_id=1540944304]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -92,7 +90,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AtlasTexture_1v8yg")
 
-[node name="Heros" type="TextureRect" parent="CanvasLayer/ArchiveSelect" unique_id=446059883]
+[node name="Heros" type="TextureRect" parent="ArchiveSelect" unique_id=446059883]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = -1
@@ -104,7 +102,7 @@ grow_horizontal = 2
 grow_vertical = 0
 texture = SubResource("AtlasTexture_tio4f")
 
-[node name="ChapterName" type="Label" parent="CanvasLayer/ArchiveSelect" unique_id=776210329]
+[node name="ChapterName" type="Label" parent="ArchiveSelect" unique_id=776210329]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0328125
@@ -116,7 +114,7 @@ offset_bottom = 16.0
 text = "特殊章节"
 metadata/_edit_use_anchors_ = true
 
-[node name="SelectFile" type="Label" parent="CanvasLayer/ArchiveSelect" unique_id=291772616]
+[node name="SelectFile" type="Label" parent="ArchiveSelect" unique_id=291772616]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.132
@@ -128,7 +126,7 @@ offset_right = 224.00002
 offset_bottom = 26.0
 text = "请选择一个文件"
 
-[node name="Archives" type="VBoxContainer" parent="CanvasLayer/ArchiveSelect" unique_id=1450222345]
+[node name="Archives" type="VBoxContainer" parent="ArchiveSelect" unique_id=1450222345]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -142,20 +140,20 @@ offset_bottom = 131.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control1" type="Control" parent="CanvasLayer/ArchiveSelect/Archives" unique_id=1981793096]
+[node name="Control1" type="Control" parent="ArchiveSelect/Archives" unique_id=1981793096]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Box" type="TextureRect" parent="CanvasLayer/ArchiveSelect/Archives/Control1" unique_id=1087481828]
+[node name="Box" type="TextureRect" parent="ArchiveSelect/Archives/Control1" unique_id=1087481828]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_1v8yg")
+texture = ExtResource("4_ru1li")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/ArchiveSelect/Archives/Control1" unique_id=203430774]
+[node name="MarginContainer" type="MarginContainer" parent="ArchiveSelect/Archives/Control1" unique_id=203430774]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -165,14 +163,14 @@ grow_vertical = 2
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_right = 40
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ArchiveSelect/Archives/Control1/MarginContainer" unique_id=1714182179]
+[node name="VBoxContainer" type="VBoxContainer" parent="ArchiveSelect/Archives/Control1/MarginContainer" unique_id=1714182179]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="CanvasLayer/ArchiveSelect/Archives/Control1/MarginContainer/VBoxContainer" unique_id=171321633]
+[node name="Control" type="Control" parent="ArchiveSelect/Archives/Control1/MarginContainer/VBoxContainer" unique_id=171321633]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control1/MarginContainer/VBoxContainer/Control" unique_id=625642091]
+[node name="Label" type="Label" parent="ArchiveSelect/Archives/Control1/MarginContainer/VBoxContainer/Control" unique_id=625642091]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -183,7 +181,7 @@ size_flags_vertical = 0
 text = "PLAYER"
 vertical_alignment = 2
 
-[node name="Label2" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control1/MarginContainer/VBoxContainer/Control" unique_id=2068428288]
+[node name="Label2" type="Label" parent="ArchiveSelect/Archives/Control1/MarginContainer/VBoxContainer/Control" unique_id=2068428288]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -194,17 +192,17 @@ grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
-theme_override_fonts/font = ExtResource("5_yjyqx")
+theme_override_fonts/font = ExtResource("2_nvfcb")
 text = "00:00:01"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="Label3" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control1/MarginContainer/VBoxContainer" unique_id=115376290]
+[node name="Label3" type="Label" parent="ArchiveSelect/Archives/Control1/MarginContainer/VBoxContainer" unique_id=115376290]
 layout_mode = 2
 size_flags_vertical = 3
 text = "MIKE ZONE"
 
-[node name="SelectCursor" type="TextureRect" parent="CanvasLayer/ArchiveSelect/Archives/Control1" unique_id=1760425040]
+[node name="SelectCursor" type="TextureRect" parent="ArchiveSelect/Archives/Control1" unique_id=1760425040]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -216,7 +214,7 @@ offset_bottom = 15.0
 grow_vertical = 2
 texture = SubResource("AtlasTexture_1t8fe")
 
-[node name="DisableDodulate" type="ColorRect" parent="CanvasLayer/ArchiveSelect/Archives/Control1" unique_id=537722123]
+[node name="DisableDodulate" type="ColorRect" parent="ArchiveSelect/Archives/Control1" unique_id=537722123]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -226,7 +224,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.38625094, 0.38625082, 0.38625085, 0.4862745)
 
-[node name="ConfirmStart" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control1"]
+[node name="ConfirmStart" type="Label" parent="ArchiveSelect/Archives/Control1" unique_id=570281785]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -239,7 +237,7 @@ offset_bottom = 27.0
 grow_vertical = 2
 text = "开始"
 
-[node name="ConfirmBack" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control1"]
+[node name="ConfirmBack" type="Label" parent="ArchiveSelect/Archives/Control1" unique_id=1402866404]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -252,20 +250,20 @@ offset_bottom = 27.0
 grow_vertical = 2
 text = "返回"
 
-[node name="Control2" type="Control" parent="CanvasLayer/ArchiveSelect/Archives" unique_id=1850558903]
+[node name="Control2" type="Control" parent="ArchiveSelect/Archives" unique_id=1850558903]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Box" type="TextureRect" parent="CanvasLayer/ArchiveSelect/Archives/Control2" unique_id=1677226617]
+[node name="Box" type="TextureRect" parent="ArchiveSelect/Archives/Control2" unique_id=1677226617]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_1v8yg")
+texture = ExtResource("4_ru1li")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/ArchiveSelect/Archives/Control2" unique_id=1510108049]
+[node name="MarginContainer" type="MarginContainer" parent="ArchiveSelect/Archives/Control2" unique_id=1510108049]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -275,14 +273,14 @@ grow_vertical = 2
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_right = 40
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ArchiveSelect/Archives/Control2/MarginContainer" unique_id=1865780908]
+[node name="VBoxContainer" type="VBoxContainer" parent="ArchiveSelect/Archives/Control2/MarginContainer" unique_id=1865780908]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="CanvasLayer/ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer" unique_id=302747189]
+[node name="Control" type="Control" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer" unique_id=302747189]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer/Control" unique_id=1711412626]
+[node name="Label" type="Label" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer/Control" unique_id=1711412626]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -293,7 +291,7 @@ size_flags_vertical = 0
 text = "[EMPTY]"
 vertical_alignment = 2
 
-[node name="Label2" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer/Control" unique_id=754888030]
+[node name="Label2" type="Label" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer/Control" unique_id=754888030]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -304,17 +302,17 @@ grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
-theme_override_fonts/font = ExtResource("5_yjyqx")
+theme_override_fonts/font = ExtResource("2_nvfcb")
 text = "--:--"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="Label3" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer" unique_id=1669115430]
+[node name="Label3" type="Label" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer" unique_id=1669115430]
 layout_mode = 2
 size_flags_vertical = 3
 text = "----------"
 
-[node name="SelectCursor" type="TextureRect" parent="CanvasLayer/ArchiveSelect/Archives/Control2" unique_id=42389320]
+[node name="SelectCursor" type="TextureRect" parent="ArchiveSelect/Archives/Control2" unique_id=42389320]
 visible = false
 layout_mode = 1
 anchors_preset = 4
@@ -327,7 +325,7 @@ offset_bottom = 15.0
 grow_vertical = 2
 texture = SubResource("AtlasTexture_1t8fe")
 
-[node name="DisableDodulate" type="ColorRect" parent="CanvasLayer/ArchiveSelect/Archives/Control2" unique_id=66329197]
+[node name="DisableDodulate" type="ColorRect" parent="ArchiveSelect/Archives/Control2" unique_id=66329197]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -336,7 +334,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.38625094, 0.38625082, 0.38625085, 0.4862745)
 
-[node name="ConfirmStart" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control2"]
+[node name="ConfirmStart" type="Label" parent="ArchiveSelect/Archives/Control2" unique_id=1433321648]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -349,7 +347,7 @@ offset_bottom = 27.0
 grow_vertical = 2
 text = "开始"
 
-[node name="ConfirmBack" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control2"]
+[node name="ConfirmBack" type="Label" parent="ArchiveSelect/Archives/Control2" unique_id=1097278014]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -362,20 +360,20 @@ offset_bottom = 27.0
 grow_vertical = 2
 text = "返回"
 
-[node name="Control3" type="Control" parent="CanvasLayer/ArchiveSelect/Archives" unique_id=1177324688]
+[node name="Control3" type="Control" parent="ArchiveSelect/Archives" unique_id=1177324688]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Box" type="TextureRect" parent="CanvasLayer/ArchiveSelect/Archives/Control3" unique_id=310415735]
+[node name="Box" type="TextureRect" parent="ArchiveSelect/Archives/Control3" unique_id=310415735]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_1v8yg")
+texture = ExtResource("4_ru1li")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/ArchiveSelect/Archives/Control3" unique_id=1114746979]
+[node name="MarginContainer" type="MarginContainer" parent="ArchiveSelect/Archives/Control3" unique_id=1114746979]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -385,14 +383,14 @@ grow_vertical = 2
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_right = 40
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ArchiveSelect/Archives/Control3/MarginContainer" unique_id=817885554]
+[node name="VBoxContainer" type="VBoxContainer" parent="ArchiveSelect/Archives/Control3/MarginContainer" unique_id=817885554]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="CanvasLayer/ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer" unique_id=701618041]
+[node name="Control" type="Control" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer" unique_id=701618041]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer/Control" unique_id=329501013]
+[node name="Label" type="Label" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer/Control" unique_id=329501013]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -403,7 +401,7 @@ size_flags_vertical = 0
 text = "[EMPTY]"
 vertical_alignment = 2
 
-[node name="Label2" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer/Control" unique_id=689843297]
+[node name="Label2" type="Label" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer/Control" unique_id=689843297]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -414,17 +412,17 @@ grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
-theme_override_fonts/font = ExtResource("5_yjyqx")
+theme_override_fonts/font = ExtResource("2_nvfcb")
 text = "--:--"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="Label3" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer" unique_id=1804419397]
+[node name="Label3" type="Label" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer" unique_id=1804419397]
 layout_mode = 2
 size_flags_vertical = 3
 text = "----------"
 
-[node name="SelectCursor" type="TextureRect" parent="CanvasLayer/ArchiveSelect/Archives/Control3" unique_id=1220787303]
+[node name="SelectCursor" type="TextureRect" parent="ArchiveSelect/Archives/Control3" unique_id=1220787303]
 visible = false
 layout_mode = 1
 anchors_preset = 4
@@ -437,7 +435,7 @@ offset_bottom = 15.0
 grow_vertical = 2
 texture = SubResource("AtlasTexture_1t8fe")
 
-[node name="DisableDodulate" type="ColorRect" parent="CanvasLayer/ArchiveSelect/Archives/Control3" unique_id=407165067]
+[node name="DisableDodulate" type="ColorRect" parent="ArchiveSelect/Archives/Control3" unique_id=407165067]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -446,7 +444,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.38625094, 0.38625082, 0.38625085, 0.4862745)
 
-[node name="ConfirmStart" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control3"]
+[node name="ConfirmStart" type="Label" parent="ArchiveSelect/Archives/Control3" unique_id=1920871393]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -459,7 +457,7 @@ offset_bottom = 27.0
 grow_vertical = 2
 text = "开始"
 
-[node name="ConfirmBack" type="Label" parent="CanvasLayer/ArchiveSelect/Archives/Control3"]
+[node name="ConfirmBack" type="Label" parent="ArchiveSelect/Archives/Control3" unique_id=1182282128]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -472,11 +470,11 @@ offset_bottom = 27.0
 grow_vertical = 2
 text = "返回"
 
-[node name="SndMove" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("11_sndmv")
+[node name="SndMove" type="AudioStreamPlayer" parent="ArchiveSelect" unique_id=119675605]
+stream = ExtResource("6_tid2w")
 
-[node name="SndOk" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("12_sndok")
+[node name="SndOk" type="AudioStreamPlayer" parent="ArchiveSelect" unique_id=1197983620]
+stream = ExtResource("7_vggj4")
 
-[node name="SndCancel" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("13_sndcxl")
+[node name="SndCancel" type="AudioStreamPlayer" parent="ArchiveSelect" unique_id=292983407]
+stream = ExtResource("8_3uqf2")
