@@ -25,6 +25,7 @@ GameLogger="*uid://5jsgpwlasq4e"
 Dialogic="*uid://ds2q0uclmolvu"
 SceneManager="*uid://2iy8wfgenjka"
 Scenes="*uid://dfpen3dk04j4x"
+GameManager="*uid://kvovkurrk8o8"
 
 [dialogic]
 
