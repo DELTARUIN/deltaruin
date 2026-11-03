@@ -1,0 +1,7 @@
+[gd_resource type="FontVariation" format=3 uid="uid://r6hjkjf084la"]
+
+[ext_resource type="FontFile" uid="uid://dmtt8i0qf1pay" path="res://assets/fonts/normal.ttf" id="1_vt1hy"]
+
+[resource]
+base_font = ExtResource("1_vt1hy")
+spacing_glyph = -3

@@ -24,12 +24,17 @@ const INPUT_COOLDOWN := 0.15          ## 输入去抖（秒）
 @onready var _snd_cancel: AudioStreamPlayer = $SndCancel
 
 var state := ArchiveSelectState.new()
-var _cursors: Array[TextureRect] = []    ## 各槽红心光标
-var _confirm_starts: Array[Label] = []   ## 各槽「开始」
-var _confirm_backs: Array[Label] = []    ## 各槽「返回」
-var _info_label_lists: Array[Array] = [] ## 各槽信息文本（名字/时间/章节）
+var _cursors: Array[TextureRect] = []      ## 各槽红心光标
+var _dodulates: Array[ColorRect] = []      ## 各槽变暗层（未选中槽叠加）
+var _confirm_boxes: Array[Control] = []    ## 各槽确认区（Confirm HBox）
+var _confirm_starts: Array[Label] = []     ## 各槽「开始」
+var _confirm_backs: Array[Label] = []      ## 各槽「返回」
+var _select_starts: Array[TextureRect] = [] ## 各槽确认态「开始」红心（z_index 切换）
+var _select_backs: Array[TextureRect] = []  ## 各槽确认态「返回」红心（z_index 切换）
+var _position_labels: Array[Label] = []    ## 各槽位置文本
+var _position_label_home: Array[bool] = [] ## 各槽位置文本的场景默认显隐（收起确认时还原）
 
-var _cooldown := 0.0                     ## 输入去抖剩余时间
+var _cooldown := 0.0                       ## 输入去抖剩余时间
 
 #endregion
 
@@ -38,14 +43,16 @@ func _ready() -> void:
 	## 按槽缓存子节点引用（容器布局不改变节点路径）
 	for slot: Node in _slots:
 		_cursors.append(slot.get_node("SelectCursor"))
-		_confirm_starts.append(slot.get_node("ConfirmStart"))
-		_confirm_backs.append(slot.get_node("ConfirmBack"))
+		_dodulates.append(slot.get_node("DisableDodulate"))
 		var vbox: Node = slot.get_node("MarginContainer/VBoxContainer")
-		_info_label_lists.append([
-			vbox.get_node("Control/Label"),
-			vbox.get_node("Control/Label2"),
-			vbox.get_node("Label3"),
-		])
+		_confirm_boxes.append(vbox.get_node("Confirm"))
+		_confirm_starts.append(vbox.get_node("Confirm/ConfirmStart"))
+		_confirm_backs.append(vbox.get_node("Confirm/ConfirmBack"))
+		_select_starts.append(vbox.get_node("Confirm/SelectStart"))
+		_select_backs.append(vbox.get_node("Confirm/SelectBack"))
+		var position_label: Label = vbox.get_node("PositionLabel")
+		_position_labels.append(position_label)
+		_position_label_home.append(position_label.visible)
 	_apply_focus()
 
 
@@ -128,19 +135,25 @@ func _focus_signature() -> int:
 	return state.cursor * 4 + state.confirm_item
 
 
-## 把状态机焦点映射到视图：确认区显隐与红心显隐。
-## 红心固定在各槽左侧原位不移动；确认态就地展开「开始/返回」替换槽内信息文本。
+## 把状态机焦点映射到视图：确认区显隐、变暗层与红心显隐。
+## 选槽态：选中槽显示红心、关闭变暗层。
+## 确认态：隐藏槽红心，展开「开始/返回」，用 z_index 切换确认红心——
+## 所选项的心 z=0 显示在 Box 贴图上，另一颗 z=-1 藏到贴图后面。
+## 位置文本确认态临时隐藏，收起后还原场景默认显隐。
 func _apply_focus() -> void:
 	var confirm_open := state.state == ArchiveSelectState.State.CONFIRM_OPEN
 
 	for i: int in ArchiveSelectState.SLOT_COUNT:
 		var in_confirm: bool = confirm_open and state.cursor == i
 
-		for label: Label in _info_label_lists[i]:
-			label.visible = not in_confirm
+		(_position_labels[i] as Label).visible = _position_label_home[i] and not in_confirm
 
-		(_confirm_starts[i] as Label).visible = in_confirm
-		(_confirm_backs[i] as Label).visible = in_confirm
-		(_cursors[i] as TextureRect).visible = state.cursor == i
+		(_confirm_boxes[i] as Control).visible = in_confirm
+		(_confirm_starts[i] as Label).visible = true
+		(_confirm_backs[i] as Label).visible = true
+		(_select_starts[i] as TextureRect).z_index = 0 if state.confirm_item == ArchiveSelectState.ConfirmItem.START else -1
+		(_select_backs[i] as TextureRect).z_index = 0 if state.confirm_item == ArchiveSelectState.ConfirmItem.BACK else -1
+		(_dodulates[i] as ColorRect).visible = state.cursor != i
+		(_cursors[i] as TextureRect).visible = not in_confirm and state.cursor == i
 
 #endregion
