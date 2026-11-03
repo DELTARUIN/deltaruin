@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://b27eh3tirsf3g"]
 
+[ext_resource type="FontVariation" uid="uid://dpydnpuemyqiq" path="res://resources/ui/archive_font_variation.tres" id="1_nvfcb"]
 [ext_resource type="Script" uid="uid://cmbs40vlkpkhb" path="res://scripts/ui/archive_select.gd" id="1_ywe50"]
 [ext_resource type="FontFile" uid="uid://dmtt8i0qf1pay" path="res://assets/fonts/normal.ttf" id="2_nvfcb"]
 [ext_resource type="Texture2D" uid="uid://brcd1dm1bgucf" path="res://assets/graphics/ui/menu_heros.png" id="3_433ub"]
@@ -10,8 +11,8 @@
 [ext_resource type="AudioStream" uid="uid://cyb6kl8342ys5" path="res://assets/audio/effects/common/snd_swing.wav" id="8_3uqf2"]
 
 [sub_resource type="Theme" id="Theme_yjyqx"]
-default_font = ExtResource("2_nvfcb")
-default_font_size = 36
+default_font = ExtResource("1_nvfcb")
+default_font_size = 32
 
 [sub_resource type="Animation" id="Animation_tio4f"]
 length = 0.001
@@ -60,7 +61,7 @@ region = Rect2(0, 193, 324, 75)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1t8fe"]
 atlas = ExtResource("5_nvhsi")
-region = Rect2(1, 15, 20, 20)
+region = Rect2(1, 36, 9, 9)
 
 [node name="ArchiveMenu" type="CanvasLayer" unique_id=1018443976]
 
@@ -102,6 +103,12 @@ grow_horizontal = 2
 grow_vertical = 0
 texture = SubResource("AtlasTexture_tio4f")
 
+[node name="ColorRect" type="ColorRect" parent="ArchiveSelect" unique_id=22552868]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 480.0
+color = Color(0, 0, 0, 0.5254902)
+
 [node name="ChapterName" type="Label" parent="ArchiveSelect" unique_id=776210329]
 layout_mode = 1
 anchors_preset = -1
@@ -111,6 +118,10 @@ anchor_right = 0.1390625
 anchor_bottom = 0.058333334
 offset_right = 40.0
 offset_bottom = 16.0
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("1_nvfcb")
 text = "第?章"
 metadata/_edit_use_anchors_ = true
 
@@ -124,6 +135,10 @@ anchor_bottom = 0.17208335
 offset_top = -19.0
 offset_right = 224.00002
 offset_bottom = 26.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
 text = "请选择一个存档。"
 
 [node name="Archives" type="VBoxContainer" parent="ArchiveSelect" unique_id=1450222345]
@@ -170,14 +185,14 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="ArchiveSelect/Archives/Control1/MarginContainer/VBoxContainer/Control" unique_id=625642091]
+[node name="NameLabel" type="Label" parent="ArchiveSelect/Archives/Control1/MarginContainer/VBoxContainer/Control" unique_id=625642091]
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 5
 text = "[空白]"
 vertical_alignment = 2
 
-[node name="Label2" type="Label" parent="ArchiveSelect/Archives/Control1/MarginContainer/VBoxContainer/Control" unique_id=2068428288]
+[node name="TimeLabel" type="Label" parent="ArchiveSelect/Archives/Control1/MarginContainer/VBoxContainer/Control" unique_id=2068428288]
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 5
@@ -186,23 +201,23 @@ text = "00:00:01"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="Label3" type="Label" parent="ArchiveSelect/Archives/Control1/MarginContainer/VBoxContainer" unique_id=115376290]
+[node name="PositionLabel" type="Label" parent="ArchiveSelect/Archives/Control1/MarginContainer/VBoxContainer" unique_id=115376290]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 text = " ------------"
 
-[node name="Control2" type="HBoxContainer" parent="ArchiveSelect/Archives/Control1/MarginContainer/VBoxContainer" unique_id=2094824859]
+[node name="Confirm" type="HBoxContainer" parent="ArchiveSelect/Archives/Control1/MarginContainer/VBoxContainer" unique_id=2094824859]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ConfirmStart" type="Label" parent="ArchiveSelect/Archives/Control1/MarginContainer/VBoxContainer/Control2" unique_id=570281785]
+[node name="ConfirmStart" type="Label" parent="ArchiveSelect/Archives/Control1/MarginContainer/VBoxContainer/Confirm" unique_id=570281785]
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 5
 text = "开始"
 
-[node name="ConfirmBack" type="Label" parent="ArchiveSelect/Archives/Control1/MarginContainer/VBoxContainer/Control2" unique_id=1402866404]
+[node name="ConfirmBack" type="Label" parent="ArchiveSelect/Archives/Control1/MarginContainer/VBoxContainer/Confirm" unique_id=1402866404]
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 5
@@ -213,10 +228,10 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 7.0
-offset_top = -15.0
-offset_right = 37.0
-offset_bottom = 15.0
+offset_left = 14.0
+offset_top = -9.0
+offset_right = 32.0
+offset_bottom = 9.0
 grow_vertical = 2
 texture = SubResource("AtlasTexture_1t8fe")
 
@@ -260,51 +275,54 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer/Control" unique_id=1711412626]
+[node name="NameLabel" type="Label" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer/Control" unique_id=1711412626]
 layout_mode = 2
 size_flags_horizontal = 7
+size_flags_vertical = 5
 text = "[空白]"
 vertical_alignment = 2
 
-[node name="Label2" type="Label" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer/Control" unique_id=754888030]
+[node name="TimeLabel" type="Label" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer/Control" unique_id=754888030]
 layout_mode = 2
 size_flags_horizontal = 7
+size_flags_vertical = 5
 theme_override_fonts/font = ExtResource("2_nvfcb")
 text = "--:--"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="Label3" type="Label" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer" unique_id=1669115430]
+[node name="PositionLabel" type="Label" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer" unique_id=1669115430]
 layout_mode = 2
 size_flags_vertical = 3
 text = " ------------"
 
-[node name="Control2" type="HBoxContainer" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer" unique_id=1912450830]
+[node name="Confirm" type="HBoxContainer" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer" unique_id=1912450830]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ConfirmStart" type="Label" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer/Control2" unique_id=1433321648]
+[node name="ConfirmStart" type="Label" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer/Confirm" unique_id=1433321648]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 7
 text = "开始"
 
-[node name="ConfirmBack" type="Label" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer/Control2" unique_id=1097278014]
+[node name="ConfirmBack" type="Label" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer/Confirm" unique_id=1097278014]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 7
 text = "返回"
 
-[node name="SelectCursor" type="TextureRect" parent="ArchiveSelect/Archives/Control2" unique_id=42389320]
+[node name="SelectCursor" type="TextureRect" parent="ArchiveSelect/Archives/Control2" unique_id=561339313]
 visible = false
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 7.0
-offset_top = -15.0
-offset_right = 37.0
-offset_bottom = 15.0
+offset_left = 14.0
+offset_top = -9.0
+offset_right = 32.0
+offset_bottom = 9.0
 grow_vertical = 2
 texture = SubResource("AtlasTexture_1t8fe")
 
@@ -347,51 +365,54 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer/Control" unique_id=921581536]
+[node name="NameLabel" type="Label" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer/Control" unique_id=921581536]
 layout_mode = 2
 size_flags_horizontal = 7
+size_flags_vertical = 5
 text = "[空白]"
 vertical_alignment = 2
 
-[node name="Label2" type="Label" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer/Control" unique_id=957728622]
+[node name="TimeLabel" type="Label" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer/Control" unique_id=957728622]
 layout_mode = 2
 size_flags_horizontal = 7
+size_flags_vertical = 5
 theme_override_fonts/font = ExtResource("2_nvfcb")
 text = "--:--"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="Label3" type="Label" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer" unique_id=809666922]
+[node name="PositionLabel" type="Label" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer" unique_id=809666922]
 layout_mode = 2
 size_flags_vertical = 3
 text = " ------------"
 
-[node name="Control2" type="HBoxContainer" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer" unique_id=299654635]
+[node name="Confirm" type="HBoxContainer" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer" unique_id=299654635]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ConfirmStart" type="Label" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer/Control2" unique_id=590004729]
+[node name="ConfirmStart" type="Label" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer/Confirm" unique_id=590004729]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 7
 text = "开始"
 
-[node name="ConfirmBack" type="Label" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer/Control2" unique_id=161623149]
+[node name="ConfirmBack" type="Label" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer/Confirm" unique_id=161623149]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 7
 text = "返回"
 
-[node name="SelectCursor" type="TextureRect" parent="ArchiveSelect/Archives/Control3" unique_id=1220787303]
+[node name="SelectCursor" type="TextureRect" parent="ArchiveSelect/Archives/Control3" unique_id=708634434]
 visible = false
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 7.0
-offset_top = -15.0
-offset_right = 37.0
-offset_bottom = 15.0
+offset_left = 14.0
+offset_top = -9.0
+offset_right = 32.0
+offset_bottom = 9.0
 grow_vertical = 2
 texture = SubResource("AtlasTexture_1t8fe")
 
@@ -403,32 +424,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.3137255)
-
-[node name="ConfirmStart" type="Label" parent="ArchiveSelect/Archives/Control3" unique_id=1920871393]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 76.0
-offset_top = -22.0
-offset_right = 164.0
-offset_bottom = 27.0
-grow_vertical = 2
-text = "开始"
-
-[node name="ConfirmBack" type="Label" parent="ArchiveSelect/Archives/Control3" unique_id=1182282128]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 180.0
-offset_top = -22.0
-offset_right = 268.0
-offset_bottom = 27.0
-grow_vertical = 2
-text = "返回"
 
 [node name="SndMove" type="AudioStreamPlayer" parent="ArchiveSelect" unique_id=119675605]
 stream = ExtResource("6_tid2w")
