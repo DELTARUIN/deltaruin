@@ -111,7 +111,7 @@ anchor_right = 0.1390625
 anchor_bottom = 0.058333334
 offset_right = 40.0
 offset_bottom = 16.0
-text = "特殊章节"
+text = "第?章"
 metadata/_edit_use_anchors_ = true
 
 [node name="SelectFile" type="Label" parent="ArchiveSelect" unique_id=291772616]
@@ -124,7 +124,7 @@ anchor_bottom = 0.17208335
 offset_top = -19.0
 offset_right = 224.00002
 offset_bottom = 26.0
-text = "请选择一个文件"
+text = "请选择一个存档。"
 
 [node name="Archives" type="VBoxContainer" parent="ArchiveSelect" unique_id=1450222345]
 layout_mode = 1
@@ -174,7 +174,7 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 5
-text = "PLAYER"
+text = "[空白]"
 vertical_alignment = 2
 
 [node name="Label2" type="Label" parent="ArchiveSelect/Archives/Control1/MarginContainer/VBoxContainer/Control" unique_id=2068428288]
@@ -190,7 +190,7 @@ vertical_alignment = 2
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
-text = "MIKE ZONE"
+text = " ------------"
 
 [node name="Control2" type="HBoxContainer" parent="ArchiveSelect/Archives/Control1/MarginContainer/VBoxContainer" unique_id=2094824859]
 layout_mode = 2
@@ -228,7 +228,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.38625094, 0.38625082, 0.38625085, 0.4862745)
+color = Color(0, 0, 0, 0.3137255)
 
 [node name="Control2" type="Control" parent="ArchiveSelect/Archives" unique_id=1850558903]
 layout_mode = 2
@@ -263,7 +263,7 @@ size_flags_vertical = 3
 [node name="Label" type="Label" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer/Control" unique_id=1711412626]
 layout_mode = 2
 size_flags_horizontal = 7
-text = "[EMPTY]"
+text = "[空白]"
 vertical_alignment = 2
 
 [node name="Label2" type="Label" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer/Control" unique_id=754888030]
@@ -277,7 +277,7 @@ vertical_alignment = 2
 [node name="Label3" type="Label" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer" unique_id=1669115430]
 layout_mode = 2
 size_flags_vertical = 3
-text = "----------"
+text = " ------------"
 
 [node name="Control2" type="HBoxContainer" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer" unique_id=1912450830]
 layout_mode = 2
@@ -315,7 +315,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.38625094, 0.38625082, 0.38625085, 0.4862745)
+color = Color(0, 0, 0, 0.3137255)
 
 [node name="Control3" type="Control" parent="ArchiveSelect/Archives" unique_id=1177324688]
 layout_mode = 2
@@ -350,7 +350,7 @@ size_flags_vertical = 3
 [node name="Label" type="Label" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer/Control" unique_id=921581536]
 layout_mode = 2
 size_flags_horizontal = 7
-text = "[EMPTY]"
+text = "[空白]"
 vertical_alignment = 2
 
 [node name="Label2" type="Label" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer/Control" unique_id=957728622]
@@ -364,7 +364,7 @@ vertical_alignment = 2
 [node name="Label3" type="Label" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer" unique_id=809666922]
 layout_mode = 2
 size_flags_vertical = 3
-text = "----------"
+text = " ------------"
 
 [node name="Control2" type="HBoxContainer" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer" unique_id=299654635]
 layout_mode = 2
@@ -402,7 +402,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.38625094, 0.38625082, 0.38625085, 0.4862745)
+color = Color(0, 0, 0, 0.3137255)
 
 [node name="ConfirmStart" type="Label" parent="ArchiveSelect/Archives/Control3" unique_id=1920871393]
 visible = false
