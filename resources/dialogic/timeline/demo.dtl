@@ -1,9 +1,13 @@
-[style name="dialogic_style"]
-susie (default): 欢迎来到测试对话
-susie (happy): 接下来测试选项功能
-- 确定
-	susie (default): 明智的抉择
+[style name="dialogic_style_light_down"]
+* 这是一个关于[color=yellow]角色对话[color=]的介绍对话。
+* 我觉得，[pause = 1]你看了会明白的。
+susie (default): * 呃克里斯，[p]  你要我来介绍吗
+- 就你了
+	susie (default): * 呃，啊？
+	susie (happy): * 哦好耶！
+	susie (happy): * 我们不仅会切换脸图，[p]  而且文本也有特殊效果。
+	susie (happy): * 还有[color=yellow]字体颜色[color=]，以及[p]我们的[shake rate=20 level=10 connected=1]对话框。[/shake]
+	susie (default): * 还有旋风，脉冲，文本淡入，静音...
+	susie (default): * OK...差不多[p]光世界就这些。
+- 不是
 	[end_timeline]
-- 拒绝
-	susie (danger): 竟然敢拒绝，那就陷入无尽的循环吧
-	jump demo/

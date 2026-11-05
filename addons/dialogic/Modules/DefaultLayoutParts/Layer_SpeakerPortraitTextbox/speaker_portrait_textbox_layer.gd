@@ -47,7 +47,7 @@ enum NameLabelColorModes {GLOBAL_COLOR, CHARACTER_COLOR, CUSTOM_COLOR}
 @export var portrait_stretch_factor: float = 0.3
 @export var portrait_position: LimitedAlignments = LimitedAlignments.LEFT
 @export var portrait_bg_modulate: Color = Color(0, 0, 0, 0.5137255191803)
-
+@export var portrait_hide_when_no_character: bool = false
 
 ## Called by dialogic whenever export overrides might change
 func _apply_export_overrides() -> void:
@@ -85,7 +85,7 @@ func _apply_export_overrides() -> void:
 
 	## BOX SETTINGS
 	var panel: PanelContainer = %Panel
-	var portrait_panel: Panel = %PortraitPanel
+	var portrait_panel: PotraitPanel = %PortraitPanel
 	if box_modulate_global_color:
 		panel.self_modulate = get_global_setting(&'bg_color', box_modulate_custom_color)
 	else:
@@ -102,7 +102,8 @@ func _apply_export_overrides() -> void:
 	portrait_background_color.color = portrait_bg_modulate
 
 	portrait_panel.get_parent().move_child(portrait_panel, portrait_position)
-
+	portrait_panel.hide_when_empty = portrait_hide_when_no_character
+	
 	## NAME LABEL SETTINGS
 	var name_label: DialogicNode_NameLabel = %DialogicNode_NameLabel
 	if name_label_use_global_size:

@@ -1,0 +1,14 @@
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://biuwhc8nxavc0"]
+
+[ext_resource type="Texture2D" uid="uid://34f641k0kq5k" path="res://assets/graphics/ui/box_light_down.png" id="1_hvabx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tep4j"]
+atlas = ExtResource("1_hvabx")
+region = Rect2(12, 156, 296, 83)
+
+[resource]
+texture = SubResource("AtlasTexture_tep4j")
+texture_margin_left = 32.0
+texture_margin_top = 20.0
+texture_margin_right = 32.0
+texture_margin_bottom = 20.0
