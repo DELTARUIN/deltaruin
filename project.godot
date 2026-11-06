@@ -30,6 +30,7 @@ GameManager="*uid://kvovkurrk8o8"
 [dialogic]
 
 directories/dch_directory={
+"default": "res://resources/dialogic/character/default.dch",
 "susie": "res://resources/dialogic/character/susie.dch"
 }
 directories/dtl_directory={
@@ -64,13 +65,13 @@ save/encryption_on_exports_only=true
 text/autopauses={}
 audio/channel_defaults={
 "": {
-"audio_bus": "",
+"audio_bus": "sfx",
 "fade_length": 0.0,
 "loop": false,
 "volume": 0.0
 },
 "music": {
-"audio_bus": "",
+"audio_bus": "music",
 "fade_length": 0.0,
 "loop": true,
 "volume": 0.0

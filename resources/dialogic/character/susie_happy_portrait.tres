@@ -1,7 +1,7 @@
 [gd_resource type="AtlasTexture" format=3 uid="uid://b18uq3wiexa52"]
 
-[ext_resource type="Texture2D" uid="uid://bb3gm3hmpkyqm" path="res://assets/graphics/characters/susie/susie_ch3.png" id="1_qwp7d"]
+[ext_resource type="Texture2D" uid="uid://b1b7w81em2fum" path="res://assets/graphics/characters/susie/susie_ch1&2.png" id="1_r7luo"]
 
 [resource]
-atlas = ExtResource("1_qwp7d")
-region = Rect2(55, 2249, 44, 51)
+atlas = ExtResource("1_r7luo")
+region = Rect2(1205, 4478, 45, 51)
