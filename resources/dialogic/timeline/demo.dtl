@@ -18,7 +18,7 @@ default: [ul bullet=*]唉，到我了吗？
 default: [ul bullet=*]可能有点麻烦，[br]我相信你能保持耐心的！
 default: [ul bullet=*]你有没有察觉到，[br]我们的[color=yellow]对话框[/color]变了呢？
 default: [ul bullet=*]以及文本增加了一个[br][color=yellow]深蓝色[/color]的渐变阴影。
-[ul bullet=*]就连[color=blue]关键字[/color]都也变成渐变效果了！
+default: [ul bullet=*]就连[color=blue]关键字[/color]都也变成渐变效果了！
 default: [ul bullet=*]怎么样？听明白了吗？
 default: [ul bullet=*]需要再复述一遍吗？
 - 请复述
