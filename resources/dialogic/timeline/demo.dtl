@@ -1,13 +1,41 @@
 [style name="dialogic_style_light_down"]
-* 这是一个关于[color=yellow]角色对话[color=]的介绍对话。
-* 我觉得，[pause = 1]你看了会明白的。
-susie (default): * 呃克里斯，[p]  你要我来介绍吗
+[ul bullet=*]这是一个关于[color=yellow]角色对话[color=white]的介绍对话。
+[ul bullet=*]我觉得，[pause = 1]你看了会明白的。
+susie (default): [ul bullet=*]呃克里斯，[br]你要我来介绍吗？
 - 就你了
-	susie (default): * 呃，啊？
-	susie (happy): * 哦好耶！
-	susie (happy): * 我们不仅会切换脸图，[p]  而且文本也有特殊效果。
-	susie (happy): * 还有[color=yellow]字体颜色[color=]，以及[p]我们的[shake rate=20 level=10 connected=1]对话框。[/shake]
-	susie (default): * 还有旋风，脉冲，文本淡入，静音...
-	susie (default): * OK...差不多[p]光世界就这些。
+	susie (default): [ul bullet=*]呃，啊？
+	susie (happy): [ul bullet=*]哦好耶！
 - 不是
-	[end_timeline]
+	susie (default): [ul bullet=*]你确定吗？
+	susie (happy): [ul bullet=*]要不我还是讲讲吧！
+susie (happy): [ul bullet=*]我们不仅会切换脸图，而且文本也有[wave]特殊效果[/wave]。
+susie (happy): [ul bullet=*]还有[color=yellow]字体颜色[color=]，以及我们的[shake]对话框。[/shake]
+susie (default): [ul bullet=*]还有[tornado]旋风[/tornado]，[pulse freq=1.0 color=#ffffff40 ease=-2.0]脉冲[/pulse]，[fade]文本淡入[/fade]，静音...
+susie (default): [ul bullet=*]OK...差不多[br]光世界就这些。
+[style name="dialogic_style_dark_down"]
+susie (happy): [ul bullet=*]现在让我们讲讲暗世界！[br]嗨利艾尔斯！
+default: [ul bullet=*]唉，到我了吗？
+default: [ul bullet=*]可能有点麻烦，[br]我相信你能保持耐心的！
+default: [ul bullet=*]你有没有察觉到，[br]我们的[color=yellow]对话框[/color]变了呢？
+default: [ul bullet=*]以及文本增加了一个[br][color=yellow]深蓝色[/color]的渐变阴影。
+[ul bullet=*]就连[color=blue]关键字[/color]都也变成渐变效果了！
+default: [ul bullet=*]怎么样？听明白了吗？
+default: [ul bullet=*]需要再复述一遍吗？
+- 请复述
+	jump 
+- 不需要
+	jump end
+- 不知道
+susie (default): [ul bullet=*]我草，可别给这家伙听睡着了。
+default: [ul bullet=*](嘿，苏西，别那么说。)
+default: [ul bullet=*]总之我再补充一点吧。
+default: [ul bullet=*]Z键或Enter键确认对话，X键或Shift键来快速播放单条对话。
+default: [ul bullet=*]然后C键或Ctrl键可以跳过所有文本。
+[style name="dialogic_style_dark_up"]
+default: [ul bullet=*]酷，讲的我都晕了。
+default: [ul bullet=*]我也  一样
+default: [ul bullet=*]我只是一台电脑又不是  豆包
+default: [ul bullet=*]哦不对我刚刚  什么也没说
+label end
+[style name="dialogic_style_dark_down"]
+susie (danger): [ul bullet=*]好吧蠢货们，[br]说明结束！！！
