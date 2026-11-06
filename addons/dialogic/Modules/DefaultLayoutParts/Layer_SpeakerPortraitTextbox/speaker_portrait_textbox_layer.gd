@@ -20,6 +20,8 @@ enum LimitedAlignments {LEFT=0, RIGHT=1}
 @export_file('*.ttf', '*.tres') var custom_italic_font: String = ""
 @export_file('*.ttf', '*.tres') var custom_bold_italic_font: String = ""
 
+@export_subgroup("Box")
+@export_file('*.tres') var text_panel: String
 
 @export_group('Name Label')
 @export_subgroup("Color")
@@ -131,6 +133,10 @@ func _apply_box_settings() -> void:
 	var stylebox: StyleBox = load(box_panel)
 	panel.add_theme_stylebox_override(&'panel', stylebox)
 
+	if !text_panel.is_empty():
+		var node_dialog_text: DialogicNode_DialogText = %DialogicNode_DialogText
+		var styletext: StyleBox = load(text_panel)
+		node_dialog_text.add_theme_stylebox_override(&"normal", styletext)
 
 func _apply_portrait_settings() -> void:
 	var portrait_panel: PotraitPanel = %PortraitPanel

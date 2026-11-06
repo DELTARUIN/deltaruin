@@ -9,7 +9,7 @@ susie (default): [ul bullet=*]呃克里斯，[br]你要我来介绍吗？
 	susie (default): [ul bullet=*]你确定吗？
 	susie (happy): [ul bullet=*]要不我还是讲讲吧！
 susie (happy): [ul bullet=*]我们不仅会切换脸图，而且文本也有[wave]特殊效果[/wave]。
-susie (happy): [ul bullet=*]还有[color=yellow]字体颜色[color=]，以及我们的[shake]对话框。[/shake]
+susie (happy): [ul bullet=*]还有[color=yellow]字体颜色[color=]，[br]以及我们的[shake]对话框。[/shake]
 susie (default): [ul bullet=*]还有[tornado]旋风[/tornado]，[pulse freq=1.0 color=#ffffff40 ease=-2.0]脉冲[/pulse]，[fade]文本淡入[/fade]，静音...
 susie (default): [ul bullet=*]OK...差不多[br]光世界就这些。
 [style name="dialogic_style_dark_down"]

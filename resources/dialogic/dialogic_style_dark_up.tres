@@ -39,7 +39,11 @@ overrides = {
 "box_modulate_global_color": "false",
 "box_panel": "\"res://resources/dialogic/dialogic_style_dark.tres\"",
 "name_label_hide_when_no_character": "true",
-"portrait_hide_when_no_character": "true"
+"padding_bottom": "10.0",
+"padding_right": "30.0",
+"padding_top": "10.0",
+"portrait_hide_when_no_character": "true",
+"text_panel": "\"res://resources/dialogic/text_box_style.tres\""
 }
 
 [sub_resource type="Resource" id="Resource_pcke6"]
