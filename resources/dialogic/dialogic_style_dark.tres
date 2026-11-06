@@ -8,7 +8,7 @@ region = Rect2(11, 156, 298, 84)
 
 [resource]
 texture = SubResource("AtlasTexture_7qxlf")
-texture_margin_left = 20.0
-texture_margin_top = 20.0
-texture_margin_right = 20.0
-texture_margin_bottom = 20.0
+texture_margin_left = 14.901907
+texture_margin_top = 14.670175
+texture_margin_right = 14.602798
+texture_margin_bottom = 14.901907

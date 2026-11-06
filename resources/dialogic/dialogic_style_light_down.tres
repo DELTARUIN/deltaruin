@@ -96,4 +96,4 @@ layer_info = {
 "15": SubResource("Resource_rlvga"),
 "16": SubResource("Resource_tfhnp")
 }
-metadata/_latest_layer = "12"
+metadata/_latest_layer = ""
