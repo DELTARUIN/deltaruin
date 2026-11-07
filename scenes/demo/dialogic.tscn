@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dw1n55np00t6m"]
+
+[ext_resource type="Script" uid="uid://diodox2aq6fan" path="res://scripts/demo/dialogic.gd" id="1_i5k7q"]
+
+[node name="Dialogic" type="CanvasLayer" unique_id=1196667612]
+script = ExtResource("1_i5k7q")

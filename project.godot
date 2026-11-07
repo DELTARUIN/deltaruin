@@ -30,19 +30,22 @@ GameManager="*uid://kvovkurrk8o8"
 [dialogic]
 
 directories/dch_directory={
+"default": "res://resources/dialogic/character/default.dch",
 "susie": "res://resources/dialogic/character/susie.dch"
 }
 directories/dtl_directory={
 "demo": "res://resources/dialogic/timeline/demo.dtl"
 }
 layout/style_directory={
-"dialogic_style": "res://resources/dialogic/dialogic_style.tres"
+"dialogic_style_dark_down": "res://resources/dialogic/dialogic_style_dark_down.tres",
+"dialogic_style_dark_up": "res://resources/dialogic/dialogic_style_dark_up.tres",
+"dialogic_style_light_down": "res://resources/dialogic/dialogic_style_light_down.tres"
 }
 glossary/default_case_sensitive=true
-layout/style_list=["res://resources/dialogic/dialogic_style.tres"]
+layout/style_list=["res://resources/dialogic/dialogic_style_dark_down.tres", "res://resources/dialogic/dialogic_style_dark_up.tres", "res://resources/dialogic/dialogic_style_light_down.tres"]
 layout/default_style="res://resources/dialogic/chat_box_style.tres"
 variables={}
-text/letter_speed=0.1
+text/letter_speed=0.05
 text/initial_text_reveal_skippable=true
 text/text_reveal_skip_delay=0.1
 text/advance_delay=0.1
@@ -62,13 +65,13 @@ save/encryption_on_exports_only=true
 text/autopauses={}
 audio/channel_defaults={
 "": {
-"audio_bus": "",
+"audio_bus": "sfx",
 "fade_length": 0.0,
 "loop": false,
 "volume": 0.0
 },
 "music": {
-"audio_bus": "",
+"audio_bus": "music",
 "fade_length": 0.0,
 "loop": true,
 "volume": 0.0

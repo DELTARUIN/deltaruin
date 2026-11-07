@@ -1,0 +1,7 @@
+[gd_resource type="FontVariation" format=3 uid="uid://dpydnpuemyqiq"]
+
+[ext_resource type="FontFile" uid="uid://dmtt8i0qf1pay" path="res://assets/fonts/normal.ttf" id="1_ajs6u"]
+
+[resource]
+base_font = ExtResource("1_ajs6u")
+spacing_glyph = 4

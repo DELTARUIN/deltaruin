@@ -5,3 +5,5 @@
 [resource]
 base_font = ExtResource("1_p1y0h")
 spacing_glyph = 4
+spacing_top = 5
+spacing_bottom = 5

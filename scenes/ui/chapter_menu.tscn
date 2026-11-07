@@ -405,7 +405,7 @@ anchor_bottom = 1.0
 offset_left = 80.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "？？？"
+text = "???"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -430,7 +430,7 @@ theme_override_constants/separation = 0
 [node name="ChapterLabel" type="Label" parent="ChapterSelect/Rows/Row5/Margin/Line" unique_id=2101013828]
 custom_minimum_size = Vector2(133, 0)
 layout_mode = 2
-text = "第？章"
+text = "第?章"
 vertical_alignment = 1
 
 [node name="Stars" type="TextureRect" parent="ChapterSelect/Rows/Row5/Margin/Line" unique_id=1722955832]
@@ -658,8 +658,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Deco" type="Control" parent="ChapterSelect" unique_id=1556814250]
 anchors_preset = 0
-offset_left = 560.0
-offset_top = 444.0
+offset_left = 543.0
+offset_top = 436.0
 offset_right = 632.0
 offset_bottom = 478.0
 mouse_filter = 2

@@ -20,6 +20,9 @@ enum LimitedAlignments {LEFT=0, RIGHT=1}
 @export_file('*.ttf', '*.tres') var custom_italic_font: String = ""
 @export_file('*.ttf', '*.tres') var custom_bold_italic_font: String = ""
 
+@export_subgroup("Box")
+@export_file('*.tres') var text_panel: String
+
 @export_group('Name Label')
 @export_subgroup("Color")
 enum NameLabelColorModes {GLOBAL_COLOR, CHARACTER_COLOR, CUSTOM_COLOR}
@@ -47,11 +50,42 @@ enum NameLabelColorModes {GLOBAL_COLOR, CHARACTER_COLOR, CUSTOM_COLOR}
 @export var portrait_stretch_factor: float = 0.3
 @export var portrait_position: LimitedAlignments = LimitedAlignments.LEFT
 @export var portrait_bg_modulate: Color = Color(0, 0, 0, 0.5137255191803)
+@export var portrait_hide_when_no_character: bool = false
 
+@export_group('Sounds')
+
+@export_subgroup('Typing Sounds')
+@export var typing_sounds_enabled: bool = true
+@export var typing_sounds_mode: DialogicNode_TypeSounds.Modes = DialogicNode_TypeSounds.Modes.INTERRUPT
+@export_dir var typing_sounds_sounds_folder: String = "res://addons/dialogic/Example Assets/sound-effects/"
+@export_file("*.wav", "*.ogg", "*.mp3") var typing_sounds_end_sound: String = ""
+@export_range(1, 999, 1) var typing_sounds_every_nths_character: int = 1
+@export_range(0.01, 4, 0.01) var typing_sounds_pitch: float = 1.0
+@export_range(0.0, 3.0) var typing_sounds_pitch_variance: float = 0.0
+@export_range(-80, 24, 0.01) var typing_sounds_volume: float = -10
+@export_range(0.0, 10) var typing_sounds_volume_variance: float = 0.0
+@export var typing_sounds_ignore_characters: String = " .,!?"
 
 ## Called by dialogic whenever export overrides might change
 func _apply_export_overrides() -> void:
 	## FONT SETTINGS
+	_apply_text_settings()
+	
+	## BOX SETTINGS
+	_apply_box_settings()
+
+	## PORTRAIT SETTINGS
+	_apply_portrait_settings()
+
+	## NAME LABEL SETTINGS
+	_apply_name_label_settings()
+	
+	## TYPING SOUNDS
+	_apply_sounds_settings()
+
+
+## Applies all text settings to the scene.
+func _apply_text_settings() -> void:
 	var dialog_text: DialogicNode_DialogText = %DialogicNode_DialogText
 	dialog_text.alignment = text_alignment as DialogicNode_DialogText.Alignment
 
@@ -83,9 +117,11 @@ func _apply_export_overrides() -> void:
 	if !custom_bold_italic_font.is_empty():
 		dialog_text.add_theme_font_override(&"bold_italics_font", load(custom_bold_italic_font) as Font)
 
-	## BOX SETTINGS
+## Applies all text box settings to the scene.
+## Except the box animations.
+func _apply_box_settings() -> void:
 	var panel: PanelContainer = %Panel
-	var portrait_panel: Panel = %PortraitPanel
+	var portrait_panel: PotraitPanel = %PortraitPanel
 	if box_modulate_global_color:
 		panel.self_modulate = get_global_setting(&'bg_color', box_modulate_custom_color)
 	else:
@@ -97,13 +133,21 @@ func _apply_export_overrides() -> void:
 	var stylebox: StyleBox = load(box_panel)
 	panel.add_theme_stylebox_override(&'panel', stylebox)
 
-	## PORTRAIT SETTINGS
+	if !text_panel.is_empty():
+		var node_dialog_text: DialogicNode_DialogText = %DialogicNode_DialogText
+		var styletext: StyleBox = load(text_panel)
+		node_dialog_text.add_theme_stylebox_override(&"normal", styletext)
+
+func _apply_portrait_settings() -> void:
+	var portrait_panel: PotraitPanel = %PortraitPanel
 	var portrait_background_color: ColorRect = %PortraitBackgroundColor
 	portrait_background_color.color = portrait_bg_modulate
-
 	portrait_panel.get_parent().move_child(portrait_panel, portrait_position)
+	portrait_panel.hide_when_empty = portrait_hide_when_no_character
 
-	## NAME LABEL SETTINGS
+
+## Applies all name label settings to the scene.
+func _apply_name_label_settings() -> void:
 	var name_label: DialogicNode_NameLabel = %DialogicNode_NameLabel
 	if name_label_use_global_size:
 		name_label.add_theme_font_size_override(&"font_size", get_global_setting(&'font_size', name_label_custom_size) as int)
@@ -127,3 +171,26 @@ func _apply_export_overrides() -> void:
 
 	name_label.horizontal_alignment = name_label_alignment as HorizontalAlignment
 	name_label.hide_when_empty = name_label_hide_when_no_character
+
+## Applies all sound settings to the scene.
+func _apply_sounds_settings() -> void:
+	var type_sounds: DialogicNode_TypeSounds = %DialogicNode_TypeSounds
+	type_sounds.enabled = typing_sounds_enabled
+	type_sounds.mode = typing_sounds_mode
+
+	if not typing_sounds_sounds_folder.is_empty():
+		type_sounds.sounds = DialogicNode_TypeSounds.load_sounds_from_path(typing_sounds_sounds_folder)
+	else:
+		type_sounds.sounds.clear()
+
+	if not typing_sounds_end_sound.is_empty():
+		type_sounds.end_sound = load(typing_sounds_end_sound)
+	else:
+		type_sounds.end_sound = null
+
+	type_sounds.play_every_character = typing_sounds_every_nths_character
+	type_sounds.base_pitch = typing_sounds_pitch
+	type_sounds.base_volume = typing_sounds_volume
+	type_sounds.pitch_variance = typing_sounds_pitch_variance
+	type_sounds.volume_variance = typing_sounds_volume_variance
+	type_sounds.ignore_characters = typing_sounds_ignore_characters
