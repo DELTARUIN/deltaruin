@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://dgdkmvgtpew50"]
+
+[ext_resource type="FontFile" uid="uid://y5f35muubhh4" path="res://assets/fonts/normal.ttf" id="1_3xvh2"]
+
+[sub_resource type="FontVariation" id="FontVariation_npgwr"]
+base_font = ExtResource("1_3xvh2")
+spacing_glyph = 4
+
+[node name="DisclaimerMenu" type="CanvasLayer" unique_id=1214048868]
+
+[node name="Bg" type="ColorRect" parent="." unique_id=1718065524]
+offset_right = 640.0
+offset_bottom = 480.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="." unique_id=970226920]
+offset_left = 25.0
+offset_top = 26.0
+offset_right = 607.0
+offset_bottom = 408.0
+theme_override_fonts/font = SubResource("FontVariation_npgwr")
+theme_override_font_sizes/font_size = 32
+text = "免责声明
+
+本作品为粉丝同人，基于《喜羊羊与
+灰太狼》相关角色/IP以及TobyFox开发的
+《DELTARUNE》世界观进行非官方创作，
+严禁用于商业用途。
+
+《喜羊羊与灰太狼》版权所属由：广东原创
+动力文化传播有限公司
+粉丝游戏《羊村大崩坏》由：XIAOWOO
+与RebornMaker工作室"
+horizontal_alignment = 1

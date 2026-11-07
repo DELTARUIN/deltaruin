@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://xpo0gxfoum1p" path="res://assets/audio/effects/common/snd_select.wav" id="8_sndok"]
 [ext_resource type="AudioStream" uid="uid://cyb6kl8342ys5" path="res://assets/audio/effects/common/snd_swing.wav" id="9_bbscx"]
 [ext_resource type="AudioStream" uid="uid://pexdydjfqe8x" path="res://assets/audio/effects/ruin/snd_title.ogg" id="10_pgiqg"]
+[ext_resource type="AudioStream" uid="uid://p810xgvr7guu" path="res://assets/audio/effects/common/AUDIO_DRONE.wav" id="11_kjnqs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f22bx"]
 atlas = ExtResource("4_sheet")
@@ -45,6 +46,10 @@ region = Rect2(0, 14, 28, 25)
 
 [sub_resource type="FontVariation" id="FontVariation_bbscx"]
 base_font = ExtResource("5_bbscx")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_127xd"]
+atlas = ExtResource("4_sheet")
+region = Rect2(65, 95, 64, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pgiqg"]
 atlas = ExtResource("6_bbscx")
@@ -89,7 +94,8 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 80.0
-offset_bottom = -2.0
+offset_top = 1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "开端"
@@ -456,19 +462,19 @@ texture = SubResource("Atlas_ch5")
 [node name="RowPlay" type="Label" parent="ChapterSelect/Rows/Row5" unique_id=368482037]
 visible = false
 layout_mode = 0
-offset_left = 252.0
-offset_top = 14.0
-offset_right = 420.0
-offset_bottom = 46.0
+offset_left = 244.0
+offset_top = 9.0
+offset_right = 412.0
+offset_bottom = 51.0
 text = "游玩"
 
 [node name="RowBack" type="Label" parent="ChapterSelect/Rows/Row5" unique_id=400359836]
 visible = false
 layout_mode = 0
 offset_left = 431.0
-offset_top = 14.0
+offset_top = 9.0
 offset_right = 599.0
-offset_bottom = 46.0
+offset_bottom = 51.0
 text = "返回"
 
 [node name="Row6" type="Control" parent="ChapterSelect/Rows" unique_id=1963876199]
@@ -656,13 +662,13 @@ text = "退出"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Deco" type="Control" parent="ChapterSelect" unique_id=1556814250]
-anchors_preset = 0
-offset_left = 543.0
-offset_top = 436.0
-offset_right = 632.0
-offset_bottom = 478.0
-mouse_filter = 2
+[node name="TextureRect" type="TextureRect" parent="ChapterSelect" unique_id=421187679]
+layout_mode = 0
+offset_left = 505.0
+offset_top = 434.0
+offset_right = 633.0
+offset_bottom = 466.0
+texture = SubResource("AtlasTexture_127xd")
 
 [node name="Heart" type="TextureRect" parent="ChapterSelect" unique_id=169233994]
 layout_mode = 0
@@ -684,3 +690,7 @@ stream = ExtResource("9_bbscx")
 
 [node name="SndBegin" type="AudioStreamPlayer" parent="ChapterSelect" unique_id=568460998]
 stream = ExtResource("10_pgiqg")
+
+[node name="SndBg" type="AudioStreamPlayer" parent="ChapterSelect" unique_id=231668124]
+stream = ExtResource("11_kjnqs")
+autoplay = true

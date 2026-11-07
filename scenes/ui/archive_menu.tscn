@@ -68,6 +68,15 @@ region = Rect2(0, 193, 324, 75)
 atlas = ExtResource("5_nvhsi")
 region = Rect2(1, 36, 9, 9)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nvfcb"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+draw_center = false
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.6039216, 0.6039216, 0.7019608, 1)
+
 [node name="ArchiveMenu" type="CanvasLayer" unique_id=1018443976]
 
 [node name="ArchiveSelect" type="Control" parent="." unique_id=1272150953]
@@ -92,6 +101,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -16.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AtlasTexture_1v8yg")
@@ -103,7 +113,7 @@ anchors_preset = -1
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -136.0
+offset_top = -140.0
 grow_horizontal = 2
 grow_vertical = 0
 texture = SubResource("AtlasTexture_tio4f")
@@ -112,15 +122,15 @@ texture = SubResource("AtlasTexture_tio4f")
 layout_mode = 0
 offset_right = 640.0
 offset_bottom = 480.0
-color = Color(0, 0, 0, 0.5254902)
+color = Color(0, 0, 0, 0.36078432)
 
 [node name="ChapterName" type="Label" parent="ArchiveSelect" unique_id=776210329]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.0328125
-anchor_top = 0.025
-anchor_right = 0.1390625
-anchor_bottom = 0.058333334
+anchor_left = 0.028125
+anchor_top = 0.016666668
+anchor_right = 0.134375
+anchor_bottom = 0.05
 offset_right = 40.0
 offset_bottom = 16.0
 theme_override_fonts/font = ExtResource("1_nvfcb")
@@ -134,9 +144,10 @@ anchor_left = 0.132
 anchor_top = 0.17208335
 anchor_right = 0.132
 anchor_bottom = 0.17208335
-offset_top = -19.0
-offset_right = 224.00002
-offset_bottom = 26.0
+offset_left = -2.0
+offset_top = -23.0
+offset_right = 222.00002
+offset_bottom = 22.0
 text = "请选择一个存档。"
 
 [node name="Archives" type="VBoxContainer" parent="ArchiveSelect" unique_id=1450222345]
@@ -146,16 +157,22 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -209.0
-offset_top = -123.0
-offset_right = 209.0
-offset_bottom = 131.0
+offset_left = -214.0
+offset_top = -134.0
+offset_right = 214.0
+offset_bottom = 132.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Archive" type="Control" parent="ArchiveSelect/Archives" unique_id=1981793096]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="ArchiveSelect/Archives/Archive" unique_id=1532089991]
+layout_mode = 0
+offset_right = 428.0
+offset_bottom = 86.0
+color = Color(0, 0, 0, 0.5019608)
 
 [node name="Box" type="TextureRect" parent="ArchiveSelect/Archives/Archive" unique_id=1087481828]
 layout_mode = 1
@@ -195,14 +212,14 @@ layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 5
 theme_override_fonts/font = ExtResource("5_nvfcb")
-text = "00:00:01"
+text = "--:--"
 horizontal_alignment = 2
 vertical_alignment = 2
 
 [node name="PositionLabel" type="Label" parent="ArchiveSelect/Archives/Archive/MarginContainer/VBoxContainer" unique_id=115376290]
 layout_mode = 2
 size_flags_vertical = 3
-text = "------------"
+text = "----------"
 
 [node name="Confirm" type="HBoxContainer" parent="ArchiveSelect/Archives/Archive/MarginContainer/VBoxContainer" unique_id=2094824859]
 visible = false
@@ -238,6 +255,13 @@ size_flags_vertical = 5
 size_flags_stretch_ratio = 4.0
 text = "返回"
 
+[node name="DisableDodulate" type="Panel" parent="ArchiveSelect/Archives/Archive" unique_id=234568527]
+visible = false
+layout_mode = 0
+offset_right = 428.0
+offset_bottom = 86.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_nvfcb")
+
 [node name="SelectCursor" type="TextureRect" parent="ArchiveSelect/Archives/Archive" unique_id=1760425040]
 layout_mode = 1
 anchors_preset = 4
@@ -250,21 +274,17 @@ offset_bottom = 9.0
 grow_vertical = 2
 texture = SubResource("AtlasTexture_1t8fe")
 
-[node name="DisableDodulate" type="ColorRect" parent="ArchiveSelect/Archives/Archive" unique_id=537722123]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.3137255)
-
-[node name="Control2" type="Control" parent="ArchiveSelect/Archives" unique_id=1850558903]
+[node name="Archive2" type="Control" parent="ArchiveSelect/Archives" unique_id=1237915433]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Box" type="TextureRect" parent="ArchiveSelect/Archives/Control2" unique_id=1677226617]
+[node name="ColorRect" type="ColorRect" parent="ArchiveSelect/Archives/Archive2" unique_id=123431513]
+layout_mode = 0
+offset_right = 428.0
+offset_bottom = 86.0
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="Box" type="TextureRect" parent="ArchiveSelect/Archives/Archive2" unique_id=32482440]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -273,7 +293,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_ru1li")
 
-[node name="MarginContainer" type="MarginContainer" parent="ArchiveSelect/Archives/Control2" unique_id=1510108049]
+[node name="MarginContainer" type="MarginContainer" parent="ArchiveSelect/Archives/Archive2" unique_id=111875860]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -283,21 +303,21 @@ grow_vertical = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_right = 50
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ArchiveSelect/Archives/Control2/MarginContainer" unique_id=1865780908]
+[node name="VBoxContainer" type="VBoxContainer" parent="ArchiveSelect/Archives/Archive2/MarginContainer" unique_id=610867479]
 layout_mode = 2
 
-[node name="Control" type="HBoxContainer" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer" unique_id=1337560166]
+[node name="Control" type="HBoxContainer" parent="ArchiveSelect/Archives/Archive2/MarginContainer/VBoxContainer" unique_id=679264734]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="NameLabel" type="Label" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer/Control" unique_id=1711412626]
+[node name="NameLabel" type="Label" parent="ArchiveSelect/Archives/Archive2/MarginContainer/VBoxContainer/Control" unique_id=1050194956]
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 5
 text = "[空白]"
 vertical_alignment = 2
 
-[node name="TimeLabel" type="Label" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer/Control" unique_id=754888030]
+[node name="TimeLabel" type="Label" parent="ArchiveSelect/Archives/Archive2/MarginContainer/VBoxContainer/Control" unique_id=1684208074]
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 5
@@ -306,17 +326,17 @@ text = "--:--"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="PositionLabel" type="Label" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer" unique_id=1669115430]
+[node name="PositionLabel" type="Label" parent="ArchiveSelect/Archives/Archive2/MarginContainer/VBoxContainer" unique_id=1979227387]
 layout_mode = 2
 size_flags_vertical = 3
-text = "------------"
+text = "----------"
 
-[node name="Confirm" type="HBoxContainer" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer" unique_id=1837173804]
+[node name="Confirm" type="HBoxContainer" parent="ArchiveSelect/Archives/Archive2/MarginContainer/VBoxContainer" unique_id=392145556]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="SelectStart" type="TextureRect" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer/Confirm" unique_id=998807533]
+[node name="SelectStart" type="TextureRect" parent="ArchiveSelect/Archives/Archive2/MarginContainer/VBoxContainer/Confirm" unique_id=857815617]
 modulate = Color(1, 1, 1, 0.9764706)
 custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
@@ -324,28 +344,34 @@ size_flags_horizontal = 2
 size_flags_vertical = 4
 texture = SubResource("AtlasTexture_1t8fe")
 
-[node name="ConfirmStart" type="Label" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer/Confirm" unique_id=1522164884]
+[node name="ConfirmStart" type="Label" parent="ArchiveSelect/Archives/Archive2/MarginContainer/VBoxContainer/Confirm" unique_id=647382000]
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 5
 size_flags_stretch_ratio = 4.0
 text = "开始"
 
-[node name="SelectBack" type="TextureRect" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer/Confirm" unique_id=356898855]
+[node name="SelectBack" type="TextureRect" parent="ArchiveSelect/Archives/Archive2/MarginContainer/VBoxContainer/Confirm" unique_id=1057752424]
 custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 4
 texture = SubResource("AtlasTexture_1t8fe")
 
-[node name="ConfirmBack" type="Label" parent="ArchiveSelect/Archives/Control2/MarginContainer/VBoxContainer/Confirm" unique_id=1129350684]
+[node name="ConfirmBack" type="Label" parent="ArchiveSelect/Archives/Archive2/MarginContainer/VBoxContainer/Confirm" unique_id=2081588878]
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 5
 size_flags_stretch_ratio = 4.0
 text = "返回"
 
-[node name="SelectCursor" type="TextureRect" parent="ArchiveSelect/Archives/Control2" unique_id=561339313]
+[node name="DisableDodulate" type="Panel" parent="ArchiveSelect/Archives/Archive2" unique_id=1990058170]
+layout_mode = 0
+offset_right = 428.0
+offset_bottom = 86.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_nvfcb")
+
+[node name="SelectCursor" type="TextureRect" parent="ArchiveSelect/Archives/Archive2" unique_id=1210567972]
 visible = false
 layout_mode = 1
 anchors_preset = 4
@@ -358,20 +384,17 @@ offset_bottom = 9.0
 grow_vertical = 2
 texture = SubResource("AtlasTexture_1t8fe")
 
-[node name="DisableDodulate" type="ColorRect" parent="ArchiveSelect/Archives/Control2" unique_id=66329197]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.3137255)
-
-[node name="Control3" type="Control" parent="ArchiveSelect/Archives" unique_id=1177324688]
+[node name="Archive3" type="Control" parent="ArchiveSelect/Archives" unique_id=1720206537]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Box" type="TextureRect" parent="ArchiveSelect/Archives/Control3" unique_id=310415735]
+[node name="ColorRect" type="ColorRect" parent="ArchiveSelect/Archives/Archive3" unique_id=1011695791]
+layout_mode = 0
+offset_right = 428.0
+offset_bottom = 86.0
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="Box" type="TextureRect" parent="ArchiveSelect/Archives/Archive3" unique_id=2048086077]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -380,7 +403,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_ru1li")
 
-[node name="MarginContainer" type="MarginContainer" parent="ArchiveSelect/Archives/Control3" unique_id=1114746979]
+[node name="MarginContainer" type="MarginContainer" parent="ArchiveSelect/Archives/Archive3" unique_id=1477072572]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -390,21 +413,21 @@ grow_vertical = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_right = 50
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ArchiveSelect/Archives/Control3/MarginContainer" unique_id=1716017491]
+[node name="VBoxContainer" type="VBoxContainer" parent="ArchiveSelect/Archives/Archive3/MarginContainer" unique_id=312443449]
 layout_mode = 2
 
-[node name="Control" type="HBoxContainer" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer" unique_id=1729041916]
+[node name="Control" type="HBoxContainer" parent="ArchiveSelect/Archives/Archive3/MarginContainer/VBoxContainer" unique_id=380955909]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="NameLabel" type="Label" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer/Control" unique_id=921581536]
+[node name="NameLabel" type="Label" parent="ArchiveSelect/Archives/Archive3/MarginContainer/VBoxContainer/Control" unique_id=1708663742]
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 5
 text = "[空白]"
 vertical_alignment = 2
 
-[node name="TimeLabel" type="Label" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer/Control" unique_id=1298670592]
+[node name="TimeLabel" type="Label" parent="ArchiveSelect/Archives/Archive3/MarginContainer/VBoxContainer/Control" unique_id=1240871505]
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 5
@@ -413,17 +436,17 @@ text = "--:--"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="PositionLabel" type="Label" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer" unique_id=809666922]
+[node name="PositionLabel" type="Label" parent="ArchiveSelect/Archives/Archive3/MarginContainer/VBoxContainer" unique_id=801910658]
 layout_mode = 2
 size_flags_vertical = 3
-text = "------------"
+text = "----------"
 
-[node name="Confirm" type="HBoxContainer" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer" unique_id=32877697]
+[node name="Confirm" type="HBoxContainer" parent="ArchiveSelect/Archives/Archive3/MarginContainer/VBoxContainer" unique_id=1408954997]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="SelectStart" type="TextureRect" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer/Confirm" unique_id=35233782]
+[node name="SelectStart" type="TextureRect" parent="ArchiveSelect/Archives/Archive3/MarginContainer/VBoxContainer/Confirm" unique_id=1378410315]
 modulate = Color(1, 1, 1, 0.9764706)
 custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
@@ -431,28 +454,34 @@ size_flags_horizontal = 2
 size_flags_vertical = 4
 texture = SubResource("AtlasTexture_1t8fe")
 
-[node name="ConfirmStart" type="Label" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer/Confirm" unique_id=1590728445]
+[node name="ConfirmStart" type="Label" parent="ArchiveSelect/Archives/Archive3/MarginContainer/VBoxContainer/Confirm" unique_id=875827800]
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 5
 size_flags_stretch_ratio = 4.0
 text = "开始"
 
-[node name="SelectBack" type="TextureRect" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer/Confirm" unique_id=2134348703]
+[node name="SelectBack" type="TextureRect" parent="ArchiveSelect/Archives/Archive3/MarginContainer/VBoxContainer/Confirm" unique_id=1378433369]
 custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 4
 texture = SubResource("AtlasTexture_1t8fe")
 
-[node name="ConfirmBack" type="Label" parent="ArchiveSelect/Archives/Control3/MarginContainer/VBoxContainer/Confirm" unique_id=1094510274]
+[node name="ConfirmBack" type="Label" parent="ArchiveSelect/Archives/Archive3/MarginContainer/VBoxContainer/Confirm" unique_id=411417276]
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 5
 size_flags_stretch_ratio = 4.0
 text = "返回"
 
-[node name="SelectCursor" type="TextureRect" parent="ArchiveSelect/Archives/Control3" unique_id=708634434]
+[node name="DisableDodulate" type="Panel" parent="ArchiveSelect/Archives/Archive3" unique_id=102165087]
+layout_mode = 0
+offset_right = 428.0
+offset_bottom = 86.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_nvfcb")
+
+[node name="SelectCursor" type="TextureRect" parent="ArchiveSelect/Archives/Archive3" unique_id=1146288474]
 visible = false
 layout_mode = 1
 anchors_preset = 4
@@ -464,15 +493,6 @@ offset_right = 38.0
 offset_bottom = 9.0
 grow_vertical = 2
 texture = SubResource("AtlasTexture_1t8fe")
-
-[node name="DisableDodulate" type="ColorRect" parent="ArchiveSelect/Archives/Control3" unique_id=407165067]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.3137255)
 
 [node name="SndMove" type="AudioStreamPlayer" parent="ArchiveSelect" unique_id=119675605]
 stream = ExtResource("6_tid2w")
