@@ -25,7 +25,7 @@ const INPUT_COOLDOWN := 0.15          ## 输入去抖（秒）
 
 var state := ArchiveSelectState.new()
 var _cursors: Array[TextureRect] = []      ## 各槽红心光标
-var _dodulates: Array[ColorRect] = []      ## 各槽变暗层（未选中槽叠加）
+var _dodulates: Array[Panel] = []      ## 各槽变暗层（未选中槽叠加）
 var _confirm_boxes: Array[Control] = []    ## 各槽确认区（Confirm HBox）
 var _confirm_starts: Array[Label] = []     ## 各槽「开始」
 var _confirm_backs: Array[Label] = []      ## 各槽「返回」
@@ -153,7 +153,7 @@ func _apply_focus() -> void:
 		(_confirm_backs[i] as Label).visible = true
 		(_select_starts[i] as TextureRect).z_index = 0 if state.confirm_item == ArchiveSelectState.ConfirmItem.START else -1
 		(_select_backs[i] as TextureRect).z_index = 0 if state.confirm_item == ArchiveSelectState.ConfirmItem.BACK else -1
-		(_dodulates[i] as ColorRect).visible = state.cursor != i
+		(_dodulates[i] as Panel).visible = state.cursor != i
 		(_cursors[i] as TextureRect).visible = not in_confirm and state.cursor == i
 
 #endregion
