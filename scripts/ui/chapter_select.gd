@@ -35,6 +35,7 @@ const HEART_FOOTER_DY := 6.0          ## 页脚态红心相对文字 y 偏移
 @onready var _snd_move: AudioStreamPlayer = $SndMove
 @onready var _snd_ok: AudioStreamPlayer = $SndOk
 @onready var _snd_cancel: AudioStreamPlayer = $SndCancel
+@onready var _snd_begin: AudioStreamPlayer = $SndBegin
 
 var state: ChapterSelectState
 var _chapter_labels: Array[Label] = []  ## 各行「第N章」
@@ -194,6 +195,10 @@ func _apply_row_colors(i: int, color: Color) -> void:
 ## 游玩转场：菜单横向压缩并淡出，结束后再切换场景
 func _start_play_transition(row: int) -> void:
 	_transitioning = true
+	## 音效跨场景播放：挂到根节点，避免随菜单释放被截断
+	_snd_begin.reparent(get_tree().root)
+	_snd_begin.finished.connect(_snd_begin.queue_free)
+	_snd_begin.play()
 	var tween := create_tween().set_parallel()
 	tween.tween_property(self, "scale", Vector2(0.0, 1.0), TRANSITION_DURATION)
 	tween.tween_property(self, "modulate:a", 0.0, TRANSITION_DURATION)
