@@ -17,6 +17,7 @@ const COLOR_YELLOW := Color("ffff00") ## 选中态（Deltarune 黄）
 const COLOR_GRAY := Color("7F7F7F")   ## 锁定行
 
 const INPUT_COOLDOWN := 0.15          ## 输入去抖（秒）
+const TRANSITION_DURATION := 0.45     ## 游玩转场时长（秒）
 
 ## 各行中心 y（对应场景行边界 0/62/122/.../422）
 const ROW_CENTERS: Array[float] = [31.0, 92.0, 152.0, 212.0, 272.0, 332.0, 392.0]
@@ -44,6 +45,7 @@ var _star_lists: Array[Array] = []      ## 各行星列（TextureRect 数组）
 var _icons: Array[TextureRect] = []     ## 各行章节图标
 
 var _cooldown := 0.0                    ## 输入去抖剩余时间
+var _transitioning := false             ## 转场 Tween 进行中（期间屏蔽输入）
 
 #endregion
 
@@ -73,7 +75,7 @@ func _process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not (event is InputEventKey) or not event.is_pressed() or event.is_echo():
 		return
-	if _cooldown > 0.0:
+	if _transitioning or _cooldown > 0.0:
 		return
 
 	if event.is_action_pressed("move_up"):
@@ -111,7 +113,7 @@ func _apply_ok() -> void:
 	match action:
 		ChapterSelectState.Action.PLAY:
 			_snd_ok.play()
-			GameManager.play_chapter(state.play_row)
+			_start_play_transition(state.play_row)
 		ChapterSelectState.Action.EXIT:
 			_snd_ok.play()
 			GameManager.exit_game()
@@ -183,5 +185,19 @@ func _apply_row_colors(i: int, color: Color) -> void:
 	for star: TextureRect in _star_lists[i]:
 		star.modulate = color
 	_icons[i].modulate = color
+
+#endregion
+
+
+#region 转场
+
+## 游玩转场：菜单横向压缩并淡出，结束后再切换场景
+func _start_play_transition(row: int) -> void:
+	_transitioning = true
+	var tween := create_tween().set_parallel()
+	tween.tween_property(self, "scale", Vector2(0.0, 1.0), TRANSITION_DURATION)
+	tween.tween_property(self, "modulate:a", 0.0, TRANSITION_DURATION)
+	await tween.finished
+	GameManager.play_chapter(row)
 
 #endregion

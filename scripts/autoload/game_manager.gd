@@ -33,9 +33,10 @@ func show_chapter() -> void:
 	SceneManager.change_scene("chapter_menu", fade_in_options, fade_in_options, general_options)
 	pass # Replace with function body.
 
+## 游玩：章节菜单已在自身完成淡出，跳过 SceneManager 的二次淡出，直接切场景并淡入
 func play_chapter(row: int) -> void:
-	SceneManager.change_scene("archive_menu", fade_in_options, fade_in_options, general_options)
-	pass # Replace with function body.
+	var no_fade_out = SceneManager.create_options(0.0, fade_out_pattern, fade_out_smoothness, fade_out_inverted)
+	SceneManager.change_scene("archive_menu", no_fade_out, fade_in_options, general_options)
 
 
 func _unhandled_input(event: InputEvent) -> void:
