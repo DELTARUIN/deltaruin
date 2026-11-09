@@ -36,3 +36,11 @@ func show_chapter() -> void:
 func play_chapter(row: int) -> void:
 	SceneManager.change_scene("archive_menu", fade_in_options, fade_in_options, general_options)
 	pass # Replace with function body.
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	# 切换窗口全屏/窗口化（按键在项目设置 → 输入映射的 toggle_fullscreen 中定义）
+	if event.is_action_pressed("toggle_fullscreen"):
+		var window := get_window()
+		window.mode = Window.MODE_WINDOWED if window.mode == Window.MODE_FULLSCREEN else Window.MODE_FULLSCREEN
+
