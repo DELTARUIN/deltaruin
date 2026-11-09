@@ -58,6 +58,16 @@ filter_clip = true
 
 [node name="ChapterMenu" type="CanvasLayer" unique_id=1519472213]
 
+[node name="ColorBg" type="ColorRect" parent="." unique_id=1673810966]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0, 0, 0, 1)
+
 [node name="ChapterSelect" type="Control" parent="." unique_id=673489019]
 auto_translate_mode = 1
 layout_mode = 3
@@ -66,7 +76,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(320, 240)
+pivot_offset = Vector2(320, 0)
 theme = ExtResource("2_theme")
 script = ExtResource("1_script")
 

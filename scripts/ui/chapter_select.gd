@@ -17,7 +17,7 @@ const COLOR_YELLOW := Color("ffff00") ## 选中态（Deltarune 黄）
 const COLOR_GRAY := Color("7F7F7F")   ## 锁定行
 
 const INPUT_COOLDOWN := 0.15          ## 输入去抖（秒）
-const TRANSITION_DURATION := 0.45     ## 游玩转场时长（秒）
+const TRANSITION_DURATION := 2        ## 游玩转场时长（秒）
 
 ## 各行中心 y（对应场景行边界 0/62/122/.../422）
 const ROW_CENTERS: Array[float] = [31.0, 92.0, 152.0, 212.0, 272.0, 332.0, 392.0]
@@ -36,6 +36,7 @@ const HEART_FOOTER_DY := 6.0          ## 页脚态红心相对文字 y 偏移
 @onready var _snd_ok: AudioStreamPlayer = $SndOk
 @onready var _snd_cancel: AudioStreamPlayer = $SndCancel
 @onready var _snd_begin: AudioStreamPlayer = $SndBegin
+@onready var _snd_bg: AudioStreamPlayer = $SndBg
 
 var state: ChapterSelectState
 var _chapter_labels: Array[Label] = []  ## 各行「第N章」
@@ -196,13 +197,13 @@ func _apply_row_colors(i: int, color: Color) -> void:
 func _start_play_transition(row: int) -> void:
 	_transitioning = true
 	## 音效跨场景播放：挂到根节点，避免随菜单释放被截断
-	_snd_begin.reparent(get_tree().root)
-	_snd_begin.finished.connect(_snd_begin.queue_free)
+	_snd_bg.stop()
 	_snd_begin.play()
-	var tween := create_tween().set_parallel()
-	tween.tween_property(self, "scale", Vector2(0.0, 1.0), TRANSITION_DURATION)
-	tween.tween_property(self, "modulate:a", 0.0, TRANSITION_DURATION)
+	var tween := create_tween()
+	tween.tween_property(self, "scale", Vector2(0.0, 0.8), 3)
+	tween.parallel().tween_property(self, "modulate:a", 0.0, 2)
 	await tween.finished
+	await _snd_begin.finished
 	GameManager.play_chapter(row)
 
 #endregion
