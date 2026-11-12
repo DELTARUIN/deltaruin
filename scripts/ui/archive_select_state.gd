@@ -153,8 +153,10 @@ func press_cancel() -> Action:
 		State.COPY_SELECT_SOURCE:
 			state = State.BAR_SELECTED
 			bar_index = BAR_COPY
-		State.COPY_SELECT_TARGET, State.COPY_CONFIRM:
+		State.COPY_SELECT_TARGET:
 			state = State.COPY_SELECT_SOURCE
+		State.COPY_CONFIRM:
+			state = State.COPY_SELECT_TARGET
 	return Action.NONE
 
 

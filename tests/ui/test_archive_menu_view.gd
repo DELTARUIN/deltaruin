@@ -54,3 +54,12 @@ func test_clear_confirm_shows_question_and_yes_no() -> void:
 	assert_eq(select.get_node(vbox + "/Confirm/ConfirmBack").text, "否")
 	assert_eq(select.get_node(vbox + "/Confirm/SelectStart").z_index, -1, "默认光标在否")
 	assert_eq(select.get_node(vbox + "/Confirm/SelectBack").z_index, 0)
+	assert_false(select.get_node(vbox + "/Control").visible, "是/否确认隐藏姓名/时间行，避免三行溢出槽高")
+
+
+func test_start_confirm_keeps_position_labels_of_other_slots() -> void:
+	state.press_ok()
+	select._apply_focus()
+	assert_false(select.get_node("Archives/Archive/MarginContainer/VBoxContainer/PositionLabel").visible, "光标槽位置文本隐藏")
+	assert_true(select.get_node("Archives/Archive2/MarginContainer/VBoxContainer/PositionLabel").visible, "其他槽位置文本保留")
+	assert_true(select.get_node("Archives/Archive/MarginContainer/VBoxContainer/Control").visible, "开始/返回确认保留姓名行")

@@ -190,6 +190,7 @@ func test_clear_flow() -> void:
 	assert_eq(state.press_ok(), ArchiveSelectState.Action.CLEAR)
 	assert_eq(state.state, ArchiveSelectState.State.BAR_SELECTED)
 	assert_eq(state.bar_index, ArchiveSelectState.BAR_CLEAR, "完成后焦点回消除")
+	assert_eq(state.cursor, 1, "cursor 仍指向被消除的槽（_do_clear 依赖）")
 
 
 func test_clear_empty_slot_noop() -> void:
@@ -225,5 +226,12 @@ func test_cancel_backtracks() -> void:
 	state.state = ArchiveSelectState.State.COPY_SELECT_TARGET
 	state.press_cancel()
 	assert_eq(state.state, ArchiveSelectState.State.COPY_SELECT_SOURCE, "复制目标取消回选源")
+	state.state = ArchiveSelectState.State.COPY_SELECT_SOURCE
+	state.press_cancel()
+	assert_eq(state.state, ArchiveSelectState.State.BAR_SELECTED, "复制选源取消回栏")
+	assert_eq(state.bar_index, ArchiveSelectState.BAR_COPY, "复制取消回栏焦点在复制")
+	state.state = ArchiveSelectState.State.COPY_CONFIRM
+	state.press_cancel()
+	assert_eq(state.state, ArchiveSelectState.State.COPY_SELECT_TARGET, "覆盖确认取消只退一级回选目标")
 
 #endregion

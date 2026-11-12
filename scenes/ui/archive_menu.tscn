@@ -272,9 +272,12 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_nvfcb")
 
 [node name="SourceHighlight" type="Panel" parent="ArchiveSelect/Archives/Archive" unique_id=1745000001]
 visible = false
-layout_mode = 0
-offset_right = 428.0
-offset_bottom = 86.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_source")
 
@@ -389,9 +392,12 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_nvfcb")
 
 [node name="SourceHighlight" type="Panel" parent="ArchiveSelect/Archives/Archive2" unique_id=1745000002]
 visible = false
-layout_mode = 0
-offset_right = 428.0
-offset_bottom = 86.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_source")
 
@@ -507,9 +513,12 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_nvfcb")
 
 [node name="SourceHighlight" type="Panel" parent="ArchiveSelect/Archives/Archive3" unique_id=1745000003]
 visible = false
-layout_mode = 0
-offset_right = 428.0
-offset_bottom = 86.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_source")
 

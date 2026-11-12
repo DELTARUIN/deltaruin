@@ -53,6 +53,7 @@ var _position_label_home: Array[bool] = [] ## 各槽位置文本的场景默认�
 var _position_text: Array[String] = []     ## 各槽位置文本（提问时临时替换，需还原）
 var _name_labels: Array[Label] = []        ## 各槽玩家名文本
 var _time_labels: Array[Label] = []        ## 各槽游玩时间文本
+var _name_rows: Array[Control] = []        ## 各槽姓名/时间行（是/否确认时隐藏，给问句腾行高）
 var _source_highlights: Array[Panel] = []  ## 各槽复制源黄框
 var _bar_hearts: Array[TextureRect] = []   ## 操作栏各项红心
 
@@ -80,6 +81,7 @@ func _ready() -> void:
 		_position_label_home.append(position_label.visible)
 		_name_labels.append(vbox.get_node("Control/NameLabel"))
 		_time_labels.append(vbox.get_node("Control/TimeLabel"))
+		_name_rows.append(vbox.get_node("Control"))
 	for i: int in ArchiveSelectState.BAR_COUNT:
 		_bar_hearts.append(_action_bar.get_node("Item%d/Heart" % i))
 	_refresh_slots()
@@ -199,6 +201,7 @@ func _after_state_change() -> void:
 
 
 ## 焦点签名：状态/光标/栏位/确认项的合成值，用于判断一次移动是否生效
+## 十进制拼装假设 SLOT_COUNT 与 BAR_COUNT 均 < 10（各自占一位，互不进位）
 func _focus_signature() -> int:
 	return state.state * 1000 + state.cursor * 100 + state.bar_index * 10 \
 		+ state.confirm_item + (2 if state.confirm_yes else 0)
@@ -281,7 +284,9 @@ func _apply_focus() -> void:
 
 		var position_label := _position_labels[i] as Label
 		position_label.text = question if question != "" else _position_text[i]
-		position_label.visible = question != "" or (_position_label_home[i] and not confirm_open)
+		position_label.visible = question != "" or (_position_label_home[i] and not in_confirm)
+		# 是/否确认占两行（问句 + 是/否），槽高放不下三行：隐藏姓名/时间行
+		(_name_rows[i] as Control).visible = not (yes_no and state.cursor == i)
 
 		(_confirm_boxes[i] as Control).visible = in_confirm
 		(_confirm_starts[i] as Label).text = "是" if yes_no else "开始"
