@@ -263,18 +263,23 @@ func _apply_focus() -> void:
 	var yes_no := current == ArchiveSelectState.State.CLEAR_CONFIRM \
 		or current == ArchiveSelectState.State.COPY_CONFIRM
 	var in_bar := current == ArchiveSelectState.State.BAR_SELECTED
+	# 子流程（消除/复制）隐藏操作栏、显示「取消」提示；选槽与栏态都展示操作栏
+	var in_flow := current == ArchiveSelectState.State.CLEAR_SELECT \
+		or current == ArchiveSelectState.State.CLEAR_CONFIRM \
+		or current == ArchiveSelectState.State.COPY_SELECT_SOURCE \
+		or current == ArchiveSelectState.State.COPY_SELECT_TARGET \
+		or current == ArchiveSelectState.State.COPY_CONFIRM
 	var slot_cursor := current == ArchiveSelectState.State.SLOT_SELECTED \
 		or current == ArchiveSelectState.State.CLEAR_SELECT \
 		or current == ArchiveSelectState.State.COPY_SELECT_SOURCE \
 		or current == ArchiveSelectState.State.COPY_SELECT_TARGET
 
 	_title_label.text = _title_text()
-	_action_bar.visible = in_bar
-	# 「取消」提示只在子流程（消除/复制）出现，选槽与开始/返回确认不显示
-	_action_cancel.visible = not in_bar and not confirm_open \
-		and current != ArchiveSelectState.State.SLOT_SELECTED
+	_action_bar.visible = not in_flow
+	_action_cancel.visible = in_flow
+	# 栏项常驻布局，焦点用透明度切换（visible 会挤掉红心宽度导致文字跳动）
 	for i: int in ArchiveSelectState.BAR_COUNT:
-		(_bar_hearts[i] as TextureRect).visible = in_bar and state.bar_index == i
+		(_bar_hearts[i] as TextureRect).modulate.a = 1.0 if in_bar and state.bar_index == i else 0.0
 
 	for i: int in ArchiveSelectState.SLOT_COUNT:
 		var in_confirm: bool = (confirm_open or yes_no) and state.cursor == i

@@ -16,20 +16,21 @@ func before_each() -> void:
 	state = select.state
 
 
-func test_initial_view_shows_slots_only() -> void:
-	assert_false(select.get_node("Actions").visible)
+func test_initial_view_shows_slots_and_actions() -> void:
+	assert_true(select.get_node("Actions").visible, "操作栏默认展示")
 	assert_false(select.get_node("ActionCancel").visible)
 	assert_eq(select.get_node("SelectFile").text, "请选择一个存档。")
 
 
-func test_bar_state_shows_actions_with_heart_on_focus() -> void:
+func test_bar_state_fades_heart_on_focus() -> void:
 	state.state = ArchiveSelectState.State.BAR_SELECTED
 	state.bar_index = ArchiveSelectState.BAR_CLEAR
 	select._apply_focus()
 	assert_true(select.get_node("Actions").visible)
 	assert_false(select.get_node("ActionCancel").visible)
-	assert_false(select.get_node("Actions/Item0/Heart").visible, "焦点不在复制")
-	assert_true(select.get_node("Actions/Item1/Heart").visible, "焦点在消除")
+	assert_eq(select.get_node("Actions/Item0/Heart").modulate.a, 0.0, "焦点不在复制：透明但仍占位")
+	assert_eq(select.get_node("Actions/Item1/Heart").modulate.a, 1.0, "焦点在消除")
+	assert_true(select.get_node("Actions/Item1/Heart").visible, "不靠 visible 隐藏，避免容器重排")
 
 
 func test_copy_target_state_highlights_source() -> void:
@@ -40,6 +41,7 @@ func test_copy_target_state_highlights_source() -> void:
 	assert_false(select.get_node("Archives/Archive/SourceHighlight").visible)
 	assert_true(select.get_node("Archives/Archive2/SourceHighlight").visible, "源槽显示黄框")
 	assert_true(select.get_node("ActionCancel").visible, "子流程显示取消提示")
+	assert_false(select.get_node("Actions").visible, "子流程隐藏操作栏")
 
 
 func test_clear_confirm_shows_question_and_yes_no() -> void:

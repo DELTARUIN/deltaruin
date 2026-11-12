@@ -536,16 +536,15 @@ grow_vertical = 2
 texture = SubResource("AtlasTexture_1t8fe")
 
 [node name="Actions" type="GridContainer" parent="ArchiveSelect" unique_id=1745000010]
-visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -300.0
+offset_left = -240.0
 offset_top = -100.0
-offset_right = 300.0
+offset_right = 251.0
 offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -556,9 +555,9 @@ columns = 3
 [node name="Item0" type="HBoxContainer" parent="ArchiveSelect/Actions" unique_id=1745000011]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 11
 
 [node name="Heart" type="TextureRect" parent="ArchiveSelect/Actions/Item0" unique_id=1745000012]
-visible = false
 custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
 size_flags_vertical = 4
@@ -569,14 +568,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
 text = "复制"
-horizontal_alignment = 1
 
 [node name="Item1" type="HBoxContainer" parent="ArchiveSelect/Actions" unique_id=1745000014]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 11
 
 [node name="Heart" type="TextureRect" parent="ArchiveSelect/Actions/Item1" unique_id=1745000015]
-visible = false
 custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
 size_flags_vertical = 4
@@ -587,14 +585,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
 text = "消除"
-horizontal_alignment = 1
 
 [node name="Item2" type="HBoxContainer" parent="ArchiveSelect/Actions" unique_id=1745000017]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 11
 
 [node name="Heart" type="TextureRect" parent="ArchiveSelect/Actions/Item2" unique_id=1745000018]
-visible = false
 custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
 size_flags_vertical = 4
@@ -605,14 +602,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
 text = "选择章节"
-horizontal_alignment = 1
 
 [node name="Item3" type="HBoxContainer" parent="ArchiveSelect/Actions" unique_id=1745000020]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 11
 
 [node name="Heart" type="TextureRect" parent="ArchiveSelect/Actions/Item3" unique_id=1745000021]
-visible = false
 custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
 size_flags_vertical = 4
@@ -622,15 +618,14 @@ texture = SubResource("AtlasTexture_1t8fe")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
-text = "第4章存档"
-horizontal_alignment = 1
+text = "第？章存档"
 
 [node name="Item4" type="HBoxContainer" parent="ArchiveSelect/Actions" unique_id=1745000023]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 11
 
 [node name="Heart" type="TextureRect" parent="ArchiveSelect/Actions/Item4" unique_id=1745000024]
-visible = false
 custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
 size_flags_vertical = 4
@@ -641,14 +636,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
 text = "人名译法"
-horizontal_alignment = 1
 
 [node name="Item5" type="HBoxContainer" parent="ArchiveSelect/Actions" unique_id=1745000026]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 11
 
 [node name="Heart" type="TextureRect" parent="ArchiveSelect/Actions/Item5" unique_id=1745000027]
-visible = false
 custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
 size_flags_vertical = 4
@@ -659,7 +653,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
 text = "退出程序"
-horizontal_alignment = 1
 
 [node name="ActionCancel" type="Label" parent="ArchiveSelect" unique_id=1745000029]
 visible = false
