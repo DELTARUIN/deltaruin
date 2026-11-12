@@ -14,6 +14,10 @@ signal exit_requested           ## 选档界面请求返回
 
 const INPUT_COOLDOWN := 0.15          ## 输入去抖（秒）
 
+const EMPTY_NAME := "[空白]"          ## 空槽玩家名占位（与场景默认文案一致）
+const EMPTY_TIME := "--:--"           ## 空槽游玩时间占位
+const EMPTY_POSITION := "----------"  ## 空槽地图位置占位
+
 #endregion
 
 #region 节点引用（场景节点，@onready 绑定）
@@ -33,6 +37,8 @@ var _select_starts: Array[TextureRect] = [] ## 各槽确认态「开始」红心
 var _select_backs: Array[TextureRect] = []  ## 各槽确认态「返回」红心（z_index 切换）
 var _position_labels: Array[Label] = []    ## 各槽位置文本
 var _position_label_home: Array[bool] = [] ## 各槽位置文本的场景默认显隐（收起确认时还原）
+var _name_labels: Array[Label] = []        ## 各槽玩家名文本
+var _time_labels: Array[Label] = []        ## 各槽游玩时间文本
 
 var _cooldown := 0.0                       ## 输入去抖剩余时间
 
@@ -53,7 +59,10 @@ func _ready() -> void:
 		var position_label: Label = vbox.get_node("PositionLabel")
 		_position_labels.append(position_label)
 		_position_label_home.append(position_label.visible)
+		_name_labels.append(vbox.get_node("Control/NameLabel"))
+		_time_labels.append(vbox.get_node("Control/TimeLabel"))
 	_apply_focus()
+	_refresh_slots()
 
 
 #region 输入
@@ -103,7 +112,10 @@ func _apply_ok() -> void:
 		_after_state_change()
 	if action == ArchiveSelectState.Action.SELECT:
 		_snd_ok.play()
-		GameLogger.debug("file_selected: %d" % state.selected_slot)
+		# 加载入口：空槽/坏档仅告警（load_game 返回 null）；是否继续由 file_selected 监听者自行判断
+		var data := GameManager.load_game(state.selected_slot)
+		if data == null:
+			GameLogger.warn("槽 %d 为空或已损坏，无法加载" % state.selected_slot, "Save")
 		file_selected.emit(state.selected_slot)
 
 
@@ -133,6 +145,27 @@ func _after_state_change() -> void:
 ## 焦点签名：光标槽与确认项的合成值，用于判断一次移动是否生效
 func _focus_signature() -> int:
 	return state.cursor * 4 + state.confirm_item
+
+
+## 用存档数据刷新三槽文本；空槽保留占位文案
+func _refresh_slots() -> void:
+	var slots := GameManager.get_all_slots()
+	for i: int in ArchiveSelectState.SLOT_COUNT:
+		var data: SaveData = slots[i]
+		(_name_labels[i] as Label).text = EMPTY_NAME if data == null else data.player_name
+		(_time_labels[i] as Label).text = EMPTY_TIME if data == null else _format_playtime(data.playtime_sec)
+		if data == null:
+			(_position_labels[i] as Label).text = EMPTY_POSITION
+		else:
+			# 位置优先显示地图名称，未设置时回退地图标识
+			(_position_labels[i] as Label).text = data.map_name if data.map_name != "" else data.map_id
+
+
+## 游玩时间（秒）格式化为 时:分
+func _format_playtime(sec: float) -> String:
+	var hours := floori(sec / 3600.0)
+	var minutes := floori(sec / 60.0) - hours * 60
+	return "%d:%02d" % [hours, minutes]
 
 
 ## 把状态机焦点映射到视图：确认区显隐、变暗层与红心显隐。
