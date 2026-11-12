@@ -228,6 +228,7 @@ vertical_alignment = 2
 layout_mode = 2
 size_flags_vertical = 3
 text = "----------"
+vertical_alignment = 1
 
 [node name="Confirm" type="HBoxContainer" parent="ArchiveSelect/Archives/Archive/MarginContainer/VBoxContainer" unique_id=2094824859]
 visible = false
@@ -349,6 +350,7 @@ vertical_alignment = 2
 layout_mode = 2
 size_flags_vertical = 3
 text = "----------"
+vertical_alignment = 1
 
 [node name="Confirm" type="HBoxContainer" parent="ArchiveSelect/Archives/Archive2/MarginContainer/VBoxContainer" unique_id=392145556]
 visible = false
@@ -470,6 +472,7 @@ vertical_alignment = 2
 layout_mode = 2
 size_flags_vertical = 3
 text = "----------"
+vertical_alignment = 1
 
 [node name="Confirm" type="HBoxContainer" parent="ArchiveSelect/Archives/Archive3/MarginContainer/VBoxContainer" unique_id=1408954997]
 visible = false
@@ -544,7 +547,7 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -240.0
 offset_top = -100.0
-offset_right = 251.0
+offset_right = 234.0
 offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -555,7 +558,7 @@ columns = 3
 [node name="Item0" type="HBoxContainer" parent="ArchiveSelect/Actions" unique_id=1745000011]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 11
+theme_override_constants/separation = 5
 
 [node name="Heart" type="TextureRect" parent="ArchiveSelect/Actions/Item0" unique_id=1745000012]
 custom_minimum_size = Vector2(18, 18)
@@ -572,7 +575,7 @@ text = "复制"
 [node name="Item1" type="HBoxContainer" parent="ArchiveSelect/Actions" unique_id=1745000014]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 11
+theme_override_constants/separation = 5
 
 [node name="Heart" type="TextureRect" parent="ArchiveSelect/Actions/Item1" unique_id=1745000015]
 custom_minimum_size = Vector2(18, 18)
@@ -589,7 +592,7 @@ text = "消除"
 [node name="Item2" type="HBoxContainer" parent="ArchiveSelect/Actions" unique_id=1745000017]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 11
+theme_override_constants/separation = 5
 
 [node name="Heart" type="TextureRect" parent="ArchiveSelect/Actions/Item2" unique_id=1745000018]
 custom_minimum_size = Vector2(18, 18)
@@ -606,7 +609,7 @@ text = "选择章节"
 [node name="Item3" type="HBoxContainer" parent="ArchiveSelect/Actions" unique_id=1745000020]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 11
+theme_override_constants/separation = 5
 
 [node name="Heart" type="TextureRect" parent="ArchiveSelect/Actions/Item3" unique_id=1745000021]
 custom_minimum_size = Vector2(18, 18)
@@ -623,7 +626,7 @@ text = "第？章存档"
 [node name="Item4" type="HBoxContainer" parent="ArchiveSelect/Actions" unique_id=1745000023]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 11
+theme_override_constants/separation = 5
 
 [node name="Heart" type="TextureRect" parent="ArchiveSelect/Actions/Item4" unique_id=1745000024]
 custom_minimum_size = Vector2(18, 18)
@@ -640,7 +643,7 @@ text = "人名译法"
 [node name="Item5" type="HBoxContainer" parent="ArchiveSelect/Actions" unique_id=1745000026]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 11
+theme_override_constants/separation = 5
 
 [node name="Heart" type="TextureRect" parent="ArchiveSelect/Actions/Item5" unique_id=1745000027]
 custom_minimum_size = Vector2(18, 18)
@@ -657,13 +660,16 @@ text = "退出程序"
 [node name="ActionCancel" type="Label" parent="ArchiveSelect" unique_id=1745000029]
 visible = false
 layout_mode = 1
-anchors_preset = 2
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 24.0
-offset_top = -56.0
-offset_right = 140.0
-offset_bottom = -16.0
+offset_left = -215.0
+offset_top = -101.0
+offset_right = -99.0
+offset_bottom = -61.0
+grow_horizontal = 2
 grow_vertical = 0
 text = "取消"
 
