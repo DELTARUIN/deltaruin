@@ -24,9 +24,14 @@ const TITLE_COPY_SOURCE := "选择要复制的存档。"
 const TITLE_COPY_TARGET := "选择粘贴的目标。"
 
 const QUESTION_CLEAR := "消除这份存档吗？"
+const QUESTION_CLEAR_AGAIN := "真的要消除吗？"
 const QUESTION_COPY := "覆盖这份存档吗？"
 const STATUS_CLEAR := "消除成功。"
 const STATUS_COPY := "复制成功。"
+const STATUS_NO_CLEAR := "没有可以消除的对象。"
+const STATUS_NO_COPY := "没有可以复制的对象。"
+
+const COLOR_DANGER := Color(1, 0, 0)  ## 二次确认的红色边框/问句
 
 #endregion
 
@@ -42,6 +47,7 @@ const STATUS_COPY := "复制成功。"
 
 var state := ArchiveSelectState.new()
 var _cursors: Array[TextureRect] = []      ## 各槽红心光标
+var _boxes: Array[TextureRect] = []        ## 各槽边框贴图（二次确认时染红）
 var _dodulates: Array[Panel] = []      ## 各槽变暗层（未选中槽叠加）
 var _confirm_boxes: Array[Control] = []    ## 各槽确认区（Confirm HBox）
 var _confirm_starts: Array[Label] = []     ## 各槽「开始/是」
@@ -68,6 +74,7 @@ func _ready() -> void:
 	_position_text.resize(ArchiveSelectState.SLOT_COUNT)
 	for slot: Node in _slots:
 		_cursors.append(slot.get_node("SelectCursor"))
+		_boxes.append(slot.get_node("Box"))
 		_dodulates.append(slot.get_node("DisableDodulate"))
 		_source_highlights.append(slot.get_node("SourceHighlight"))
 		var vbox: Node = slot.get_node("MarginContainer/VBoxContainer")
@@ -146,6 +153,9 @@ func _apply_ok() -> void:
 			file_selected.emit(state.selected_slot)
 		ArchiveSelectState.Action.CLEAR:
 			_do_clear()
+		ArchiveSelectState.Action.NO_TARGET:
+			_status = STATUS_NO_CLEAR if state.bar_index == ArchiveSelectState.BAR_CLEAR else STATUS_NO_COPY
+			_apply_focus()
 		ArchiveSelectState.Action.COPY:
 			_do_copy()
 		ArchiveSelectState.Action.QUIT:
@@ -235,7 +245,8 @@ func _format_playtime(sec: float) -> String:
 ## 标题文案：成功提示在栏态覆盖标题，其余按状态映射
 func _title_text() -> String:
 	match state.state:
-		ArchiveSelectState.State.CLEAR_SELECT, ArchiveSelectState.State.CLEAR_CONFIRM:
+		ArchiveSelectState.State.CLEAR_SELECT, ArchiveSelectState.State.CLEAR_CONFIRM, \
+			ArchiveSelectState.State.CLEAR_CONFIRM_AGAIN:
 			return TITLE_CLEAR
 		ArchiveSelectState.State.COPY_SELECT_SOURCE:
 			return TITLE_COPY_SOURCE
@@ -261,11 +272,13 @@ func _apply_focus() -> void:
 	var current := state.state
 	var confirm_open := current == ArchiveSelectState.State.CONFIRM_OPEN
 	var yes_no := current == ArchiveSelectState.State.CLEAR_CONFIRM \
+		or current == ArchiveSelectState.State.CLEAR_CONFIRM_AGAIN \
 		or current == ArchiveSelectState.State.COPY_CONFIRM
 	var in_bar := current == ArchiveSelectState.State.BAR_SELECTED
 	# 子流程（消除/复制）隐藏操作栏、显示「取消」提示；选槽与栏态都展示操作栏
 	var in_flow := current == ArchiveSelectState.State.CLEAR_SELECT \
 		or current == ArchiveSelectState.State.CLEAR_CONFIRM \
+		or current == ArchiveSelectState.State.CLEAR_CONFIRM_AGAIN \
 		or current == ArchiveSelectState.State.COPY_SELECT_SOURCE \
 		or current == ArchiveSelectState.State.COPY_SELECT_TARGET \
 		or current == ArchiveSelectState.State.COPY_CONFIRM
@@ -283,19 +296,40 @@ func _apply_focus() -> void:
 
 	for i: int in ArchiveSelectState.SLOT_COUNT:
 		var in_confirm: bool = (confirm_open or yes_no) and state.cursor == i
+		var danger := current == ArchiveSelectState.State.CLEAR_CONFIRM_AGAIN and state.cursor == i
 		var question := ""
 		if yes_no and state.cursor == i:
-			question = QUESTION_CLEAR if current == ArchiveSelectState.State.CLEAR_CONFIRM else QUESTION_COPY
+			match current:
+				ArchiveSelectState.State.CLEAR_CONFIRM:
+					question = QUESTION_CLEAR
+				ArchiveSelectState.State.CLEAR_CONFIRM_AGAIN:
+					question = QUESTION_CLEAR_AGAIN
+				ArchiveSelectState.State.COPY_CONFIRM:
+					question = QUESTION_COPY
 
 		var position_label := _position_labels[i] as Label
 		position_label.text = question if question != "" else _position_text[i]
 		position_label.visible = question != "" or (_position_label_home[i] and not in_confirm)
+		# 二次确认：边框与问句染红，其余状态还原主题色
+		(_boxes[i] as TextureRect).modulate = COLOR_DANGER if danger else Color.WHITE
+		if danger:
+			position_label.add_theme_color_override("font_color", COLOR_DANGER)
+		else:
+			position_label.remove_theme_color_override("font_color")
 		# 是/否确认占两行（问句 + 是/否），槽高放不下三行：隐藏姓名/时间行
 		(_name_rows[i] as Control).visible = not (yes_no and state.cursor == i)
 
 		(_confirm_boxes[i] as Control).visible = in_confirm
-		(_confirm_starts[i] as Label).text = "是" if yes_no else "开始"
-		(_confirm_backs[i] as Label).text = "否" if yes_no else "返回"
+		var first_text := "开始"
+		var second_text := "返回"
+		if danger:
+			first_text = "消除！"
+			second_text = "不要！"
+		elif yes_no:
+			first_text = "是"
+			second_text = "否"
+		(_confirm_starts[i] as Label).text = first_text
+		(_confirm_backs[i] as Label).text = second_text
 		var first_selected: bool = state.confirm_yes if yes_no \
 			else state.confirm_item == ArchiveSelectState.ConfirmItem.START
 		(_select_starts[i] as TextureRect).z_index = 0 if first_selected else -1

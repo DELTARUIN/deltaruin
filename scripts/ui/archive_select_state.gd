@@ -9,6 +9,7 @@ enum State {
 	BAR_SELECTED,        ## 底部操作栏：2×3 网格
 	CLEAR_SELECT,        ## 消除：选择要消除的槽
 	CLEAR_CONFIRM,       ## 消除：槽内确认「是/否」
+	CLEAR_CONFIRM_AGAIN, ## 消除：第二问「真的要消除吗？」
 	COPY_SELECT_SOURCE,  ## 复制：选择源槽
 	COPY_SELECT_TARGET,  ## 复制：选择粘贴目标
 	COPY_CONFIRM,        ## 复制：覆盖占用目标前确认「是/否」
@@ -27,6 +28,7 @@ enum Action {
 	CLEAR,  ## 确认消除（对象为 cursor 槽）
 	COPY,   ## 确认复制（copy_source → copy_target）
 	QUIT,   ## 退出程序
+	NO_TARGET, ## 消除/复制入口拦截：三槽全空
 }
 
 #region 常量
@@ -69,7 +71,7 @@ func debug_text() -> String:
 			sub = " item=%s" % ConfirmItem.keys()[confirm_item]
 		State.BAR_SELECTED:
 			sub = " bar=%d" % bar_index
-		State.CLEAR_CONFIRM, State.COPY_CONFIRM:
+		State.CLEAR_CONFIRM, State.CLEAR_CONFIRM_AGAIN, State.COPY_CONFIRM:
 			sub = " yes=%s" % confirm_yes
 	return "state=%s cursor=%d%s" % [State.keys()[state], cursor, sub]
 
@@ -117,10 +119,17 @@ func press_ok() -> Action:
 				confirm_yes = false
 		State.CLEAR_CONFIRM:
 			if confirm_yes:
+				state = State.CLEAR_CONFIRM_AGAIN
+				confirm_yes = false
+			else:
+				state = State.CLEAR_SELECT
+		State.CLEAR_CONFIRM_AGAIN:
+			if confirm_yes:
 				state = State.BAR_SELECTED
 				bar_index = BAR_CLEAR
 				return Action.CLEAR
-			state = State.CLEAR_SELECT
+			state = State.CLEAR_CONFIRM
+			confirm_yes = false
 		State.COPY_SELECT_SOURCE:
 			if occupied[cursor]:
 				copy_source = cursor
@@ -150,6 +159,9 @@ func press_cancel() -> Action:
 			bar_index = BAR_CLEAR
 		State.CLEAR_CONFIRM:
 			state = State.CLEAR_SELECT
+		State.CLEAR_CONFIRM_AGAIN:
+			state = State.CLEAR_CONFIRM
+			confirm_yes = false
 		State.COPY_SELECT_SOURCE:
 			state = State.BAR_SELECTED
 			bar_index = BAR_COPY
@@ -160,14 +172,18 @@ func press_cancel() -> Action:
 	return Action.NONE
 
 
-## 操作栏确认：复制/消除进子流程、退出程序产生 QUIT，占位项无动作
+## 操作栏确认：复制/消除进子流程（全空时拦截）、退出程序产生 QUIT，占位项无动作
 func _press_ok_on_bar() -> Action:
 	match bar_index:
 		BAR_COPY:
+			if not occupied.has(true):
+				return Action.NO_TARGET
 			copy_source = -1
 			copy_target = -1
 			state = State.COPY_SELECT_SOURCE
 		BAR_CLEAR:
+			if not occupied.has(true):
+				return Action.NO_TARGET
 			state = State.CLEAR_SELECT
 		BAR_QUIT:
 			return Action.QUIT
@@ -212,7 +228,7 @@ func _move_vertical(dir: int) -> void:
 				state = State.SLOT_SELECTED
 		State.CLEAR_SELECT, State.COPY_SELECT_SOURCE, State.COPY_SELECT_TARGET:
 			cursor = posmod(cursor + dir, SLOT_COUNT)
-		State.CLEAR_CONFIRM, State.COPY_CONFIRM:
+		State.CLEAR_CONFIRM, State.CLEAR_CONFIRM_AGAIN, State.COPY_CONFIRM:
 			confirm_yes = not confirm_yes
 
 
@@ -224,7 +240,7 @@ func _move_horizontal(dir: int) -> void:
 		State.BAR_SELECTED:
 			var col := bar_index % BAR_COLS
 			bar_index = bar_index - col + posmod(col + dir, BAR_COLS)
-		State.CLEAR_CONFIRM, State.COPY_CONFIRM:
+		State.CLEAR_CONFIRM, State.CLEAR_CONFIRM_AGAIN, State.COPY_CONFIRM:
 			confirm_yes = not confirm_yes
 
 

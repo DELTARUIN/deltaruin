@@ -59,6 +59,30 @@ func test_clear_confirm_shows_question_and_yes_no() -> void:
 	assert_false(select.get_node(vbox + "/Control").visible, "是/否确认隐藏姓名/时间行，避免三行溢出槽高")
 
 
+func test_clear_second_confirm_turns_red_and_renames_choices() -> void:
+	var vbox := "Archives/Archive/MarginContainer/VBoxContainer"
+	state.state = ArchiveSelectState.State.CLEAR_CONFIRM_AGAIN
+	state.cursor = 0
+	select._apply_focus()
+	assert_eq(select.get_node("SelectFile").text, "选择要消除的对象。")
+	assert_eq(select.get_node(vbox + "/PositionLabel").text, "真的要消除吗？")
+	assert_eq(select.get_node(vbox + "/PositionLabel").get_theme_color("font_color"), Color(1, 0, 0), "问句染红")
+	assert_eq(select.get_node("Archives/Archive/Box").modulate, Color(1, 0, 0), "边框染红")
+	assert_eq(select.get_node("Archives/Archive2/Box").modulate, Color.WHITE, "其他槽边框不变")
+	assert_eq(select.get_node(vbox + "/Confirm/ConfirmStart").text, "消除！")
+	assert_eq(select.get_node(vbox + "/Confirm/ConfirmBack").text, "不要！")
+	assert_false(select.get_node(vbox + "/Control").visible, "隐藏姓名/时间行")
+
+
+func test_clear_with_no_saves_shows_no_target_message() -> void:
+	state.occupied = [false, false, false]
+	state.state = ArchiveSelectState.State.BAR_SELECTED
+	state.bar_index = ArchiveSelectState.BAR_CLEAR
+	select._apply_ok()
+	assert_eq(state.state, ArchiveSelectState.State.BAR_SELECTED, "全空不进选槽")
+	assert_eq(select.get_node("SelectFile").text, "没有可以消除的对象。")
+
+
 func test_start_confirm_keeps_position_labels_of_other_slots() -> void:
 	state.press_ok()
 	select._apply_focus()

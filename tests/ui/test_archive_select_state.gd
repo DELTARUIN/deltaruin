@@ -116,6 +116,7 @@ func test_bar_navigation() -> void:
 
 
 func test_bar_ok_copy_enters_source_select() -> void:
+	state.occupied = [true, false, false]
 	state.state = ArchiveSelectState.State.BAR_SELECTED
 	state.bar_index = ArchiveSelectState.BAR_COPY
 	assert_eq(state.press_ok(), ArchiveSelectState.Action.NONE)
@@ -187,10 +188,48 @@ func test_clear_flow() -> void:
 	state.press_ok()
 	state.move_right()
 	assert_true(state.confirm_yes)
-	assert_eq(state.press_ok(), ArchiveSelectState.Action.CLEAR)
+	assert_eq(state.press_ok(), ArchiveSelectState.Action.NONE, "第一问选是进入二次确认")
+	assert_eq(state.state, ArchiveSelectState.State.CLEAR_CONFIRM_AGAIN)
+	assert_false(state.confirm_yes, "二次确认默认光标在否")
+	state.move_right()
+	assert_eq(state.press_ok(), ArchiveSelectState.Action.CLEAR, "二次确认选是才消除")
 	assert_eq(state.state, ArchiveSelectState.State.BAR_SELECTED)
 	assert_eq(state.bar_index, ArchiveSelectState.BAR_CLEAR, "完成后焦点回消除")
 	assert_eq(state.cursor, 1, "cursor 仍指向被消除的槽（_do_clear 依赖）")
+
+
+func test_clear_second_confirm_no_returns_to_first() -> void:
+	state.occupied = [true, false, false]
+	state.state = ArchiveSelectState.State.CLEAR_CONFIRM
+	state.confirm_yes = true
+	assert_eq(state.press_ok(), ArchiveSelectState.Action.NONE)
+	assert_eq(state.state, ArchiveSelectState.State.CLEAR_CONFIRM_AGAIN)
+	assert_eq(state.press_ok(), ArchiveSelectState.Action.NONE, "第二问否不消除")
+	assert_eq(state.state, ArchiveSelectState.State.CLEAR_CONFIRM, "退回第一问")
+	assert_false(state.confirm_yes, "光标重置到否")
+
+
+func test_cancel_second_confirm_returns_to_first() -> void:
+	state.state = ArchiveSelectState.State.CLEAR_CONFIRM_AGAIN
+	state.press_cancel()
+	assert_eq(state.state, ArchiveSelectState.State.CLEAR_CONFIRM)
+	assert_false(state.confirm_yes)
+
+
+func test_clear_with_no_saves_returns_no_target() -> void:
+	state.occupied = [false, false, false]
+	state.state = ArchiveSelectState.State.BAR_SELECTED
+	state.bar_index = ArchiveSelectState.BAR_CLEAR
+	assert_eq(state.press_ok(), ArchiveSelectState.Action.NO_TARGET)
+	assert_eq(state.state, ArchiveSelectState.State.BAR_SELECTED, "全空不进选槽")
+
+
+func test_copy_with_no_saves_returns_no_target() -> void:
+	state.occupied = [false, false, false]
+	state.state = ArchiveSelectState.State.BAR_SELECTED
+	state.bar_index = ArchiveSelectState.BAR_COPY
+	assert_eq(state.press_ok(), ArchiveSelectState.Action.NO_TARGET)
+	assert_eq(state.state, ArchiveSelectState.State.BAR_SELECTED, "全空不进选源")
 
 
 func test_clear_empty_slot_noop() -> void:
