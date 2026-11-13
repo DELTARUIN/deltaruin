@@ -359,6 +359,7 @@ offset_bottom = 133.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 24
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Grid" type="VBoxContainer" parent="ArchiveSelect/NameInput" unique_id=1882600868]
 layout_mode = 1
@@ -376,14 +377,33 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 4
 
-[node name="ConfirmName" type="Label" parent="ArchiveSelect/NameInput" unique_id=1351192252]
-layout_mode = 0
-offset_left = 100.0
-offset_top = 164.0
-offset_right = 540.0
-offset_bottom = 220.0
-theme_override_font_sizes/font_size = 48
+[node name="ConfirmBox" type="Control" parent="ArchiveSelect/NameInput" unique_id=2135510416]
+custom_minimum_size = Vector2(400, 32)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 200.0
+offset_right = 200.0
+offset_bottom = 232.0
+grow_horizontal = 2
+rotation = -0.10471976
+scale = Vector2(1.7, 1.7)
+pivot_offset = Vector2(200, 15)
+
+[node name="ConfirmName" type="Label" parent="ArchiveSelect/NameInput/ConfirmBox" unique_id=1351192252]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_right = 200.0
+offset_bottom = 32.0
+grow_horizontal = 2
+pivot_offset = Vector2(200, 0)
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ConfirmNo" type="Label" parent="ArchiveSelect/NameInput" unique_id=1856349208]
 layout_mode = 0

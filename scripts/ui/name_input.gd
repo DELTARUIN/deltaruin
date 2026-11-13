@@ -38,10 +38,16 @@ const HEART_GAP := 16.0
 @onready var _title: Label = $Title
 @onready var _entered_name: Label = $EnteredName
 @onready var _grid: VBoxContainer = $Grid
-@onready var _confirm_name: Label = $ConfirmName
+@onready var _confirm_box: Control = $ConfirmBox
+@onready var _confirm_name: Label = $ConfirmBox/ConfirmName
 @onready var _confirm_no: Label = $ConfirmNo
 @onready var _confirm_yes: Label = $ConfirmYes
 @onready var _heart: TextureRect = $Heart
+@onready var _confirm_tween: Tween
+
+@onready var _confirm_box_position = _confirm_box.position
+@onready var _confirm_box_rotation = _confirm_box.rotation
+@onready var _confirm_box_scale = _confirm_box.scale
 
 @export var snd_move: AudioStreamPlayer
 @export var snd_ok: AudioStreamPlayer
@@ -55,11 +61,11 @@ var _cells: Array = []       ## 每行一个数组：_cells[r][c] → 格子 Lab
 var _slot := 0                ## 当前建档槽
 var _cooldown := 0.0          ## 输入去抖剩余时间
 
-
 func _ready() -> void:
 	_build_grid()
 	_refresh()
-
+	var tween:= get_tree().create_tween().bind_node(self).set_loops()
+	tween.tween_property(_confirm_name, "rotation_degrees", -1, 0.1).from(1)
 
 func _process(delta: float) -> void:
 	_cooldown = maxf(0.0, _cooldown - delta)
@@ -182,6 +188,9 @@ func _refresh() -> void:
 		COLOR_SELECTED if state.name.length() >= NameInputState.MAX_NAME else COLOR_NORMAL)
 
 	if entry:
+		if _confirm_tween:
+			_confirm_tween.stop();
+			_confirm_tween = null
 		for row: Array in _cells:
 			for cell: Label in row:
 				cell.add_theme_color_override("font_color", COLOR_NORMAL)
@@ -197,6 +206,13 @@ func _refresh() -> void:
 		COLOR_SELECTED if state.confirm_yes else COLOR_NORMAL)
 	_confirm_no.add_theme_color_override("font_color",
 		COLOR_NORMAL if state.confirm_yes else COLOR_SELECTED)
+
+	if not _confirm_tween:
+		_confirm_tween = get_tree().create_tween().bind_node(self).set_parallel()
+		_confirm_tween.tween_property(_confirm_box, "position", _confirm_box_position, 3).from(_entered_name.position)
+		_confirm_tween.tween_property(_confirm_box, "rotation", _confirm_box_rotation, 3).from(_entered_name.rotation)
+		_confirm_tween.tween_property(_confirm_box, "scale", _confirm_box_scale, 3).from(_entered_name.scale)
+		
 	var target: Label = _confirm_yes if state.confirm_yes else _confirm_no
 	_heart.position = target.position \
 		+ Vector2((target.size.x - HEART_SIZE.x) / 2, (target.size.y - HEART_SIZE.y) / 2.0)
