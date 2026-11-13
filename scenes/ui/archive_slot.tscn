@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene format=3 uid="uid://q4huav4cbriv"]
 
-[ext_resource type="Script" path="res://scripts/ui/archive_slot.gd" id="4_script"]
 [ext_resource type="Texture2D" uid="uid://sxfh504cklr2" path="res://assets/graphics/ui/files_column.png" id="1_box"]
 [ext_resource type="FontVariation" uid="uid://r6hjkjf084la" path="res://resources/ui/archive_font_variation_2.tres" id="2_font"]
 [ext_resource type="Texture2D" uid="uid://drtkdkhtqsk5t" path="res://assets/graphics/characters/soul/the_soul.png" id="3_soul"]
+[ext_resource type="Script" uid="uid://cwxy0n3ups7hk" path="res://scripts/ui/archive_slot.gd" id="4_script"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_heart"]
 atlas = ExtResource("3_soul")
@@ -24,9 +24,9 @@ border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
-border_color = Color(1, 0.9254902, 0.15686275, 1)
+border_color = Color(1, 1, 0.5019608, 1)
 
-[node name="ArchiveSlot" type="Control"]
+[node name="ArchiveSlot" type="Control" unique_id=533961169]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,13 +35,13 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_script")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1466576910]
 layout_mode = 0
 offset_right = 428.0
 offset_bottom = 86.0
 color = Color(0, 0, 0, 0.5019608)
 
-[node name="Box" type="TextureRect" parent="."]
+[node name="Box" type="TextureRect" parent="." unique_id=653607501]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,7 +50,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_box")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=950134484]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -60,41 +60,42 @@ grow_vertical = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_right = 50
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1353668217]
 layout_mode = 2
 
-[node name="Control" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Control" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=957813160]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer/Control"]
+[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer/Control" unique_id=1356022450]
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 5
 text = "[空白]"
 vertical_alignment = 2
 
-[node name="TimeLabel" type="Label" parent="MarginContainer/VBoxContainer/Control"]
+[node name="TimeLabel" type="Label" parent="MarginContainer/VBoxContainer/Control" unique_id=1301820734]
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 5
+theme_override_constants/line_spacing = 3
 theme_override_fonts/font = ExtResource("2_font")
 text = "--:--"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="PositionLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="PositionLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1948964214]
 layout_mode = 2
 size_flags_vertical = 3
 text = "----------"
 vertical_alignment = 1
 
-[node name="Confirm" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Confirm" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=868530730]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="SelectStart" type="TextureRect" parent="MarginContainer/VBoxContainer/Confirm"]
+[node name="SelectStart" type="TextureRect" parent="MarginContainer/VBoxContainer/Confirm" unique_id=321577261]
 modulate = Color(1, 1, 1, 0.9764706)
 custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
@@ -102,35 +103,35 @@ size_flags_horizontal = 2
 size_flags_vertical = 4
 texture = SubResource("AtlasTexture_heart")
 
-[node name="ConfirmStart" type="Label" parent="MarginContainer/VBoxContainer/Confirm"]
+[node name="ConfirmStart" type="Label" parent="MarginContainer/VBoxContainer/Confirm" unique_id=187815048]
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 5
 size_flags_stretch_ratio = 4.0
 text = "开始"
 
-[node name="SelectBack" type="TextureRect" parent="MarginContainer/VBoxContainer/Confirm"]
+[node name="SelectBack" type="TextureRect" parent="MarginContainer/VBoxContainer/Confirm" unique_id=534394820]
 custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 4
 texture = SubResource("AtlasTexture_heart")
 
-[node name="ConfirmBack" type="Label" parent="MarginContainer/VBoxContainer/Confirm"]
+[node name="ConfirmBack" type="Label" parent="MarginContainer/VBoxContainer/Confirm" unique_id=1195940923]
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 5
 size_flags_stretch_ratio = 4.0
 text = "返回"
 
-[node name="DisableDodulate" type="Panel" parent="."]
+[node name="DisableDodulate" type="Panel" parent="." unique_id=229564036]
 visible = false
 layout_mode = 0
 offset_right = 428.0
 offset_bottom = 86.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_dim")
 
-[node name="SourceHighlight" type="Panel" parent="."]
+[node name="SourceHighlight" type="Panel" parent="." unique_id=959642047]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -141,7 +142,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_source")
 
-[node name="SelectCursor" type="TextureRect" parent="."]
+[node name="SelectCursor" type="TextureRect" parent="." unique_id=262512677]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5

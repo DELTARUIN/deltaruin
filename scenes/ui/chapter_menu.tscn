@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dyyroll14jssr"]
 
 [ext_resource type="Script" uid="uid://cw1hsbpa8ntj6" path="res://scripts/ui/chapter_select.gd" id="1_script"]
-[ext_resource type="PackedScene" path="res://scenes/ui/chapter_row.tscn" id="12_row"]
 [ext_resource type="Theme" uid="uid://hsp738u2o52k" path="res://resources/ui/chapter_select_theme.tres" id="2_theme"]
 [ext_resource type="Texture2D" uid="uid://kfv66t7owls7" path="res://assets/graphics/ui/menu_bg.png" id="3_bg"]
 [ext_resource type="Texture2D" uid="uid://by01uoiqcmk4k" path="res://assets/graphics/ui/chapter.png" id="4_sheet"]
@@ -12,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://cyb6kl8342ys5" path="res://assets/audio/effects/common/snd_swing.wav" id="9_bbscx"]
 [ext_resource type="AudioStream" uid="uid://pexdydjfqe8x" path="res://assets/audio/effects/ruin/snd_title.ogg" id="10_pgiqg"]
 [ext_resource type="AudioStream" uid="uid://p810xgvr7guu" path="res://assets/audio/effects/common/AUDIO_DRONE.wav" id="11_kjnqs"]
+[ext_resource type="PackedScene" uid="uid://c64tfm65qpe85" path="res://scenes/ui/chapter_row.tscn" id="12_row"]
 
 [sub_resource type="FontVariation" id="FontVariation_bbscx"]
 base_font = ExtResource("5_bbscx")
@@ -63,20 +63,28 @@ offset_bottom = 422.0
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="Row1" parent="ChapterSelect/Rows" instance=ExtResource("12_row")]
+[node name="Row1" parent="ChapterSelect/Rows" unique_id=725079228 instance=ExtResource("12_row")]
 custom_minimum_size = Vector2(0, 62)
+layout_mode = 2
 
-[node name="Row2" parent="ChapterSelect/Rows" instance=ExtResource("12_row")]
+[node name="Row2" parent="ChapterSelect/Rows" unique_id=1851339379 instance=ExtResource("12_row")]
+layout_mode = 2
 
-[node name="Row3" parent="ChapterSelect/Rows" instance=ExtResource("12_row")]
+[node name="Row3" parent="ChapterSelect/Rows" unique_id=1813366241 instance=ExtResource("12_row")]
+layout_mode = 2
 
-[node name="Row4" parent="ChapterSelect/Rows" instance=ExtResource("12_row")]
+[node name="Row4" parent="ChapterSelect/Rows" unique_id=1836565591 instance=ExtResource("12_row")]
+layout_mode = 2
 
-[node name="Row5" parent="ChapterSelect/Rows" instance=ExtResource("12_row")]
+[node name="Row5" parent="ChapterSelect/Rows" unique_id=211149765 instance=ExtResource("12_row")]
+layout_mode = 2
 
-[node name="Row6" parent="ChapterSelect/Rows" instance=ExtResource("12_row")]
+[node name="Row6" parent="ChapterSelect/Rows" unique_id=501064501 instance=ExtResource("12_row")]
+layout_mode = 2
 
-[node name="Row7" parent="ChapterSelect/Rows" instance=ExtResource("12_row")]
+[node name="Row7" parent="ChapterSelect/Rows" unique_id=983341308 instance=ExtResource("12_row")]
+layout_mode = 2
+
 [node name="CopyrightLabel" type="Label" parent="ChapterSelect" unique_id=1082124430]
 layout_mode = 0
 offset_left = 16.0

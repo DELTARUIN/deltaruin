@@ -6,9 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://brcd1dm1bgucf" path="res://assets/graphics/ui/menu_heros.png" id="3_433ub"]
 [ext_resource type="Texture2D" uid="uid://drtkdkhtqsk5t" path="res://assets/graphics/characters/soul/the_soul.png" id="5_nvhsi"]
 [ext_resource type="AudioStream" uid="uid://dmm0fswoftc5t" path="res://assets/audio/effects/common/snd_menumove.wav" id="6_tid2w"]
+[ext_resource type="FontFile" uid="uid://y5f35muubhh4" path="res://assets/fonts/normal.ttf" id="7_ru1li"]
 [ext_resource type="AudioStream" uid="uid://xpo0gxfoum1p" path="res://assets/audio/effects/common/snd_select.wav" id="7_vggj4"]
 [ext_resource type="AudioStream" uid="uid://cyb6kl8342ys5" path="res://assets/audio/effects/common/snd_swing.wav" id="8_3uqf2"]
-[ext_resource type="PackedScene" path="res://scenes/ui/archive_slot.tscn" id="10_slot"]
+[ext_resource type="AudioStream" uid="uid://bn5w06alfpbxy" path="res://assets/audio/music/with_hope_crossed_on_our_hearts.mp3" id="9_433ub"]
+[ext_resource type="PackedScene" uid="uid://q4huav4cbriv" path="res://scenes/ui/archive_slot.tscn" id="10_slot"]
 
 [sub_resource type="Theme" id="Theme_yjyqx"]
 default_font = ExtResource("1_nvfcb")
@@ -67,6 +69,10 @@ region = Rect2(0, 193, 324, 75)
 [sub_resource type="AtlasTexture" id="AtlasTexture_1t8fe"]
 atlas = ExtResource("5_nvhsi")
 region = Rect2(1, 36, 9, 9)
+
+[sub_resource type="FontVariation" id="FontVariation_nvhsi"]
+base_font = ExtResource("7_ru1li")
+spacing_glyph = 8
 
 [node name="ArchiveMenu" type="CanvasLayer" unique_id=1018443976]
 
@@ -186,10 +192,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -240.0
+offset_left = -233.0
 offset_top = -100.0
-offset_right = 234.0
-offset_bottom = -20.0
+offset_right = 193.0
+offset_bottom = -22.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/h_separation = 8
@@ -262,7 +268,7 @@ texture = SubResource("AtlasTexture_1t8fe")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
-text = "第？章存档"
+text = "第4章存档"
 
 [node name="Item4" type="HBoxContainer" parent="ArchiveSelect/Actions" unique_id=1745000023]
 layout_mode = 2
@@ -279,7 +285,7 @@ texture = SubResource("AtlasTexture_1t8fe")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
-text = "人名译法"
+text = "职员表"
 
 [node name="Item5" type="HBoxContainer" parent="ArchiveSelect/Actions" unique_id=1745000026]
 layout_mode = 2
@@ -306,10 +312,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -215.0
-offset_top = -101.0
-offset_right = -99.0
-offset_bottom = -61.0
+offset_left = -210.0
+offset_top = -100.0
+offset_right = -94.0
+offset_bottom = -60.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "取消"
@@ -336,15 +342,19 @@ offset_bottom = 18.0
 texture = SubResource("AtlasTexture_1t8fe")
 
 [node name="Title" type="Label" parent="ArchiveSelect/NameInput" unique_id=675070377]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -205.0
-offset_top = 61.0
-offset_right = 211.0
-offset_bottom = 117.0
+offset_left = -182.0
+offset_top = 40.0
+offset_right = 98.0
+offset_bottom = 72.0
 grow_horizontal = 2
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = SubResource("FontVariation_nvhsi")
 text = "输入你自己的名字。"
 
 [node name="EnteredName" type="Label" parent="ArchiveSelect/NameInput" unique_id=1149797105]
@@ -353,11 +363,13 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -200.0
-offset_top = 103.0
+offset_top = 80.0
 offset_right = 200.0
-offset_bottom = 133.0
+offset_bottom = 112.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 24
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -368,10 +380,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -216.0
-offset_top = -64.0
-offset_right = 216.0
-offset_bottom = 64.0
+offset_left = -196.0
+offset_top = -100.0
+offset_right = 236.0
+offset_bottom = 39.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -397,9 +409,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -200.0
-offset_right = 200.0
-offset_bottom = 32.0
+offset_left = -224.01099
+offset_top = -11.79007
+offset_right = 224.01099
+offset_bottom = 43.79007
 grow_horizontal = 2
 pivot_offset = Vector2(200, 0)
 horizontal_alignment = 1
@@ -407,19 +420,23 @@ vertical_alignment = 1
 
 [node name="ConfirmNo" type="Label" parent="ArchiveSelect/NameInput" unique_id=1856349208]
 layout_mode = 0
-offset_left = 222.0
-offset_top = 358.0
-offset_right = 282.0
-offset_bottom = 398.0
+offset_left = 204.0
+offset_top = 360.0
+offset_right = 264.0
+offset_bottom = 400.0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
 text = "否"
 horizontal_alignment = 1
 
 [node name="ConfirmYes" type="Label" parent="ArchiveSelect/NameInput" unique_id=905956907]
 layout_mode = 0
-offset_left = 382.0
-offset_top = 358.0
-offset_right = 442.0
-offset_bottom = 398.0
+offset_left = 364.0
+offset_top = 360.0
+offset_right = 424.0
+offset_bottom = 400.0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
 text = "是"
 horizontal_alignment = 1
 
@@ -428,6 +445,10 @@ stream = ExtResource("6_tid2w")
 
 [node name="SndOk" type="AudioStreamPlayer" parent="ArchiveSelect" unique_id=1197983620]
 stream = ExtResource("7_vggj4")
+
+[node name="SndBg" type="AudioStreamPlayer" parent="ArchiveSelect" unique_id=1198693161]
+stream = ExtResource("9_433ub")
+autoplay = true
 
 [node name="SndCancel" type="AudioStreamPlayer" parent="ArchiveSelect" unique_id=292983407]
 stream = ExtResource("8_3uqf2")
