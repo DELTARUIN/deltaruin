@@ -109,18 +109,25 @@ func test_clear_with_no_saves_shows_no_target_message() -> void:
 	assert_eq(select.get_node("SelectFile").text, "没有可以消除的对象。")
 
 
-func test_name_input_grid_has_28_cells_and_heart_follows_selection() -> void:
+func test_name_input_grid_uses_container_layout() -> void:
 	var input: NameInputView = select.get_node("NameInput")
 	input.open(0)
+	await wait_frames(2) # 容器可见后下一帧才完成排序
 	input.state.row = 2
 	input.state.col = 6
 	input._refresh()
-	var grid := input.get_node("Grid")
-	assert_eq(grid.get_child_count(), 28, "10 + 10 + 8")
-	assert_eq((grid.get_child(26) as Label).text, "退格")
-	assert_eq((grid.get_child(27) as Label).text, "决定")
-	assert_eq((grid.get_child(26) as Label).get_theme_color("font_color"), Color("ffff00"), "选中黄字")
-	assert_eq(input.get_node("Heart").position.x, (grid.get_child(26) as Label).position.x - 16.0)
+	var grid: VBoxContainer = input.get_node("Grid")
+	assert_eq(grid.get_child_count(), 3, "三行 HBox")
+	var row3: HBoxContainer = grid.get_child(2)
+	assert_eq(row3.get_child_count(), 8, "6 字母 + 退格 + 决定")
+	assert_eq((row3.get_child(6) as Label).text, "退格")
+	assert_eq((row3.get_child(7) as Label).text, "决定")
+	assert_eq((row3.get_child(6) as Label).get_theme_color("font_color"), Color("ffff00"), "选中黄字")
+	# 布局钉死录屏换算值：格 36×32、sep 4（列距 40 / 行距 36）、宽格 76
+	assert_eq((row3.get_child(6) as Control).position.x, 240.0, "退格 x（行内坐标）")
+	assert_eq((row3.get_child(7) as Control).position.x, 320.0, "决定 x（行内坐标）")
+	assert_eq(row3.position.y, 72.0, "行距 36 × 2")
+	assert_eq(input.get_node("Heart").position, Vector2(405, 227), "红心居中退格（屏坐标）")
 
 
 func test_name_input_full_name_turns_yellow() -> void:

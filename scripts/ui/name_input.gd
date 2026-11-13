@@ -23,10 +23,10 @@ const COLOR_NORMAL := Color.WHITE
 const FONT_NAME := 24
 
 ## 网格布局（640×480 逻辑坐标，由录屏换算）
-const GRID_ORIGIN := Vector2(136, 148)
-const CELL_STEP := Vector2(40, 36)
-const CELL_SIZE := Vector2(36, 32)
-const ROW3_OFFSETS: Array[float] = [0.0, 40.0, 80.0, 120.0, 160.0, 200.0, 250.0, 330.0]
+## 场景 Grid 是 VBoxContainer（行距 36 = 格 32 + sep 4），行内 HBox 由脚本按 GRID 生成
+const CELL_SIZE := Vector2(36, 32)  ## 普通字母格
+const CELL_WIDE := Vector2(76, 32)  ## 退格 / 决定（更宽）
+const CELL_SEPARATION := 4          ## 行内格间距（列距 40 = 36 + 4）
 const HEART_SIZE := Vector2(18, 18)
 const HEART_GAP := 16.0
 #const CONFIRM_HEART_GAP := 22.0
@@ -37,7 +37,7 @@ const HEART_GAP := 16.0
 
 @onready var _title: Label = $Title
 @onready var _entered_name: Label = $EnteredName
-@onready var _grid: Control = $Grid
+@onready var _grid: VBoxContainer = $Grid
 @onready var _confirm_name: Label = $ConfirmName
 @onready var _confirm_no: Label = $ConfirmNo
 @onready var _confirm_yes: Label = $ConfirmYes
@@ -51,7 +51,7 @@ const HEART_GAP := 16.0
 
 var state := NameInputState.new()
 
-var _cells: Array[Label] = [] ## 网格格子（行优先展开）
+var _cells: Array = []       ## 每行一个数组：_cells[r][c] → 格子 Label（与 GRID 同形）
 var _slot := 0                ## 当前建档槽
 var _cooldown := 0.0          ## 输入去抖剩余时间
 
@@ -73,6 +73,9 @@ func open(slot: int) -> void:
 	state.reset()
 	visible = true
 	_cooldown = INPUT_COOLDOWN
+	_refresh()
+	# GridContainer 可见后下一帧才完成排序，再刷一次让红心贴准格子
+	await get_tree().process_frame
 	_refresh()
 
 #endregion
@@ -142,17 +145,27 @@ func _signature() -> String:
 #region 状态到视图
 
 func _build_grid() -> void:
+	var last_row := NameInputState.GRID.size() - 1
 	for r: int in NameInputState.GRID.size():
+		var row := HBoxContainer.new()
+		row.name = "Row%d" % (r + 1)
+		row.add_theme_constant_override("separation", CELL_SEPARATION)
+		row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_grid.add_child(row)
 		var row_cells: Array = NameInputState.GRID[r]
+		var row_labels: Array = []
 		for c: int in row_cells.size():
 			var cell := Label.new()
 			cell.name = "Label_" + row_cells[c]
 			cell.text = row_cells[c]
 			cell.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-			cell.position = _cell_position(r, c)
-			cell.size = CELL_SIZE
-			_grid.add_child(cell)
-			_cells.append(cell)
+			# 末行末两格（退格 / 决定）更宽，其余 36×32
+			cell.custom_minimum_size = CELL_WIDE if c >= row_cells.size() - 2 and r == last_row \
+				else CELL_SIZE
+			cell.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			row.add_child(cell)
+			row_labels.append(cell)
+		_cells.append(row_labels)
 
 
 func _refresh() -> void:
@@ -169,11 +182,13 @@ func _refresh() -> void:
 		COLOR_SELECTED if state.name.length() >= NameInputState.MAX_NAME else COLOR_NORMAL)
 
 	if entry:
-		for cell: Label in _cells:
-			cell.add_theme_color_override("font_color", COLOR_NORMAL)
-		var selected := _cells[_cell_index(state.row, state.col)] as Label
+		for row: Array in _cells:
+			for cell: Label in row:
+				cell.add_theme_color_override("font_color", COLOR_NORMAL)
+		var selected := _cells[state.row][state.col] as Label
+		var row: Control = selected.get_parent()
 		selected.add_theme_color_override("font_color", COLOR_SELECTED)
-		_heart.position = selected.position \
+		_heart.position = _grid.position + row.position + selected.position \
 			+ Vector2((selected.size.x - HEART_SIZE.x) / 2, (selected.size.y - HEART_SIZE.y) / 2.0)
 		return
 
@@ -185,20 +200,5 @@ func _refresh() -> void:
 	var target: Label = _confirm_yes if state.confirm_yes else _confirm_no
 	_heart.position = target.position \
 		+ Vector2((target.size.x - HEART_SIZE.x) / 2, (target.size.y - HEART_SIZE.y) / 2.0)
-
-
-func _cell_position(r: int, c: int) -> Vector2:
-	var x := CELL_STEP.x * c
-	if r == NameInputState.GRID.size() - 1:
-		x = ROW3_OFFSETS[c]
-	return GRID_ORIGIN + Vector2(x, CELL_STEP.y * r)
-
-
-## 行优先展开后的下标（第三行长度不同，不能直接用 row * 10 + col）
-func _cell_index(r: int, c: int) -> int:
-	var index := 0
-	for i: int in r:
-		index += (NameInputState.GRID[i] as Array).size()
-	return index + c
 
 #endregion

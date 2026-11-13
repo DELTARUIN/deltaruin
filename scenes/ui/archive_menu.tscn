@@ -328,33 +328,53 @@ snd_move = NodePath("../SndMove")
 snd_ok = NodePath("../SndOk")
 snd_cancel = NodePath("../SndCancel")
 
+[node name="Heart" type="TextureRect" parent="ArchiveSelect/NameInput" unique_id=939621920]
+modulate = Color(1, 1, 1, 0.8)
+layout_mode = 0
+offset_right = 18.0
+offset_bottom = 18.0
+texture = SubResource("AtlasTexture_1t8fe")
+
 [node name="Title" type="Label" parent="ArchiveSelect/NameInput" unique_id=675070377]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -210.0
+offset_left = -205.0
 offset_top = 61.0
-offset_right = 216.0
+offset_right = 211.0
 offset_bottom = 117.0
 grow_horizontal = 2
 text = "输入你自己的名字。"
 
 [node name="EnteredName" type="Label" parent="ArchiveSelect/NameInput" unique_id=1149797105]
-layout_mode = 0
-offset_left = 120.0
-offset_top = 84.0
-offset_right = 520.0
-offset_bottom = 114.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 103.0
+offset_right = 200.0
+offset_bottom = 133.0
+grow_horizontal = 2
 theme_override_font_sizes/font_size = 24
 horizontal_alignment = 1
 
-[node name="Grid" type="Control" parent="ArchiveSelect/NameInput" unique_id=1882600868]
-z_index = 1
-anchors_preset = 0
-offset_right = 640.0
-offset_bottom = 480.0
+[node name="Grid" type="VBoxContainer" parent="ArchiveSelect/NameInput" unique_id=1882600868]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -216.0
+offset_top = -64.0
+offset_right = 216.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
+theme_override_constants/separation = 4
 
 [node name="ConfirmName" type="Label" parent="ArchiveSelect/NameInput" unique_id=1351192252]
 layout_mode = 0
@@ -372,6 +392,7 @@ offset_top = 358.0
 offset_right = 282.0
 offset_bottom = 398.0
 text = "否"
+horizontal_alignment = 1
 
 [node name="ConfirmYes" type="Label" parent="ArchiveSelect/NameInput" unique_id=905956907]
 layout_mode = 0
@@ -380,13 +401,7 @@ offset_top = 358.0
 offset_right = 442.0
 offset_bottom = 398.0
 text = "是"
-
-[node name="Heart" type="TextureRect" parent="ArchiveSelect/NameInput" unique_id=939621920]
-modulate = Color(1, 1, 1, 0.8)
-layout_mode = 0
-offset_right = 18.0
-offset_bottom = 18.0
-texture = SubResource("AtlasTexture_1t8fe")
+horizontal_alignment = 1
 
 [node name="SndMove" type="AudioStreamPlayer" parent="ArchiveSelect" unique_id=119675605]
 stream = ExtResource("6_tid2w")
