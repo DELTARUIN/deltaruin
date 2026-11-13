@@ -2,13 +2,13 @@
 
 [ext_resource type="FontVariation" uid="uid://dpydnpuemyqiq" path="res://resources/ui/archive_font_variation.tres" id="1_nvfcb"]
 [ext_resource type="Script" uid="uid://cmbs40vlkpkhb" path="res://scripts/ui/archive_select.gd" id="1_ywe50"]
-[ext_resource type="PackedScene" path="res://scenes/ui/archive_slot.tscn" id="10_slot"]
 [ext_resource type="Script" uid="uid://bobesg1heab10" path="res://scripts/ui/name_input.gd" id="2_ninpt"]
 [ext_resource type="Texture2D" uid="uid://brcd1dm1bgucf" path="res://assets/graphics/ui/menu_heros.png" id="3_433ub"]
 [ext_resource type="Texture2D" uid="uid://drtkdkhtqsk5t" path="res://assets/graphics/characters/soul/the_soul.png" id="5_nvhsi"]
 [ext_resource type="AudioStream" uid="uid://dmm0fswoftc5t" path="res://assets/audio/effects/common/snd_menumove.wav" id="6_tid2w"]
 [ext_resource type="AudioStream" uid="uid://xpo0gxfoum1p" path="res://assets/audio/effects/common/snd_select.wav" id="7_vggj4"]
 [ext_resource type="AudioStream" uid="uid://cyb6kl8342ys5" path="res://assets/audio/effects/common/snd_swing.wav" id="8_3uqf2"]
+[ext_resource type="PackedScene" path="res://scenes/ui/archive_slot.tscn" id="10_slot"]
 
 [sub_resource type="Theme" id="Theme_yjyqx"]
 default_font = ExtResource("1_nvfcb")
@@ -24,7 +24,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Heros:texture:region")
+tracks/0/path = NodePath("Background/Heros:texture:region")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -40,7 +40,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Heros:texture:region")
+tracks/0/path = NodePath("Background/Heros:texture:region")
 tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -70,7 +70,7 @@ region = Rect2(1, 36, 9, 9)
 
 [node name="ArchiveMenu" type="CanvasLayer" unique_id=1018443976]
 
-[node name="ArchiveSelect" type="Control" parent="." unique_id=1272150953]
+[node name="ArchiveSelect" type="Control" parent="." unique_id=1272150953 node_paths=PackedStringArray("snd_move", "snd_ok", "snd_cancel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -81,12 +81,24 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = SubResource("Theme_yjyqx")
 script = ExtResource("1_ywe50")
+snd_move = NodePath("SndMove")
+snd_ok = NodePath("SndOk")
+snd_cancel = NodePath("SndCancel")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ArchiveSelect" unique_id=1563920247]
+[node name="Background" type="Control" parent="ArchiveSelect" unique_id=312654689]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ArchiveSelect/Background" unique_id=1563920247]
+root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_ygnmt")
 autoplay = &"default"
 
-[node name="Background" type="TextureRect" parent="ArchiveSelect" unique_id=1540944304]
+[node name="Image" type="TextureRect" parent="ArchiveSelect/Background" unique_id=1540944304]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -97,7 +109,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AtlasTexture_1v8yg")
 
-[node name="Heros" type="TextureRect" parent="ArchiveSelect" unique_id=446059883]
+[node name="Heros" type="TextureRect" parent="ArchiveSelect/Background" unique_id=446059883]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = -1
@@ -109,7 +121,7 @@ grow_horizontal = 2
 grow_vertical = 0
 texture = SubResource("AtlasTexture_tio4f")
 
-[node name="ColorRect" type="ColorRect" parent="ArchiveSelect" unique_id=22552868]
+[node name="ColorRect" type="ColorRect" parent="ArchiveSelect/Background" unique_id=22552868]
 layout_mode = 0
 offset_right = 640.0
 offset_bottom = 480.0
@@ -155,15 +167,15 @@ offset_bottom = 132.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Archive" type="Control" parent="ArchiveSelect/Archives" instance=ExtResource("10_slot")]
+[node name="Archive" parent="ArchiveSelect/Archives" unique_id=1492477680 instance=ExtResource("10_slot")]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Archive2" type="Control" parent="ArchiveSelect/Archives" instance=ExtResource("10_slot")]
+[node name="Archive2" parent="ArchiveSelect/Archives" unique_id=95104573 instance=ExtResource("10_slot")]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Archive3" type="Control" parent="ArchiveSelect/Archives" instance=ExtResource("10_slot")]
+[node name="Archive3" parent="ArchiveSelect/Archives" unique_id=78869144 instance=ExtResource("10_slot")]
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -302,7 +314,7 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "取消"
 
-[node name="NameInput" type="Control" parent="ArchiveSelect" unique_id=1063417853]
+[node name="NameInput" type="Control" parent="ArchiveSelect" unique_id=1063417853 node_paths=PackedStringArray("snd_move", "snd_ok", "snd_cancel")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -312,14 +324,20 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("2_ninpt")
+snd_move = NodePath("../SndMove")
+snd_ok = NodePath("../SndOk")
+snd_cancel = NodePath("../SndCancel")
 
 [node name="Title" type="Label" parent="ArchiveSelect/NameInput" unique_id=675070377]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 26.0
-offset_right = 616.0
-offset_bottom = 82.0
-theme_override_font_sizes/font_size = 48
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -210.0
+offset_top = 61.0
+offset_right = 216.0
+offset_bottom = 117.0
+grow_horizontal = 2
 text = "输入你自己的名字。"
 
 [node name="EnteredName" type="Label" parent="ArchiveSelect/NameInput" unique_id=1149797105]
@@ -332,6 +350,7 @@ theme_override_font_sizes/font_size = 24
 horizontal_alignment = 1
 
 [node name="Grid" type="Control" parent="ArchiveSelect/NameInput" unique_id=1882600868]
+z_index = 1
 anchors_preset = 0
 offset_right = 640.0
 offset_bottom = 480.0
@@ -347,7 +366,6 @@ theme_override_font_sizes/font_size = 48
 horizontal_alignment = 1
 
 [node name="ConfirmNo" type="Label" parent="ArchiveSelect/NameInput" unique_id=1856349208]
-visible = false
 layout_mode = 0
 offset_left = 222.0
 offset_top = 358.0
@@ -356,7 +374,6 @@ offset_bottom = 398.0
 text = "否"
 
 [node name="ConfirmYes" type="Label" parent="ArchiveSelect/NameInput" unique_id=905956907]
-visible = false
 layout_mode = 0
 offset_left = 382.0
 offset_top = 358.0
@@ -365,7 +382,7 @@ offset_bottom = 398.0
 text = "是"
 
 [node name="Heart" type="TextureRect" parent="ArchiveSelect/NameInput" unique_id=939621920]
-modulate = Color(1, 1, 1, 0.5)
+modulate = Color(1, 1, 1, 0.8)
 layout_mode = 0
 offset_right = 18.0
 offset_bottom = 18.0

@@ -33,13 +33,14 @@ const STATUS_NO_COPY := "没有可以复制的对象。"
 #region 节点引用（场景节点，@onready 绑定）
 
 @onready var _archives: Control = $Archives
-@onready var _name_input: NameInputView = $NameInput
 @onready var _title_label: Label = $SelectFile
 @onready var _action_bar: Control = $Actions
 @onready var _action_cancel: Label = $ActionCancel
-@onready var _snd_move: AudioStreamPlayer = $SndMove
-@onready var _snd_ok: AudioStreamPlayer = $SndOk
-@onready var _snd_cancel: AudioStreamPlayer = $SndCancel
+@onready var _name_input: NameInputView = $NameInput
+
+@export var snd_move: AudioStreamPlayer
+@export var snd_ok: AudioStreamPlayer
+@export var snd_cancel: AudioStreamPlayer
 
 var state := ArchiveSelectState.new()
 
@@ -54,7 +55,7 @@ var _exit_requested := false               ## 退出已受理（等待音效期�
 
 
 func _ready() -> void:
-	for child: Node in $Archives.get_children():
+	for child: Node in _archives.get_children():
 		_slots.append(child as ArchiveSlot)
 	for i: int in ArchiveSelectState.BAR_COUNT:
 		_bar_hearts.append(_action_bar.get_node("Item%d/Heart" % i))
@@ -104,7 +105,7 @@ func _apply_move(action: Callable) -> void:
 	var before := _focus_signature()
 	action.call()
 	if _focus_signature() != before:
-		_snd_move.play()
+		snd_move.play()
 		_after_state_change()
 
 
@@ -113,11 +114,11 @@ func _apply_ok() -> void:
 	var old_state := state.state
 	var action := state.press_ok()
 	if state.state != old_state:
-		_snd_ok.play()
+		snd_ok.play()
 		_after_state_change()
 	match action:
 		ArchiveSelectState.Action.SELECT:
-			_snd_ok.play()
+			snd_ok.play()
 			if state.occupied[state.selected_slot]:
 				# 已有存档：加载并通知外部（是否继续由 file_selected 监听者判断）
 				var data := GameManager.load_game(state.selected_slot)
@@ -137,7 +138,7 @@ func _apply_ok() -> void:
 			if _exit_requested:
 				return
 			_exit_requested = true
-			_snd_ok.play()
+			snd_ok.play()
 			# 稍等让音效出声再切场景（切场景会立刻停掉本节点的声音）
 			await get_tree().create_timer(0.15).timeout
 			GameManager.exit_game()
@@ -148,10 +149,10 @@ func _apply_cancel() -> void:
 	var old_state := state.state
 	var action := state.press_cancel()
 	if state.state != old_state:
-		_snd_cancel.play()
+		snd_cancel.play()
 		_after_state_change()
 	if action == ArchiveSelectState.Action.EXIT:
-		_snd_cancel.play()
+		snd_cancel.play()
 		GameLogger.debug("exit_requested")
 		exit_requested.emit()
 

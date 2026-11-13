@@ -20,9 +20,7 @@ const TITLE_CONFIRM := "这就是你的名字。"
 const COLOR_SELECTED := Color("ffff00") ## 选中态（Deltarune 黄）
 const COLOR_NORMAL := Color.WHITE
 
-const FONT_TITLE := 48
 const FONT_NAME := 24
-const FONT_CELL := 32
 
 ## 网格布局（640×480 逻辑坐标，由录屏换算）
 const GRID_ORIGIN := Vector2(136, 148)
@@ -31,7 +29,7 @@ const CELL_SIZE := Vector2(36, 32)
 const ROW3_OFFSETS: Array[float] = [0.0, 40.0, 80.0, 120.0, 160.0, 200.0, 250.0, 330.0]
 const HEART_SIZE := Vector2(18, 18)
 const HEART_GAP := 16.0
-const CONFIRM_HEART_GAP := 22.0
+#const CONFIRM_HEART_GAP := 22.0
 
 #endregion
 
@@ -44,9 +42,10 @@ const CONFIRM_HEART_GAP := 22.0
 @onready var _confirm_no: Label = $ConfirmNo
 @onready var _confirm_yes: Label = $ConfirmYes
 @onready var _heart: TextureRect = $Heart
-@onready var _snd_move: AudioStreamPlayer = $"../SndMove"
-@onready var _snd_ok: AudioStreamPlayer = $"../SndOk"
-@onready var _snd_cancel: AudioStreamPlayer = $"../SndCancel"
+
+@export var snd_move: AudioStreamPlayer
+@export var snd_ok: AudioStreamPlayer
+@export var snd_cancel: AudioStreamPlayer
 
 #endregion
 
@@ -110,7 +109,7 @@ func _move(action: Callable) -> void:
 	var before := _signature()
 	action.call()
 	if _signature() != before:
-		_snd_move.play()
+		snd_move.play()
 	_refresh()
 
 
@@ -119,7 +118,7 @@ func _ok() -> void:
 	var before := _signature()
 	var action := state.press_ok()
 	if _signature() != before or action != NameInputState.Action.NONE:
-		_snd_ok.play()
+		snd_ok.play()
 	if action == NameInputState.Action.START:
 		completed.emit(_slot, state.name)
 	_refresh()
@@ -128,7 +127,7 @@ func _ok() -> void:
 ## 取消：确认页退回输入页；输入页发 cancelled 由父菜单关闭
 func _cancel() -> void:
 	var action := state.press_cancel()
-	_snd_cancel.play()
+	snd_cancel.play()
 	if action == NameInputState.Action.EXIT:
 		cancelled.emit()
 	_refresh()
@@ -147,8 +146,9 @@ func _build_grid() -> void:
 		var row_cells: Array = NameInputState.GRID[r]
 		for c: int in row_cells.size():
 			var cell := Label.new()
+			cell.name = "Label_" + row_cells[c]
 			cell.text = row_cells[c]
-			cell.add_theme_font_size_override("font_size", FONT_CELL)
+			cell.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			cell.position = _cell_position(r, c)
 			cell.size = CELL_SIZE
 			_grid.add_child(cell)
@@ -174,7 +174,7 @@ func _refresh() -> void:
 		var selected := _cells[_cell_index(state.row, state.col)] as Label
 		selected.add_theme_color_override("font_color", COLOR_SELECTED)
 		_heart.position = selected.position \
-			+ Vector2(-HEART_GAP, (CELL_SIZE.y - HEART_SIZE.y) / 2.0)
+			+ Vector2((selected.size.x - HEART_SIZE.x) / 2, (selected.size.y - HEART_SIZE.y) / 2.0)
 		return
 
 	_confirm_name.text = state.name
@@ -184,7 +184,7 @@ func _refresh() -> void:
 		COLOR_NORMAL if state.confirm_yes else COLOR_SELECTED)
 	var target: Label = _confirm_yes if state.confirm_yes else _confirm_no
 	_heart.position = target.position \
-		+ Vector2(-CONFIRM_HEART_GAP, (target.size.y - HEART_SIZE.y) / 2.0)
+		+ Vector2((target.size.x - HEART_SIZE.x) / 2, (target.size.y - HEART_SIZE.y) / 2.0)
 
 
 func _cell_position(r: int, c: int) -> Vector2:
