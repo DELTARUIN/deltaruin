@@ -315,8 +315,8 @@ func _apply_focus() -> void:
 		var first_text := "开始"
 		var second_text := "返回"
 		if danger:
-			first_text = "消除！"
-			second_text = "不要！"
+			first_text = "消除!"
+			second_text = "不要!"
 		elif yes_no:
 			first_text = "是"
 			second_text = "否"

@@ -45,9 +45,9 @@ const BAR_NAMES := 4     ## 人名译法（占位）
 const BAR_QUIT := 5      ## 退出程序
 
 ## 槽内问句文案（视图经 question_text() 取用）
-const QUESTION_CLEAR := "消除这份存档吗？"
-const QUESTION_CLEAR_AGAIN := "真的要消除吗？"
-const QUESTION_COPY := "覆盖这份存档吗？"
+const QUESTION_CLEAR := "消除这份存档吗?"
+const QUESTION_CLEAR_AGAIN := "真的要消除吗?"
+const QUESTION_COPY := "覆盖这份存档吗?"
 
 #endregion
 
