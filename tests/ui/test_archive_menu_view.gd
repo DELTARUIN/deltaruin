@@ -127,7 +127,11 @@ func test_name_input_grid_uses_container_layout() -> void:
 	assert_eq((row3.get_child(6) as Control).position.x, 240.0, "退格 x（行内坐标）")
 	assert_eq((row3.get_child(7) as Control).position.x, 320.0, "决定 x（行内坐标）")
 	assert_eq(row3.position.y, 72.0, "行距 36 × 2")
-	assert_eq(input.get_node("Heart").position, Vector2(405, 227), "红心居中退格（屏坐标）")
+	# 红心 = Grid 实际位置 + 行位置 + 行内坐标 + 格内居中（不钉死场景偏移，防布局挪动后误报）
+	var back: Control = row3.get_child(6)
+	var expected := (input.get_node("Grid") as Control).position + row3.position + back.position \
+		+ Vector2((back.size.x - 18.0) / 2, (back.size.y - 18.0) / 2)
+	assert_eq(input.get_node("Heart").position, expected, "红心居中退格")
 
 
 func test_name_input_full_name_turns_yellow() -> void:
@@ -150,8 +154,8 @@ func test_name_input_confirm_page_shows_name_and_yes_no() -> void:
 	input._refresh()
 	assert_eq(input.get_node("Title").text, "这就是你的名字。")
 	assert_false(input.get_node("Grid").visible, "确认页隐藏网格")
-	assert_true(input.get_node("ConfirmName").visible)
-	assert_eq(input.get_node("ConfirmName").text, "ABC")
+	assert_true(input.get_node("ConfirmBox/ConfirmName").visible)
+	assert_eq(input.get_node("ConfirmBox/ConfirmName").text, "ABC")
 	assert_eq(input.get_node("ConfirmYes").get_theme_color("font_color"), Color("ffff00"), "默认为是")
 	assert_eq(input.get_node("ConfirmNo").get_theme_color("font_color"), Color.WHITE)
 	input.state.confirm_yes = false
