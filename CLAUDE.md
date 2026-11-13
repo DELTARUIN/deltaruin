@@ -64,6 +64,8 @@
 ### 文件编码（本机系统代码页 GBK，PowerShell 5.1）
 
 - **不要用 `Get-Content` / `Set-Content` 轮转含中文的 UTF-8 文件**（.tscn/.gd/.md）：PS 会按 GBK 读入再写出，中文全部乱码。改文件用编辑器或 Write/Edit 类工具；批量修改优先此类工具，实在要用 PS 就 `[System.IO.File]::ReadAllText/WriteAllText($path, $text, [System.Text.UTF8Encoding]::new($false))`。
+- 往返损坏是**全文件级**的：哪怕只改一行 ASCII 代码，重新编码也会毁掉全文所有中文。发现后直接 `git checkout -- <file>` 丢弃重做，不要试图手工修复乱码。
+- 只读操作（`Select-String` / `Get-Content` 查看）不写文件，是安全的；控制台输出中文乱码只是显示问题，不代表文件坏了——判断文件是否损坏以 `git diff` 是否出现整文件重写为准。
 - PS 5.1 的 `-Encoding UTF8` 写出**带 BOM**，违反本项目「无 BOM」约定（.tscn 含中文，同样适用）。
 
 ### Godot / GDScript
