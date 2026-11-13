@@ -91,6 +91,22 @@ func test_out_of_range_slot_rejected() -> void:
 	assert_false(sys.clear_slot(-1))
 
 
+func test_create_save_writes_player_name_and_defaults() -> void:
+	assert_true(sys.create_save(0, "KRIS"))
+	var loaded := sys.load_game(0)
+	assert_not_null(loaded)
+	assert_eq(loaded.player_name, "KRIS")
+	assert_eq(loaded.playtime_sec, 0.0)
+	assert_eq(loaded.map_id, "")
+	assert_eq(loaded.map_name, "")
+	assert_eq(loaded.map_pos, Vector2.ZERO)
+
+
+func test_create_save_rejects_bad_slot() -> void:
+	assert_false(sys.create_save(-1, "X"))
+	assert_false(sys.create_save(SaveSystem.SLOT_COUNT, "X"))
+
+
 func test_get_all_slots_shape() -> void:
 	sys.save_game(1, _make_data("M", 5.0, "mid", Vector2(1.0, 2.0)))
 	var slots := sys.get_all_slots()

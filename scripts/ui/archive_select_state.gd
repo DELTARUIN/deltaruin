@@ -44,6 +44,11 @@ const BAR_CH4 := 3       ## 第4章存档（占位）
 const BAR_NAMES := 4     ## 人名译法（占位）
 const BAR_QUIT := 5      ## 退出程序
 
+## 槽内问句文案（视图经 question_text() 取用）
+const QUESTION_CLEAR := "消除这份存档吗？"
+const QUESTION_CLEAR_AGAIN := "真的要消除吗？"
+const QUESTION_COPY := "覆盖这份存档吗？"
+
 #endregion
 
 #region 状态字段
@@ -56,7 +61,11 @@ var bar_index := 0                       ## 操作栏焦点项（0 起）
 var confirm_yes := false                 ## 消除/复制确认光标是否在「是」
 var copy_source := -1                    ## 复制源槽（-1 = 未选）
 var copy_target := -1                    ## 复制目标槽（-1 = 未选）
-var occupied: Array[bool] = [false, false, false] ## 各槽是否有档（脚本按存档快照注入）
+var occupied: Array[bool] = [] ## 各槽是否有档（脚本按存档快照注入，长度 = SLOT_COUNT）
+
+
+func _init() -> void:
+	occupied.resize(SLOT_COUNT)
 
 #endregion
 
@@ -74,6 +83,61 @@ func debug_text() -> String:
 		State.CLEAR_CONFIRM, State.CLEAR_CONFIRM_AGAIN, State.COPY_CONFIRM:
 			sub = " yes=%s" % confirm_yes
 	return "state=%s cursor=%d%s" % [State.keys()[state], cursor, sub]
+
+
+## 光标是否在槽区（决定槽红心显隐）
+func is_slot_cursor() -> bool:
+	match state:
+		State.SLOT_SELECTED, State.CLEAR_SELECT, State.COPY_SELECT_SOURCE, State.COPY_SELECT_TARGET:
+			return true
+	return false
+
+
+## 是否处于消除/复制子流程（隐藏操作栏、显示「取消」）
+func is_in_flow() -> bool:
+	match state:
+		State.CLEAR_SELECT, State.CLEAR_CONFIRM, State.CLEAR_CONFIRM_AGAIN, \
+		State.COPY_SELECT_SOURCE, State.COPY_SELECT_TARGET, State.COPY_CONFIRM:
+			return true
+	return false
+
+
+## 是否处于是/否确认态
+func is_yes_no() -> bool:
+	match state:
+		State.CLEAR_CONFIRM, State.CLEAR_CONFIRM_AGAIN, State.COPY_CONFIRM:
+			return true
+	return false
+
+
+## 是否处于消除子流程（标题映射用）
+func is_clear_flow() -> bool:
+	match state:
+		State.CLEAR_SELECT, State.CLEAR_CONFIRM, State.CLEAR_CONFIRM_AGAIN:
+			return true
+	return false
+
+
+## 是否处于复制选目标阶段（源槽黄框）
+func is_copy_target_stage() -> bool:
+	match state:
+		State.COPY_SELECT_TARGET, State.COPY_CONFIRM:
+			return true
+	return false
+
+
+## 光标槽当前应显示的问句（空串 = 无）
+func question_text() -> String:
+	if not is_yes_no():
+		return ""
+	match state:
+		State.CLEAR_CONFIRM:
+			return QUESTION_CLEAR
+		State.CLEAR_CONFIRM_AGAIN:
+			return QUESTION_CLEAR_AGAIN
+		State.COPY_CONFIRM:
+			return QUESTION_COPY
+	return ""
 
 #endregion
 

@@ -1,0 +1,154 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/archive_slot.gd" id="4_script"]
+[ext_resource type="Texture2D" uid="uid://sxfh504cklr2" path="res://assets/graphics/ui/files_column.png" id="1_box"]
+[ext_resource type="FontVariation" uid="uid://r6hjkjf084la" path="res://resources/ui/archive_font_variation_2.tres" id="2_font"]
+[ext_resource type="Texture2D" uid="uid://drtkdkhtqsk5t" path="res://assets/graphics/characters/soul/the_soul.png" id="3_soul"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_heart"]
+atlas = ExtResource("3_soul")
+region = Rect2(1, 36, 9, 9)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dim"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+draw_center = false
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.6039216, 0.6039216, 0.7019608, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_source"]
+draw_center = false
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0.9254902, 0.15686275, 1)
+
+[node name="ArchiveSlot" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_script")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 428.0
+offset_bottom = 86.0
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="Box" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_box")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Control" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer/Control"]
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 5
+text = "[空白]"
+vertical_alignment = 2
+
+[node name="TimeLabel" type="Label" parent="MarginContainer/VBoxContainer/Control"]
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 5
+theme_override_fonts/font = ExtResource("2_font")
+text = "--:--"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="PositionLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "----------"
+vertical_alignment = 1
+
+[node name="Confirm" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SelectStart" type="TextureRect" parent="MarginContainer/VBoxContainer/Confirm"]
+modulate = Color(1, 1, 1, 0.9764706)
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_heart")
+
+[node name="ConfirmStart" type="Label" parent="MarginContainer/VBoxContainer/Confirm"]
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 5
+size_flags_stretch_ratio = 4.0
+text = "开始"
+
+[node name="SelectBack" type="TextureRect" parent="MarginContainer/VBoxContainer/Confirm"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_heart")
+
+[node name="ConfirmBack" type="Label" parent="MarginContainer/VBoxContainer/Confirm"]
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 5
+size_flags_stretch_ratio = 4.0
+text = "返回"
+
+[node name="DisableDodulate" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 428.0
+offset_bottom = 86.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_dim")
+
+[node name="SourceHighlight" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_source")
+
+[node name="SelectCursor" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = -9.0
+offset_right = 38.0
+offset_bottom = 9.0
+grow_vertical = 2
+texture = SubResource("AtlasTexture_heart")

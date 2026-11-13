@@ -32,6 +32,13 @@ func save_game(slot: int, data: SaveData) -> bool:
 	return true
 
 
+## 新建存档：只写玩家名，地图与游玩时间保持默认（0 / 空）
+func create_save(slot: int, player_name: String) -> bool:
+	var data := SaveData.new()
+	data.player_name = player_name
+	return save_game(slot, data)
+
+
 ## 读取指定槽；槽位为空、文件损坏或槽号非法返回 null
 func load_game(slot: int) -> SaveData:
 	if not _is_valid_slot(slot) or not FileAccess.file_exists(_slot_path(slot)):

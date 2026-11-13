@@ -48,6 +48,11 @@ func save_game(slot: int, data: SaveData) -> bool:
 	return _save_system.save_game(slot, data)
 
 
+## 新建存档：确认页「是」的唯一入口（具体逻辑在 SaveSystem）
+func init_save(slot: int, player_name: String) -> bool:
+	return _save_system.create_save(slot, player_name)
+
+
 ## 读取指定槽；空/坏档返回 null
 func load_game(slot: int) -> SaveData:
 	return _save_system.load_game(slot)

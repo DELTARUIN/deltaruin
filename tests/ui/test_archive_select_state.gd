@@ -273,4 +273,33 @@ func test_cancel_backtracks() -> void:
 	state.press_cancel()
 	assert_eq(state.state, ArchiveSelectState.State.COPY_SELECT_TARGET, "覆盖确认取消只退一级回选目标")
 
+
+func test_phase_predicates() -> void:
+	state.state = ArchiveSelectState.State.SLOT_SELECTED
+	assert_true(state.is_slot_cursor())
+	assert_false(state.is_in_flow())
+	assert_false(state.is_yes_no())
+	state.state = ArchiveSelectState.State.BAR_SELECTED
+	assert_false(state.is_slot_cursor())
+	assert_false(state.is_in_flow())
+	state.state = ArchiveSelectState.State.CLEAR_SELECT
+	assert_true(state.is_in_flow())
+	assert_true(state.is_slot_cursor())
+	assert_true(state.is_clear_flow())
+	assert_eq(state.question_text(), "")
+	state.state = ArchiveSelectState.State.CLEAR_CONFIRM_AGAIN
+	assert_true(state.is_yes_no())
+	assert_eq(state.question_text(), ArchiveSelectState.QUESTION_CLEAR_AGAIN)
+	state.state = ArchiveSelectState.State.COPY_CONFIRM
+	assert_eq(state.question_text(), ArchiveSelectState.QUESTION_COPY)
+	assert_true(state.is_copy_target_stage())
+	state.state = ArchiveSelectState.State.COPY_SELECT_SOURCE
+	assert_false(state.is_copy_target_stage())
+	assert_eq(state.question_text(), "")
+
+
+func test_occupied_defaults_follow_slot_count() -> void:
+	assert_eq(state.occupied.size(), ArchiveSelectState.SLOT_COUNT)
+	assert_false(state.occupied[2])
+
 #endregion
