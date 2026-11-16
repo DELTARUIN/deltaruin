@@ -63,20 +63,28 @@ offset_bottom = 422.0
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="Row1" parent="ChapterSelect/Rows" instance=ExtResource("12_row")]
+[node name="Row1" parent="ChapterSelect/Rows" unique_id=1118558077 instance=ExtResource("12_row")]
 custom_minimum_size = Vector2(0, 62)
+layout_mode = 2
 
-[node name="Row2" parent="ChapterSelect/Rows" instance=ExtResource("12_row")]
+[node name="Row2" parent="ChapterSelect/Rows" unique_id=1390226086 instance=ExtResource("12_row")]
+layout_mode = 2
 
-[node name="Row3" parent="ChapterSelect/Rows" instance=ExtResource("12_row")]
+[node name="Row3" parent="ChapterSelect/Rows" unique_id=974973485 instance=ExtResource("12_row")]
+layout_mode = 2
 
-[node name="Row4" parent="ChapterSelect/Rows" instance=ExtResource("12_row")]
+[node name="Row4" parent="ChapterSelect/Rows" unique_id=952067407 instance=ExtResource("12_row")]
+layout_mode = 2
 
-[node name="Row5" parent="ChapterSelect/Rows" instance=ExtResource("12_row")]
+[node name="Row5" parent="ChapterSelect/Rows" unique_id=1209390768 instance=ExtResource("12_row")]
+layout_mode = 2
 
-[node name="Row6" parent="ChapterSelect/Rows" instance=ExtResource("12_row")]
+[node name="Row6" parent="ChapterSelect/Rows" unique_id=1951474717 instance=ExtResource("12_row")]
+layout_mode = 2
 
-[node name="Row7" parent="ChapterSelect/Rows" instance=ExtResource("12_row")]
+[node name="Row7" parent="ChapterSelect/Rows" unique_id=363928655 instance=ExtResource("12_row")]
+layout_mode = 2
+
 [node name="CopyrightLabel" type="Label" parent="ChapterSelect" unique_id=1082124430]
 layout_mode = 0
 offset_left = 16.0
@@ -96,9 +104,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -88.0
+offset_left = -35.0
 offset_top = -42.0
-offset_right = 88.0
+offset_right = 35.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 0

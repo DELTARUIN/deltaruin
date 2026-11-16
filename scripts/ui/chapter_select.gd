@@ -80,6 +80,7 @@ func _ready() -> void:
 		_back_labels.append(row.get_node("RowBack"))
 		_icons.append(row.get_node("Margin/Line/Icon"))
 		_stars.append(row.get_node("Margin/Line/Stars"))
+		_stars[i].self_modulate.a = 1.0 if CHAPTERS[i]["locked"] else 0.0
 		_apply_row_content(i, row)
 		locked.append(CHAPTERS[i]["locked"])
 		var height := (row as Control).custom_minimum_size.y
