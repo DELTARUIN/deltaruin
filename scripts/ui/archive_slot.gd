@@ -1,20 +1,21 @@
 class_name ArchiveSlot
 extends Control
-## 单个存档槽视图组件：内容文本 + 焦点灰框/红心 + 槽内确认与问句覆盖。
+## 单个存档槽视图组件：内容文本 + 焦点灰框 + 槽内确认与问句覆盖。
+## 红心光标为场景级唯一节点（archive_menu.tscn 的 HeartCursor），
+## 本组件经 heart_anchor() 提供其在槽内的锚点坐标。
 ## 节点结构在 archive_slot.tscn（由 archive_menu.tscn 实例化 ×3）。
 
 #region 常量
 
 const COLOR_DANGER := Color(1, 0, 0) ## 二次确认红色（边框/问句）
+const HEART_SIZE := 18.0 ## 红心光标边长
+const HEART_GAP := 4.0   ## 红心与文本左缘的间距
 
 #endregion
 
 #region 节点引用
 
 @onready var _box: TextureRect = $Box
-@onready var _dodulate: Panel = $DisableDodulate
-@onready var _cursor: TextureRect = $SelectCursor
-@onready var _source_highlight: Panel = $SourceHighlight
 @onready var _name_row: Control = $MarginContainer/VBoxContainer/Control
 @onready var _name_label: Label = $MarginContainer/VBoxContainer/Control/NameLabel
 @onready var _time_label: Label = $MarginContainer/VBoxContainer/Control/TimeLabel
@@ -22,14 +23,16 @@ const COLOR_DANGER := Color(1, 0, 0) ## 二次确认红色（边框/问句）
 @onready var _confirm_box: Control = $MarginContainer/VBoxContainer/Confirm
 @onready var _confirm_start: Label = $MarginContainer/VBoxContainer/Confirm/ConfirmStart
 @onready var _confirm_back: Label = $MarginContainer/VBoxContainer/Confirm/ConfirmBack
-@onready var _select_start: TextureRect = $MarginContainer/VBoxContainer/Confirm/SelectStart
-@onready var _select_back: TextureRect = $MarginContainer/VBoxContainer/Confirm/SelectBack
+
+@export var modulate_color := Color("#9a9ab3")
+@export var highlight_color := Color("#ffec28")
 
 #endregion
 
 var _position_home := true ## 位置标签的场景默认显隐（覆盖后还原）
 var _position_text := ""   ## 常态位置文本（确认态临时替换）
-
+var _is_focused := true
+var _is_highlight := false
 
 func _ready() -> void:
 	_position_home = _position_label.visible
@@ -45,15 +48,23 @@ func set_content(player_name: String, time_text: String, position_text: String) 
 	_position_label.text = position_text
 
 
-## 焦点灰框与槽红心（focused 与 show_heart 独立：栏态保留焦点框但不显示红心）
-func set_frame(focused: bool, show_heart: bool) -> void:
-	_dodulate.visible = not focused
-	_cursor.visible = show_heart
+## 焦点（红心光标独立在场景级，由 archive_select 驱动）
+func set_focused(focused: bool) -> void:
+	_is_focused = focused
+	reset_modulate()
 
 
-func set_source_highlight(on: bool) -> void:
-	_source_highlight.visible = on
+func set_highlight(on: bool) -> void:
+	_is_highlight = on
+	reset_modulate()
 
+func reset_modulate() -> void:
+	if _is_highlight :
+		modulate = highlight_color
+	elif not _is_focused:
+		modulate = modulate_color
+	else:
+		modulate = Color.WHITE
 
 ## 还原常态：位置文本/显隐/颜色、姓名行、确认区、红框全部复位
 func clear_overlay() -> void:
@@ -65,15 +76,13 @@ func clear_overlay() -> void:
 	_confirm_box.visible = false
 
 
-## 槽内确认区：两个选项 + 红心 z_index；question 非空时替换位置行、隐藏姓名行腾出两行，
+## 槽内确认区：两个选项；question 非空时替换位置行、隐藏姓名行腾出两行，
 ## danger 时边框与问句染红；无问句（开始/返回）则保留姓名行、隐藏位置行
-func show_confirm(first_text: String, second_text: String, first_selected: bool,
+func show_confirm(first_text: String, second_text: String,
 		question := "", danger := false) -> void:
 	_confirm_box.visible = true
 	_confirm_start.text = first_text
 	_confirm_back.text = second_text
-	_select_start.z_index = 0 if first_selected else -1
-	_select_back.z_index = -1 if first_selected else 0
 	_name_row.visible = question == ""
 	if question == "":
 		_position_label.visible = false
@@ -83,5 +92,16 @@ func show_confirm(first_text: String, second_text: String, first_selected: bool,
 	if danger:
 		_position_label.add_theme_color_override("font_color", COLOR_DANGER)
 		_box.modulate = COLOR_DANGER
+
+
+## 红心光标在本槽的锚点（全局坐标，18×18 左上角）。
+## 确认区展开时锚在所选项文本左侧，否则锚在槽左缘竖直居中。
+func heart_anchor(first_selected: bool) -> Vector2:
+	if _confirm_box.visible:
+		var label: Label = _confirm_start if first_selected else _confirm_back
+		var rect := label.get_global_rect()
+		var x: float = rect.position.x - HEART_SIZE - HEART_GAP
+		return Vector2(x, rect.position.y + rect.size.y * 0.5 - HEART_SIZE * 0.5)
+	return get_global_rect().position + Vector2(20.0, size.y * 0.5 - HEART_SIZE * 0.5)
 
 #endregion

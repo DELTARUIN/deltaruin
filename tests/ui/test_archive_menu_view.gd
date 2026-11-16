@@ -48,15 +48,29 @@ func test_initial_view_shows_slots_and_actions() -> void:
 	assert_eq(select.get_node("SelectFile").text, "请选择一个存档。")
 
 
-func test_bar_state_fades_heart_on_focus() -> void:
+func test_bar_state_moves_heart_cursor_to_focused_item() -> void:
 	state.state = ArchiveSelectState.State.BAR_SELECTED
 	state.bar_index = ArchiveSelectState.BAR_CLEAR
 	select._apply_focus()
 	assert_true(select.get_node("Actions").visible)
 	assert_false(select.get_node("ActionCancel").visible)
-	assert_eq(select.get_node("Actions/Item0/Heart").modulate.a, 0.0, "焦点不在复制：透明但仍占位")
-	assert_eq(select.get_node("Actions/Item1/Heart").modulate.a, 1.0, "焦点在消除")
-	assert_true(select.get_node("Actions/Item1/Heart").visible, "不靠 visible 隐藏，避免容器重排")
+	var heart: TextureRect = select.get_node("HeartCursor")
+	# 大步长一步到位：红心精确落在「消除」项文本左侧竖直居中
+	select._move_heart(10.0)
+	var label: Label = select.get_node("Actions/Item1/Label")
+	var rect := label.get_global_rect()
+	assert_true(heart.visible)
+	assert_eq(heart.global_position, Vector2(
+		rect.position.x - ArchiveSlot.HEART_SIZE - ArchiveSlot.HEART_GAP,
+		rect.position.y + rect.size.y * 0.5 - ArchiveSlot.HEART_SIZE * 0.5),
+		"光标锚在所选项左侧")
+	# 小步长：目标切换后按 move_toward 渐进逼近，不瞬移
+	var before := heart.global_position
+	state.bar_index = ArchiveSelectState.BAR_COPY
+	select._move_heart(0.001)
+	assert_ne(heart.global_position, select._heart_anchor(), "未瞬间到位")
+	assert_true(heart.global_position.distance_to(select._heart_anchor())
+		< before.distance_to(select._heart_anchor()), "正向目标逼近")
 
 
 func test_copy_target_state_highlights_source() -> void:
@@ -80,8 +94,15 @@ func test_clear_confirm_shows_question_and_yes_no() -> void:
 	assert_eq(select.get_node(vbox + "/PositionLabel").text, "消除这份存档吗？")
 	assert_eq(select.get_node(vbox + "/Confirm/ConfirmStart").text, "是")
 	assert_eq(select.get_node(vbox + "/Confirm/ConfirmBack").text, "否")
-	assert_eq(select.get_node(vbox + "/Confirm/SelectStart").z_index, -1, "默认光标在否")
-	assert_eq(select.get_node(vbox + "/Confirm/SelectBack").z_index, 0)
+	# 红心光标（confirm_yes=false）应锚在「否」左侧
+	select._move_heart(10.0)
+	var heart: TextureRect = select.get_node("HeartCursor")
+	var start: Label = select.get_node(vbox + "/Confirm/ConfirmStart")
+	var back: Label = select.get_node(vbox + "/Confirm/ConfirmBack")
+	assert_eq(heart.global_position, Vector2(
+		start.get_global_rect().end.x + ArchiveSlot.HEART_GAP,
+		back.get_global_rect().position.y + back.get_global_rect().size.y * 0.5
+			- ArchiveSlot.HEART_SIZE * 0.5), "光标锚在「否」左侧")
 	assert_false(select.get_node(vbox + "/Control").visible, "是/否确认隐藏姓名/时间行，避免三行溢出槽高")
 
 
