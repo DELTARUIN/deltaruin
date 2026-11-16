@@ -63,7 +63,7 @@ func _enter_tree() -> void:
 
 	# Release 构建默认屏蔽 DEBUG 控制台输出（可按需调整）
 	if not OS.is_debug_build():
-		min_console_level = maxi(min_console_level, Level.INFO)
+		min_console_level = maxi(min_console_level, Level.INFO) as Level
 
 	if write_to_file:
 		_open_log_file()

@@ -13,6 +13,7 @@ signal exit_requested           ## 选档界面请求返回
 #region 常量：交互参数
 
 const INPUT_COOLDOWN := 0.15          ## 输入去抖（秒）
+const HEART_SPEED := 1200.0           ## 红心光标移动速度（像素/秒，move_toward）
 
 const EMPTY_NAME := "[空白]"          ## 空槽玩家名占位（与场景默认文案一致）
 const EMPTY_TIME := "--:--"           ## 空槽游玩时间占位
@@ -37,6 +38,7 @@ const STATUS_NO_COPY := "没有可以复制的对象。"
 @onready var _action_bar: Control = $Actions
 @onready var _action_cancel: Label = $ActionCancel
 @onready var _name_input: NameInputView = $NameInput
+@onready var _heart: TextureRect = $HeartCursor
 
 @export var snd_move: AudioStreamPlayer
 @export var snd_ok: AudioStreamPlayer
@@ -45,7 +47,6 @@ const STATUS_NO_COPY := "没有可以复制的对象。"
 var state := ArchiveSelectState.new()
 
 var _slots: Array[ArchiveSlot] = []        ## 三个槽组件（顺序即槽号）
-var _bar_hearts: Array[TextureRect] = []   ## 操作栏各项红心
 
 var _cooldown := 0.0                       ## 输入去抖剩余时间
 var _status := ""                          ## 操作成功提示（栏态覆盖标题，下次输入清除）
@@ -57,8 +58,6 @@ var _exit_requested := false               ## 退出已受理（等待音效期�
 func _ready() -> void:
 	for child: Node in _archives.get_children():
 		_slots.append(child as ArchiveSlot)
-	for i: int in ArchiveSelectState.BAR_COUNT:
-		_bar_hearts.append(_action_bar.get_node("Item%d/Heart" % i))
 	_name_input.completed.connect(_on_name_completed)
 	_name_input.cancelled.connect(_on_name_cancelled)
 	_refresh_slots()
@@ -69,6 +68,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	_cooldown = maxf(0.0, _cooldown - delta)
+	_move_heart(delta)
 
 
 ## 键盘输入入口：按动作映射分派
@@ -226,6 +226,40 @@ func _on_name_cancelled() -> void:
 
 #region 状态到视图
 
+## 红心光标每帧向状态锚点逼近（move_toward，帧率无关）；重新出现时直接就位不跨屏滑行
+func _move_heart(delta: float) -> void:
+	if _name_input.visible:
+		_heart.visible = false
+		return
+	var target := _heart_anchor()
+	if not _heart.visible:
+		_heart.visible = true
+		_heart.global_position = target
+		return
+	_heart.global_position = _heart.global_position.move_toward(target, HEART_SPEED * delta)
+
+
+## 红心光标的目标锚点（全局坐标，18×18 左上角）：
+## 槽区→槽左缘；操作栏→项文本左侧；槽内确认→所选项（开始/返回 或 是/否）
+func _heart_anchor() -> Vector2:
+	var slot: ArchiveSlot = _slots[state.cursor]
+	if state.is_slot_cursor():
+		return slot.heart_anchor(false)
+	if state.state == ArchiveSelectState.State.BAR_SELECTED:
+		return _bar_heart_anchor(state.bar_index)
+	var first: bool = state.confirm_yes if state.is_yes_no() \
+		else state.confirm_item == ArchiveSelectState.ConfirmItem.START
+	return slot.heart_anchor(first)
+
+
+## 操作栏第 i 项锚点：项文本左侧竖直居中
+func _bar_heart_anchor(i: int) -> Vector2:
+	var label: Label = _action_bar.get_node("Item%d/Label" % i)
+	var rect := label.get_global_rect()
+	return Vector2(rect.position.x - ArchiveSlot.HEART_SIZE - ArchiveSlot.HEART_GAP, \
+		rect.position.y + rect.size.y * 0.5 - ArchiveSlot.HEART_SIZE * 0.5)
+
+
 ## 每次状态变更的统一出口：刷新视图 + 重置去抖
 func _after_state_change() -> void:
 	_apply_focus()
@@ -281,24 +315,18 @@ func _title_text() -> String:
 	return TITLE_SELECT
 
 
-## 把状态机焦点映射到视图：标题/操作栏/栏红心 + 每槽的灰框红心、问句与槽内确认。
-## 选槽态：选中槽显示红心。确认态：展开「开始/返回」或「是/否」，
-## 所选项的红心 z=0 显示在 Box 贴图上，另一颗 z=-1 藏到贴图后面。
+## 把状态机焦点映射到视图：标题/操作栏/取消提示 + 每槽的灰框、问句与槽内确认。
+## 红心光标为场景级唯一 HeartCursor，坐标由 _move_heart 按状态锚点平滑逼近。
 func _apply_focus() -> void:
 	var current := state.state
 	var confirm_open := current == ArchiveSelectState.State.CONFIRM_OPEN
 	var yes_no := state.is_yes_no()
-	var in_bar := current == ArchiveSelectState.State.BAR_SELECTED
 	# 子流程（消除/复制）隐藏操作栏、显示「取消」提示；选槽与栏态都展示操作栏
 	var in_flow := state.is_in_flow()
-	var slot_cursor := state.is_slot_cursor()
 
 	_title_label.text = _title_text()
 	_action_bar.visible = not in_flow
 	_action_cancel.visible = in_flow
-	# 栏项常驻布局，焦点用透明度切换（visible 会挤掉红心宽度导致文字跳动）
-	for i: int in ArchiveSelectState.BAR_COUNT:
-		_bar_hearts[i].modulate.a = 1.0 if in_bar and state.bar_index == i else 0.0
 
 	for i: int in ArchiveSelectState.SLOT_COUNT:
 		var slot: ArchiveSlot = _slots[i]
@@ -307,7 +335,7 @@ func _apply_focus() -> void:
 		var danger := current == ArchiveSelectState.State.CLEAR_CONFIRM_AGAIN and cursor_here
 		var question: String = state.question_text() if yes_no and cursor_here else ""
 
-		slot.set_frame(cursor_here, slot_cursor and cursor_here)
+		slot.set_frame(cursor_here)
 		slot.set_source_highlight(state.is_copy_target_stage() and state.copy_source == i)
 		slot.clear_overlay()
 		if not in_confirm:
@@ -320,8 +348,6 @@ func _apply_focus() -> void:
 		elif yes_no:
 			first_text = "是"
 			second_text = "否"
-		var first_selected: bool = state.confirm_yes if yes_no \
-			else state.confirm_item == ArchiveSelectState.ConfirmItem.START
-		slot.show_confirm(first_text, second_text, first_selected, question, danger)
+		slot.show_confirm(first_text, second_text, question, danger)
 
 #endregion

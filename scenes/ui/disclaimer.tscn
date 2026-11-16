@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dgdkmvgtpew50"]
 
-[ext_resource type="FontFile" uid="uid://y5f35muubhh4" path="res://assets/fonts/normal.ttf" id="1_3xvh2"]
+[ext_resource type="FontFile" uid="uid://dmtt8i0qf1pay" path="res://assets/fonts/normal.ttf" id="1_3xvh2"]
 
 [sub_resource type="FontVariation" id="FontVariation_npgwr"]
 base_font = ExtResource("1_3xvh2")

@@ -201,12 +201,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
 
-[node name="Heart" type="TextureRect" parent="ArchiveSelect/Actions/Item0" unique_id=1745000012]
-custom_minimum_size = Vector2(18, 18)
-layout_mode = 2
-size_flags_vertical = 4
-texture = SubResource("AtlasTexture_1t8fe")
-
 [node name="Label" type="Label" parent="ArchiveSelect/Actions/Item0" unique_id=1745000013]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -217,12 +211,6 @@ text = "复制"
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
-
-[node name="Heart" type="TextureRect" parent="ArchiveSelect/Actions/Item1" unique_id=1745000015]
-custom_minimum_size = Vector2(18, 18)
-layout_mode = 2
-size_flags_vertical = 4
-texture = SubResource("AtlasTexture_1t8fe")
 
 [node name="Label" type="Label" parent="ArchiveSelect/Actions/Item1" unique_id=1745000016]
 layout_mode = 2
@@ -235,12 +223,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
 
-[node name="Heart" type="TextureRect" parent="ArchiveSelect/Actions/Item2" unique_id=1745000018]
-custom_minimum_size = Vector2(18, 18)
-layout_mode = 2
-size_flags_vertical = 4
-texture = SubResource("AtlasTexture_1t8fe")
-
 [node name="Label" type="Label" parent="ArchiveSelect/Actions/Item2" unique_id=1745000019]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -251,12 +233,6 @@ text = "选择章节"
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
-
-[node name="Heart" type="TextureRect" parent="ArchiveSelect/Actions/Item3" unique_id=1745000021]
-custom_minimum_size = Vector2(18, 18)
-layout_mode = 2
-size_flags_vertical = 4
-texture = SubResource("AtlasTexture_1t8fe")
 
 [node name="Label" type="Label" parent="ArchiveSelect/Actions/Item3" unique_id=1745000022]
 layout_mode = 2
@@ -269,12 +245,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
 
-[node name="Heart" type="TextureRect" parent="ArchiveSelect/Actions/Item4" unique_id=1745000024]
-custom_minimum_size = Vector2(18, 18)
-layout_mode = 2
-size_flags_vertical = 4
-texture = SubResource("AtlasTexture_1t8fe")
-
 [node name="Label" type="Label" parent="ArchiveSelect/Actions/Item4" unique_id=1745000025]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -285,12 +255,6 @@ text = "人名译法"
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
-
-[node name="Heart" type="TextureRect" parent="ArchiveSelect/Actions/Item5" unique_id=1745000027]
-custom_minimum_size = Vector2(18, 18)
-layout_mode = 2
-size_flags_vertical = 4
-texture = SubResource("AtlasTexture_1t8fe")
 
 [node name="Label" type="Label" parent="ArchiveSelect/Actions/Item5" unique_id=1745000028]
 layout_mode = 2
@@ -431,3 +395,10 @@ stream = ExtResource("7_vggj4")
 
 [node name="SndCancel" type="AudioStreamPlayer" parent="ArchiveSelect" unique_id=292983407]
 stream = ExtResource("8_3uqf2")
+
+[node name="HeartCursor" type="TextureRect" parent="ArchiveSelect" unique_id=1750000001]
+visible = false
+layout_mode = 0
+offset_right = 18.0
+offset_bottom = 18.0
+texture = SubResource("AtlasTexture_1t8fe")
