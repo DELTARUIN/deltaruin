@@ -64,6 +64,12 @@ region = Rect2(2, 14, 320, 248)
 atlas = ExtResource("3_433ub")
 region = Rect2(0, 193, 324, 75)
 
+[sub_resource type="Theme" id="Theme_433ub"]
+Label/constants/outline_size = 0
+Label/constants/shadow_offset_x = 0
+Label/constants/shadow_offset_y = 0
+Label/constants/shadow_outline_size = 0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_1t8fe"]
 atlas = ExtResource("5_nvhsi")
 region = Rect2(1, 36, 9, 9)
@@ -280,6 +286,7 @@ text = "取消"
 
 [node name="NameInput" type="Control" parent="ArchiveSelect" unique_id=1063417853 node_paths=PackedStringArray("snd_move", "snd_ok", "snd_cancel")]
 visible = false
+texture_filter = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -287,6 +294,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = SubResource("Theme_433ub")
 script = ExtResource("2_ninpt")
 snd_move = NodePath("../SndMove")
 snd_ok = NodePath("../SndOk")

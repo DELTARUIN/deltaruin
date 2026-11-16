@@ -20,10 +20,10 @@ func test_set_content_writes_labels() -> void:
 
 
 func test_set_frame_controls_border() -> void:
-	slot.set_frame(true)
-	assert_false(slot.get_node("DisableDodulate").visible, "聚焦槽无灰框")
-	slot.set_frame(false)
-	assert_true(slot.get_node("DisableDodulate").visible)
+	slot.set_focused(true)
+	assert_true(slot.modulate == slot.modulate_color, "聚焦槽无灰框")
+	slot.set_focused(false)
+	assert_true(slot.modulate == Color.WHITE)
 
 
 func test_heart_anchor_follows_confirm_selection() -> void:

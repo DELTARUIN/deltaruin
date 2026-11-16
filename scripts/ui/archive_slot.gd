@@ -16,8 +16,6 @@ const HEART_GAP := 4.0   ## 红心与文本左缘的间距
 #region 节点引用
 
 @onready var _box: TextureRect = $Box
-@onready var _dodulate: Panel = $DisableDodulate
-@onready var _source_highlight: Panel = $SourceHighlight
 @onready var _name_row: Control = $MarginContainer/VBoxContainer/Control
 @onready var _name_label: Label = $MarginContainer/VBoxContainer/Control/NameLabel
 @onready var _time_label: Label = $MarginContainer/VBoxContainer/Control/TimeLabel
@@ -26,11 +24,15 @@ const HEART_GAP := 4.0   ## 红心与文本左缘的间距
 @onready var _confirm_start: Label = $MarginContainer/VBoxContainer/Confirm/ConfirmStart
 @onready var _confirm_back: Label = $MarginContainer/VBoxContainer/Confirm/ConfirmBack
 
+@export var modulate_color := Color("#9a9ab3")
+@export var highlight_color := Color("#ffec28")
+
 #endregion
 
 var _position_home := true ## 位置标签的场景默认显隐（覆盖后还原）
 var _position_text := ""   ## 常态位置文本（确认态临时替换）
-
+var _is_focused := true
+var _is_highlight := false
 
 func _ready() -> void:
 	_position_home = _position_label.visible
@@ -46,14 +48,23 @@ func set_content(player_name: String, time_text: String, position_text: String) 
 	_position_label.text = position_text
 
 
-## 焦点灰框（红心光标独立在场景级，由 archive_select 驱动）
-func set_frame(focused: bool) -> void:
-	_dodulate.visible = not focused
+## 焦点（红心光标独立在场景级，由 archive_select 驱动）
+func set_focused(focused: bool) -> void:
+	_is_focused = focused
+	reset_modulate()
 
 
-func set_source_highlight(on: bool) -> void:
-	_source_highlight.visible = on
+func set_highlight(on: bool) -> void:
+	_is_highlight = on
+	reset_modulate()
 
+func reset_modulate() -> void:
+	if _is_highlight :
+		modulate = highlight_color
+	elif not _is_focused:
+		modulate = modulate_color
+	else:
+		modulate = Color.WHITE
 
 ## 还原常态：位置文本/显隐/颜色、姓名行、确认区、红框全部复位
 func clear_overlay() -> void:

@@ -115,10 +115,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 ## 移动：焦点真正变化才播音效
 func _move(action: Callable) -> void:
-	var before := _signature()
+	# var before := _signature()
 	action.call()
-	if _signature() != before:
-		snd_move.play()
+	# if _signature() != before:
+	# 	snd_move.play()
 	_refresh()
 
 

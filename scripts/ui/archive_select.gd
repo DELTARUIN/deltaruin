@@ -335,8 +335,8 @@ func _apply_focus() -> void:
 		var danger := current == ArchiveSelectState.State.CLEAR_CONFIRM_AGAIN and cursor_here
 		var question: String = state.question_text() if yes_no and cursor_here else ""
 
-		slot.set_frame(cursor_here)
-		slot.set_source_highlight(state.is_copy_target_stage() and state.copy_source == i)
+		slot.set_focused(cursor_here)
+		slot.set_highlight(state.is_copy_target_stage() and state.copy_source == i)
 		slot.clear_overlay()
 		if not in_confirm:
 			continue
