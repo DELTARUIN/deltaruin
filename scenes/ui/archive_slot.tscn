@@ -56,6 +56,7 @@ vertical_alignment = 2
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 5
+theme_override_constants/line_spacing = 3
 theme_override_fonts/font = ExtResource("2_font")
 text = "--:--"
 horizontal_alignment = 2

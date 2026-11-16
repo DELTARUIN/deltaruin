@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene format=3 uid="uid://c64tfm65qpe85"]
 
 [ext_resource type="Texture2D" uid="uid://by01uoiqcmk4k" path="res://assets/graphics/ui/chapter.png" id="1_sheet"]
 
@@ -6,13 +6,13 @@
 atlas = ExtResource("1_sheet")
 region = Rect2(1, 94, 17, 17)
 
-[node name="Row" type="Control"]
+[node name="Row" type="Control" unique_id=2110354428]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 3
 anchors_preset = 0
-custom_minimum_size = Vector2(0, 60)
 mouse_filter = 2
 
-[node name="NameLabel" type="Label" parent="."]
+[node name="NameLabel" type="Label" parent="." unique_id=712449240]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,7 +23,7 @@ grow_vertical = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Margin" type="MarginContainer" parent="."]
+[node name="Margin" type="MarginContainer" parent="." unique_id=453456903]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,35 +36,35 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 5
 
-[node name="Line" type="HBoxContainer" parent="Margin"]
+[node name="Line" type="HBoxContainer" parent="Margin" unique_id=834150445]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="ChapterLabel" type="Label" parent="Margin/Line"]
+[node name="ChapterLabel" type="Label" parent="Margin/Line" unique_id=947968390]
 custom_minimum_size = Vector2(133, 0)
 layout_mode = 2
 vertical_alignment = 1
 
-[node name="Stars" type="TextureRect" parent="Margin/Line"]
+[node name="Stars" type="TextureRect" parent="Margin/Line" unique_id=1819758817]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 texture = SubResource("AtlasTexture_star")
 
-[node name="Spacer" type="Control" parent="Margin/Line"]
+[node name="Spacer" type="Control" parent="Margin/Line" unique_id=1581845579]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Icon" type="TextureRect" parent="Margin/Line"]
+[node name="Icon" type="TextureRect" parent="Margin/Line" unique_id=131711626]
 custom_minimum_size = Vector2(56, 50)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 
-[node name="RowPlay" type="Label" parent="."]
+[node name="RowPlay" type="Label" parent="." unique_id=1445012500]
 visible = false
 layout_mode = 0
 offset_left = 252.0
@@ -73,7 +73,7 @@ offset_right = 420.0
 offset_bottom = 46.0
 text = "游玩"
 
-[node name="RowBack" type="Label" parent="."]
+[node name="RowBack" type="Label" parent="." unique_id=1440867706]
 visible = false
 layout_mode = 0
 offset_left = 431.0
